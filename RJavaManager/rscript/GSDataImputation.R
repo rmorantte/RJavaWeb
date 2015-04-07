@@ -38,7 +38,7 @@ GSDataImputation <- function(outputPath, geno_file, impType = c("random", "famil
       syn_code$geno[syn_code$geno==1]=0        # set heterozygotes to AA
       
       #add: redo codeGeno with maf? -- specify maf value
-      syn_code<-codeGeno(syn_code,label.heter="1",maf=maf)
+      #syn_code<-codeGeno(syn_code,label.heter="1",maf=maf)
       ###compare output files
       
       #Z#   write.csv(syn_code$geno,paste0(file_prefix,"-synbreed-",nmiss,"-",maf,"-",cor_threshold,".csv"))  
