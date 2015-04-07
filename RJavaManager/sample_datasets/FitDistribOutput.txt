@@ -1,2 +1,0 @@
-Error in FitDistrib:
-there is no package called 'fitdistrplus'

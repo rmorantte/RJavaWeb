@@ -1,5 +1,0 @@
-
-*** 
-ERROR in GraphHist function:
-  invalid 'xlim' value
-***

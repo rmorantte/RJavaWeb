@@ -1,5 +1,0 @@
-
-*** 
-ERROR in GraphPie function:
-  'x' values must be positive.
-***
