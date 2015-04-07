@@ -1,0 +1,13 @@
+   step 1  : No markers removed due to fraction of missing values 
+   step 2  : Recoding alleles 
+   step 4  : No markers discarded due to minor allele frequency 
+   step 7  : Imputing of missing values 
+   step 7d : Random imputing of missing values 
+   step 8  : No recoding of alleles necessary after imputation 
+   step 9  : No markers discarded due to minor allele frequency 
+   step 10 : No duplicated markers removed 
+   End     : 681 marker(s) remain after the check
+
+     Summary of imputation 
+    total number of missing values                : 0 
+    number of random imputations                  : 0 

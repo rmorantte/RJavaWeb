@@ -1,0 +1,133 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2RowCol_case3.csv
+
+SINGLE-ENVIRONMENT ANALYSIS
+
+DESIGN: Latinized Row-Column
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DESCRIPTIVE STATISTICS:
+
+  Variable Trial N_NonMissObs     Mean   StdDev
+1        Y     1           26 162.0749 91.65294
+2        Y     2           27 194.9773 93.09490
+
+------------------------------
+ANALYSIS FOR: Trial  =  1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  27 
+Number of observations used:  26 
+
+ Factors   Number of Levels   Levels           
+ trmt      9                  T1  T2  T3 ... T9
+ rep       3                  1  2  3          
+ row       3                  1  2  3          
+ col       9                  1  2  3 ... 9    
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups  Variance Std.Dev.
+1      col 3144.1785 56.07297
+2  rep:row 1528.9272 39.10150
+3      row  282.7672 16.81568
+4      rep    0.0000  0.00000
+5 Residual 3178.3715 56.37705
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df   Sum Sq  Mean Sq F value  Denom Pr(>F)
+trmt  8 51906.53 6488.316  2.0414 5.3808 0.2142
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  trmt    LSMean StdErrMean
+1   T1 201.14925   52.07094
+2   T2 133.48135   52.07094
+3   T3 155.51182   52.07094
+4   T4 152.98738   52.07094
+5   T5  81.67431   52.07094
+6   T6 125.39264   52.07094
+7   T7 346.88177   59.94345
+8   T8 207.50823   52.07094
+9   T9 137.78634   52.07094
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   56.0200 
+ Average   67.8302 
+ Maximum   78.2054 
+
+
+------------------------------
+ANALYSIS FOR: Trial  =  2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  27 
+Number of observations used:  27 
+
+ Factors   Number of Levels   Levels           
+ trmt      9                  T1  T2  T3 ... T9
+ rep       3                  1  2  3          
+ row       3                  1  2  3          
+ col       9                  1  2  3 ... 9    
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1      col 2.812849e+03 53.036301286
+2  rep:row 3.901699e-06  0.001975272
+3      row 4.653960e+02 21.573037930
+4      rep 0.000000e+00  0.000000000
+5 Residual 8.239624e+03 90.772374966
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df  Sum Sq  Mean Sq F value  Denom Pr(>F)
+trmt  8 17782.9 2222.863  0.2698 9.7629 0.9618
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  trmt   LSMean StdErrMean
+1   T1 240.4041     61.962
+2   T2 210.5418     61.962
+3   T3 146.7191     61.962
+4   T4 170.6583     61.962
+5   T5 182.0199     61.962
+6   T6 209.9611     61.962
+7   T7 184.5042     61.962
+8   T8 198.8855     61.962
+9   T9 211.1015     61.962
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   74.1153 
+ Average   82.9080 
+ Maximum   85.8389 
+
+
+
+==============================

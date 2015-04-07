@@ -1,0 +1,26 @@
+
+MULTIPLICATIVE MODELS
+
+
+------------------------------
+RESPONSE VARIABLE:  MeanYield 
+------------------------------
+
+
+GGE ANALYSIS:
+
+    percent  acum Df    Sum.Sq  Mean.Sq F.value Pr.F
+PC1    58.9  58.9 24 25.125559 1.046898     Inf  NaN
+PC2    19.1  78.0 22  8.142108 0.370096     Inf  NaN
+PC3     9.9  87.9 20  4.235761 0.211788     Inf  NaN
+PC4     4.1  92.0 18  1.730426 0.096135     Inf  NaN
+PC5     2.8  94.8 16  1.210455 0.075653     Inf  NaN
+PC6     2.3  97.1 14  0.960960 0.068640     Inf  NaN
+PC7     1.4  98.5 12  0.612515 0.051043     Inf  NaN
+PC8     1.3  99.8 10  0.533971 0.053397     Inf  NaN
+PC9     0.2 100.0  8  0.078579 0.009822     Inf  NaN
+
+
+
+
+==============================

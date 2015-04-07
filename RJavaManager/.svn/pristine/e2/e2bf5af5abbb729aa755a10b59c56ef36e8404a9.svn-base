@@ -1,0 +1,16 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/popgenTestData.csv
+
+HARDY-WEINBERG EQUILIBRIUM TEST
+
+SUMMARY OF TESTS:
+
+  Locus Population Chisq Value df Pr(>Chisq)
+1  loc1         P1      0.5333  1     0.4652
+2  loc1         P2      0.5028  1     0.4783
+3  loc2         P1      0.9780  1     0.3227
+4  loc2         P2      3.0613  1     0.0802
+5  loc3         P1      0.2836  1     0.5944
+6  loc3         P2      0.0187  1     0.8911
+7  loc4         P1      3.6081  1     0.0575
+8  loc4         P2      8.7538  1     0.0031

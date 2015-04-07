@@ -1,0 +1,2 @@
+Warning message:
+In dlnorm(c(1680L, 1350L, 1900L, 3700L, 3750L, 3600L,  ... : NaNs produced

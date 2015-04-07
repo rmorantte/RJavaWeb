@@ -1,0 +1,5 @@
+
+*** 
+ERROR in GraphBar function:
+  non-numeric argument to binary operator
+***

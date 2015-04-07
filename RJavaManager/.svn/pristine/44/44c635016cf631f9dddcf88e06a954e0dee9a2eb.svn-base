@@ -1,0 +1,238 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2RowCol_case3.csv
+
+MULTI-ENVIRONMENT ANALYSIS (ONE-STAGE)
+
+DESIGN: Latinized Row-Column
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  54 
+Number of observations used:  53 
+
+ Factors   Number of Levels   Levels           
+ Trial     2                  1  2             
+ trmt      9                  T1  T2  T3 ... T9
+ rep       3                  1  2  3          
+ row       3                  1  2  3          
+ col       9                  1  2  3 ... 9    
+
+
+DESCRIPTIVE STATISTICS:
+
+  Variable N_NonMissObs     Mean   StdDev
+1        Y           53 178.8365 92.99283
+
+
+VARIANCE COMPONENTS TABLE:
+
+         Groups     Variance   Std.Dev.
+1    trmt:Trial 0.000000e+00  0.0000000
+2     col:Trial 1.580713e+03 39.7581759
+3 rep:row:Trial 0.000000e+00  0.0000000
+4     row:Trial 4.676905e+02 21.6261525
+5     rep:Trial 0.000000e+00  0.0000000
+6         Trial 6.014755e-06  0.0024525
+7      Residual 7.012358e+03 83.7398259
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+trmt  8 45749.61 5718.702  0.8155 25.1425 0.5960
+
+
+TESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + trmt + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+Formula for Model2:  Y ~ 1 + trmt + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 570.1963 599.7506 -270.0981                    
+Model1 572.1962 603.7209 -270.0981     0  1     0.9976
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + trmt + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+Formula for Model2:  Y ~ 1 + trmt + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 570.1962 599.7506 -270.0981                    
+Model1 572.1962 603.7209 -270.0981     0  1     0.9994
+
+
+GENOTYPE X ENVIRONMENT MEANS:
+
+   trmt Trial  Y_means
+1    T1     1 220.7767
+2    T1     2 220.7767
+3    T2     2 172.0116
+4    T2     1 172.0116
+5    T3     2 151.1155
+6    T3     1 151.1155
+7    T4     2 161.8228
+8    T4     1 161.8228
+9    T5     1 131.8471
+10   T5     2 131.8471
+11   T6     2 167.6769
+12   T6     1 167.6769
+13   T7     2 239.1622
+14   T7     1 239.1622
+15   T8     2 203.1969
+16   T8     1 203.1969
+17   T9     1 174.4439
+18   T9     2 174.4439
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  trmt   LSMean StdErrMean
+1   T1 220.7767   38.86073
+2   T2 172.0116   38.86073
+3   T3 151.1155   38.86073
+4   T4 161.8228   38.86073
+5   T5 131.8471   38.86073
+6   T6 167.6769   38.86073
+7   T7 239.1622   42.33474
+8   T8 203.1969   38.86073
+9   T9 174.4439   38.86073
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   48.3478 
+ Average   52.8135 
+ Maximum   56.0936 
+
+
+SIGNIFICANT PAIRWISE COMPARISONS (IF ANY): 
+Compared with control(s)
+
+                                       
+(No significant pairwise comparisons.) 
+
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  54 
+Number of observations used:  53 
+
+ Factors   Number of Levels   Levels           
+ Trial     2                  1  2             
+ trmt      9                  T1  T2  T3 ... T9
+ rep       3                  1  2  3          
+ row       3                  1  2  3          
+ col       9                  1  2  3 ... 9    
+
+
+DESCRIPTIVE STATISTICS:
+
+  Variable N_NonMissObs     Mean   StdDev
+1        Y           53 178.8365 92.99283
+
+
+VARIANCE COMPONENTS TABLE:
+
+         Groups     Variance     Std.Dev.
+1    trmt:Trial 2.362058e-05  0.004860101
+2     col:Trial 1.352114e+03 36.771104085
+3 rep:row:Trial 6.761898e-04  0.026003649
+4          trmt 0.000000e+00  0.000000000
+5     row:Trial 5.437495e+02 23.318436348
+6     rep:Trial 0.000000e+00  0.000000000
+7         Trial 0.000000e+00  0.000000000
+8      Residual 6.884469e+03 82.972701728
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + (1|trmt) + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+Formula for Model2:  Y ~ 1 + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 637.2905 653.0528 -310.6453                    
+Model1 639.2905 657.0231 -310.6453     0  1     0.9999
+
+
+TESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + (1|trmt) + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+Formula for Model2:  Y ~ 1 + (1|trmt) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 637.2905 653.0529 -310.6453                    
+Model1 639.2905 657.0231 -310.6453     0  1     0.9964
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + (1|trmt) + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) + (1|trmt:Trial) 
+Formula for Model2:  Y ~ 1 + (1|trmt) + (1|Trial) + (1|rep:Trial) + (1|row:Trial) + (1|rep:row:Trial) + (1|col:Trial) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 637.2905 653.0528 -310.6453                    
+Model1 639.2905 657.0231 -310.6453     0  1     0.9998
+
+
+GENOTYPE X ENVIRONMENT MEANS:
+
+   trmt Trial  Y_means
+1    T1     1 179.0787
+2    T1     2 179.0787
+3    T2     2 179.0787
+4    T2     1 179.0787
+5    T3     2 179.0787
+6    T3     1 179.0787
+7    T4     2 179.0787
+8    T4     1 179.0787
+9    T5     1 179.0787
+10   T5     2 179.0787
+11   T6     2 179.0787
+12   T6     1 179.0787
+13   T7     2 179.0787
+14   T7     1 179.0787
+15   T8     2 179.0787
+16   T8     1 179.0787
+17   T9     1 179.0787
+18   T9     2 179.0787
+
+
+PREDICTED GENOTYPE MEANS:
+
+  trmt     Mean
+1   T1 179.0787
+2   T2 179.0787
+3   T3 179.0787
+4   T4 179.0787
+5   T5 179.0787
+6   T6 179.0787
+7   T7 179.0787
+8   T8 179.0787
+9   T9 179.0787
+
+
+HERITABILITY:
+  
+0 
+
+
+==============================

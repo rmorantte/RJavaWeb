@@ -1,0 +1,21 @@
+# --------------------------------------------------------       
+# printWarnings: prints warning messages (if any)
+# ARGUMENTS:
+# warnMessages - warning messsages from function output
+# --------------------------------------------------------
+
+printWarnings <- function(warnMessages)
+  UseMethod("printWarnings")
+
+printWarnings.default <- function(warnMessages) {
+  if (!is.null(warnMessages))
+    cat("\nWarning(s):\n\n")
+  
+  warnMessages <- as.matrix(names(warnMessages))
+  rnames <- rep("",nrow(warnMessages))
+  rownames(warnMessages) <- rnames
+  for (i in 1:length(warnMessages))
+    print(warnMessages[i,1],quote = F)
+#  for (i in 1:length(warnMessages))
+ #   print(paste(names(warnMessages)[[i]],"\n",sep =""))
+}

@@ -1,0 +1,2911 @@
+package org.irri.breedingtool.rjava.manager;
+
+import java.util.Arrays;
+
+import org.irri.breedingtool.rjava.manager.api.IRJavaSTARAnalysisManager;
+import org.irri.breedingtool.rjava.utilities.InputTransform;
+import org.rosuda.JRI.Rengine;
+
+public class STARAnalysisManager implements IRJavaSTARAnalysisManager {
+
+	private Rengine rEngine;
+	private InputTransform inputTransform;
+	
+	public STARAnalysisManager(Rengine rEngine) {
+		this.rEngine = rEngine;
+		this.inputTransform= new InputTransform();
+	}
+	
+	private void rEngineEnd(){
+		String rm = "rm(list=ls(all=TRUE))";
+		rEngine.eval(rm);
+		rEngine.end();
+	}
+
+	@Override
+	public void doDescriptiveStatistics(String dataFileName, String outFileName, String[] respvar, String[] grp, 
+			String[] statistics){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		String statVector= inputTransform.createRVector(statistics);
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcDescStat = "result <- try(";
+		String command = "DescriptiveStatistics(data = \"dataRead\", var = "+ respvarVector;
+		if (grp != null) {
+			command = command + ", grp = " + inputTransform.createRVector(grp);
+		}
+		command = command + ", statistics = " + statVector + ")";
+		funcDescStat = funcDescStat + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcDescStat);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcDescStat);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in DescriptiveStatistics:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		} 
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+
+		//rscriptCommand.append(command+"\n");
+		rEngineEnd();
+	}
+
+	public void doCrossTab(String dataFileName, String resultFolderPath, 
+			String[] rowvar, String[] colvar, boolean expFreq, 
+			boolean stdresid, boolean totPercent, boolean rowPercent, 
+			boolean colPercent){
+		
+		String rowvarVector= inputTransform.createRVector(rowvar);
+		String colvarVector= inputTransform.createRVector(colvar);
+				
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + resultFolderPath + "CrossTabOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\n\", date(),\"\n\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "Crosstab(dataRead, rowVar = "+ rowvarVector + ", colVar = "+ colvarVector + ", obsFreq = TRUE";
+		if (expFreq) {
+			command = command + ", expFreq = TRUE";
+		}
+		if (stdresid) {
+			command = command + ", stdresid = TRUE";
+		}
+		if (totPercent) {
+			command = command + ", totPercent = TRUE";
+		}
+		if (rowPercent) {
+			command = command + ", rowPercent = TRUE";
+		}
+		if (colPercent) {
+			command = command + ", colPercent = TRUE";
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in Cross Tabulation:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doNormality(String dataFileName, String outFileName, String[] respvar, String[] grp, String[] method,  
+			String outputBoxplot, String graphBoxFileName,String outputHist, String graphHistFileName){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		String methodVector= inputTransform.createRVector(method);
+		String grpVector = null;
+
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcNormality = "result <- try(";
+		String command = "NormalityTest(data = \"dataRead\", var = " + respvarVector;
+		if (grp != null) {
+			grpVector = inputTransform.createRVector(grp);
+			command = command + ", grp = " + grpVector;
+		}
+		command = command + ", method = "+ methodVector + ")";
+		funcNormality = funcNormality + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcNormality);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcNormality);
+		
+		String sinkOut = "sink()";		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in NormalityTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+		} else {
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+			//display boxplot and/histogram for each response variables
+			if (outputBoxplot == "TRUE" || outputHist == "TRUE") {
+				String var= "\nrespVar <- "+ respvarVector;
+				System.out.println(var);
+				rEngine.eval(var);
+				
+				if (grp != null) {
+					String grpvar = "grpVar <- "+ grpVector;
+					System.out.println(grpvar);
+					rEngine.eval(grpvar);
+				}
+
+				if (outputBoxplot == "TRUE") {
+					String boxplot1;
+					if (grp != null) {
+						boxplot1 = "for (i in (1:length(respVar))) {\n for (j in (1:length(grpVar))) {\n  png(file = paste (\""+ graphBoxFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n  boxplot(dataRead[,respVar[i]] ~ dataRead[,grpVar[j]], main = paste(\"Boxplot of \", respVar[i],\" by \", grpVar[j], sep = \"\"), ylab = respVar[i], xlab = grpVar[j]) \n  dev.off() \n } \n}";
+					} else {
+						boxplot1 = "for (i in (1:length(respVar))) { \n png(file = paste (\""+ graphBoxFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n boxplot(dataRead[,respVar[i]], horizontal = TRUE, main = paste(\"Boxplot of \", respVar[i],sep = \"\"), xlab = respVar[i]) \n dev.off() \n}";
+					}
+					
+					System.out.println(boxplot1);
+					rEngine.eval(boxplot1);
+				}
+				
+				if (outputHist == "TRUE") {
+					String libLoad= "library(lattice)";
+					String histogram1;
+					
+					if (grp != null) {
+						histogram1 = "for (i in (1:length(respVar))) {\n for (j in (1:length(grpVar))) {\n  png(file = paste (\""+ graphHistFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n  print(histogram(~dataRead[,respVar[i]] | dataRead[,grpVar[j]], data = dataRead, main = paste(\"Histogram of \", respVar[i],\" by \", grpVar[j], sep = \"\"), xlab = respVar[i])) \n  dev.off() \n } \n}";
+					} else {
+						histogram1 = "for (i in (1:length(respVar))) { \n png(file = paste (\""+ graphHistFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n print(hist(dataRead[,respVar[i]], main = paste(\"Histogram of \", respVar[i],sep = \"\"), xlab = respVar[i])) \n dev.off() \n}";
+					}
+					
+					System.out.println(libLoad);
+					System.out.println(histogram1);
+					
+					rEngine.eval(libLoad);
+					rEngine.eval(histogram1);
+				}
+			}
+		} 
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doHeteroskedasticity(String dataFileName, String outFileName, String[] respvar, String[] grp, String[] method,  
+			String outputBoxplot, String graphBoxFileName,String outputHist, String graphHistFileName){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		String methodVector= inputTransform.createRVector(method);
+		String grpVector = inputTransform.createRVector(grp);
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "HeteroskedasticityTest(data = \"dataRead\", var = " + respvarVector + ", grp = " + grpVector + ", method = "+ methodVector + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String sinkOut = "sink()";
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in HeteroskedasticityTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+		} else {
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+			//display boxplot and/histogram for each response variables
+			if (outputBoxplot == "TRUE" || outputHist == "TRUE") {
+				String var= "\nrespVar <- "+ respvarVector;
+				String grpvar = "grpVar <- "+ grpVector;
+				
+				System.out.println(var);
+				System.out.println(grpvar);
+				
+				rEngine.eval(var);
+				rEngine.eval(grpvar);
+				
+				if (outputBoxplot == "TRUE") {
+					String boxplot1 = "for (i in (1:length(respVar))) {\n for (j in (1:length(grpVar))) {\n  png(file = paste (\""+ graphBoxFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n  boxplot(dataRead[,respVar[i]] ~ dataRead[,grpVar[j]], main = paste(\"Boxplot of \", respVar[i],\" by \", grpVar[j], sep = \"\"), ylab = respVar[i], xlab = grpVar[j]) \n  dev.off() \n } \n}";
+					System.out.println(boxplot1);
+					rEngine.eval(boxplot1);
+				}
+				
+				if (outputHist == "TRUE") {
+					String libLoad= "library(lattice)";
+					String histogram1 = "for (i in (1:length(respVar))) {\n for (j in (1:length(grpVar))) {\n  png(file = paste (\""+ graphHistFileName + "\",\"_\", respVar[i],\".png\", sep = \"\")) \n  print(histogram(~dataRead[,respVar[i]] | dataRead[,grpVar[j]], data = dataRead, main = paste(\"Histogram of \", respVar[i],\" by \", grpVar[j], sep = \"\"), xlab = respVar[i])) \n  dev.off() \n } \n}";
+
+					System.out.println(libLoad);
+					System.out.println(histogram1);
+					
+					rEngine.eval(libLoad);
+					rEngine.eval(histogram1);
+				}
+			}
+		}
+
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doOneMean(String dataFileName, String outFileName,
+			String[] respvar, Integer testValue, String altHypo, boolean statistics, 
+			boolean confInt, float confLevel, String[] method){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "CompareMeans(data = \"dataRead\", varX = "+ respvarVector + ", testVal = " + testValue + ", procedure = \"one\", alternative = \""+ altHypo+"\"" ;
+		if (statistics) {
+			command = command + ", statistics = TRUE";	
+		}
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", CI = TRUE, confLevel = " + confLevel;
+		}
+		if (method != null) {
+			command = command + ", normality = " + inputTransform.createRVector(method);
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMeans:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		} 
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doPairedMean(String dataFileName, String outFileName,
+			String[] varX, String[] varY, String altHypo, boolean statistics, 
+			boolean confInt, float confLevel, String[] method){
+		
+		String varXVector= inputTransform.createRVector(varX);
+		String varYVector= inputTransform.createRVector(varY);
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(" ;
+		String command = "CompareMeans(data = \"dataRead\", varX = "+ varXVector + ", varY = "+ varYVector +", procedure = \"paired\", alternative = \""+ altHypo +"\"" ;
+		if (statistics) {
+			command = command + ", statistics = TRUE";	
+		}
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", CI = TRUE, confLevel = " + confLevel;
+		}
+		if (method != null) {
+			command = command + ", normality = " + inputTransform.createRVector(method);
+		} 
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMeans:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		} 
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doIndependentMean(String dataFileName, String outFileName,
+			String[] respvar, String grp, String altHypo, double levelSig, 
+			boolean statistics, boolean confInt, float confLevel, 
+			String[] method){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "CompareMeans(data = \"dataRead\", varX = "+ respvarVector + ", grp = \""+ grp + "\", procedure = \"independent\", alternative = \""+ altHypo+"\"" ;
+		if (statistics) {
+			command = command + ", statistics = TRUE";	
+		}
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", CI = TRUE, confLevel = " + confLevel;
+		}
+		if (method != null) {
+			command = command + ", normality = " + inputTransform.createRVector(method);
+		}
+		command = command + ", alpha = "+ levelSig +")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMeans:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		} 
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doProportionTest(String dataFileName, String resultFolderPath, 
+			String procedure, String[] varX, String[] varY, String grp, double[] testVal, 
+			String alternative, boolean confInterval, int confLevel){
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + resultFolderPath + "ProportionOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "CompareProportion(data = \"dataRead\", varX = "+ inputTransform.createRVector(varX);
+		if (procedure.equals("one")) {
+			command = command + ", procedure = \"one\", testVal = "+ inputTransform.createRNumVector(testVal);
+			if (alternative.equals("not equal")) {
+				command = command + ", alternative = \"two.sided\"";
+			} else {
+				command = command + ", alternative = \""+ alternative +"\"";
+			}
+			
+		} else if (procedure.equals("paired")) {
+			command = command + ", varY = "+ inputTransform.createRVector(varY) +", procedure = \"paired\"";
+		} else if (procedure.equals("independent")) {
+			command = command + ", grp = \"" + grp + "\", procedure = \"independent\"";
+			if (alternative.equals("not equal")) {
+				command = command + ", alternative = \"two.sided\"";
+			} else {
+				command = command + ", alternative = \""+ alternative +"\"";
+			}
+		}
+		if (confInterval) {
+			confLevel = confLevel/100;
+			command = command + ", CI = TRUE, confLevel = "+ confLevel;
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareProportion:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		} 
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doChiSqGoodnessOfFit(String dataFileName, 
+			String resultFolderPath, String inputType, 
+			String testvar, String freqVar,
+			boolean categoryEqual, String[] specifiedCategory, 
+			int[] specifiedExpFreq){
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + resultFolderPath + "GoodnessOfFitOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		
+		if (!categoryEqual) {
+			String expCat = "expCat <- "+ inputTransform.createRVector(specifiedCategory);
+			//String expFreq = "expFreq <- as.numeric("+ inputTransform.createRVector(Arrays.toString(specifiedExpFreq).split("[\\[\\]]")[1].split(", "))+")";
+			String expFreq = "expFreq <- "+ inputTransform.createRNumVector(specifiedExpFreq);
+			String expFreq1 = "expFreq <- as.table(expFreq)";
+			String expFreq2 = "names(expFreq) <- expCat";
+			
+			System.out.println(expCat);
+			System.out.println(expFreq);
+			System.out.println(expFreq1);
+			System.out.println(expFreq2);
+			
+			rEngine.eval(expCat);
+			rEngine.eval(expFreq);
+			rEngine.eval(expFreq1);
+			rEngine.eval(expFreq2);
+		}
+		
+		String fxnStmt = "result <- try(";
+		String command = "GoodnessOfFitTest(data = \"dataRead\", var = \""+ testvar +"\"";
+		if (inputType == "summary") {
+			command = command + ", colFreq = \""+ freqVar +"\"";
+		}
+		if (!categoryEqual) {
+			command = command + ", expected = expFreq";
+		}
+		command = command + ")";
+		fxnStmt = fxnStmt + command + ", silent = TRUE)";
+		
+		System.out.println(fxnStmt);
+		rEngine.eval(fxnStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in Chi-Square Goodness of Fit Test:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+		
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doChiSqTestOfIndependence(String dataFileName, 
+			String resultFolderPath, String inputType, String[] rowvar, String[] colvar, String freqvar, 
+			boolean obsFreq, boolean expFreq, boolean stdresid, 
+			boolean totPercent, boolean rowPercent, boolean colPercent,
+			boolean phi, boolean cramersv, boolean contingency){
+		
+		String rowvarVector= inputTransform.createRVector(rowvar);
+		String colvarVector= inputTransform.createRVector(colvar);
+				
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + resultFolderPath + "ChiSqIndependenceOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String fxnStmt = "result <- try(";
+		String command = "Crosstab(data = \"dataRead\", rowVar = "+ rowvarVector + ", colVar = "+ colvarVector;
+		if (inputType == "summary") {
+			if (freqvar != null) {
+				command = command + ", freqVar = \""+ freqvar +"\"";
+			} else {
+				command = command + ", freqVar = NULL";
+			}
+		} else {
+			command = command + ", freqVar = NULL";			
+		}
+		command = command + ", obsFreq = "+ String.valueOf(obsFreq).toUpperCase();
+		if (expFreq) {
+			command = command + ", expFreq = TRUE";
+		}
+		if (stdresid) {
+			command = command + ", stdresid = TRUE";
+		}
+		if (totPercent) {
+			command = command + ", totPercent = TRUE";
+		}
+		if (rowPercent) {
+			command = command + ", rowPercent = TRUE";
+		}
+		if (colPercent) {
+			command = command + ", colPercent = TRUE";
+		}
+		command = command + ", chisq = TRUE";
+		if (phi) {
+			command = command + ", phi = TRUE";
+		}
+		if (cramersv) {
+			command = command + ", cramersv = TRUE";
+		}
+		if (contingency) {
+			command = command + ", contingency = TRUE";
+		}
+		command = command + ")";
+		fxnStmt = fxnStmt + command + ", silent = TRUE)";
+			
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(fxnStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(fxnStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in Chi-Square Test of Independence:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+		
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public String[] doANOVA(String dataFileName, String outputPath, 
+			String design, String[] respvar, String[] factor1, 
+			String[] factor2, String[] factor3, String[] factor4, 
+			String rep1, String rep2, String set, boolean descriptive,
+			boolean normality, boolean homogeneity, String[] pwtest, 
+			String[] pwvar, boolean contrastOption, double sig){
+		
+		//defining the R statements for ANOVA 
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String loadWorkspace = null;
+		String contrastStmt = null;
+		
+		if (contrastOption) {
+			// String fileExistsStmt = "if (file.exists(file = \""+ outputPath +"tempContrastWorkspace.RData\")) {\n";
+			// fileExistsStmt = fileExistsStmt + "   load(file = \""+ outputPath +"tempContrastWorkspace.RData\")\n";
+			// fileExistsStmt = fileExistsStmt + "   if (exists(\"resultContrast\")) {\n";
+			// fileExistsStmt = fileExistsStmt + "         funcStmt = funcStmt + ";
+			// fileExistsStmt = fileExistsStmt + "   }\n}";
+			loadWorkspace = "load(file = \""+ outputPath +"tempContrastWorkspace.RData\")";
+			contrastStmt = "contrast.option <- resultContrast$contrast.option";
+		}
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + design +"Output.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "AOVResult <- AOVTest(data = \"dataRead\", design = \""+ design +"\", respvar = "+ inputTransform.createRVector(respvar);
+		command = command + ", factor1 = "+ inputTransform.createRVector(factor1);
+		if (design == "SplitCRD" || design == "SplitRCBD" || design == "SplitLSD" || design == "Strip") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+		}
+		if (design == "Split2CRD" || design == "Split2RCBD" || design == "Split2LSD" || design == "Strip-Split") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+			command = command + ", factor3 = "+ inputTransform.createRVector(factor3);
+		}
+		if (design == "Split3CRD" || design == "Split3RCBD" || design == "Split3LSD" || design == "Strip-Split2") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+			command = command + ", factor3 = "+ inputTransform.createRVector(factor3);
+			command = command + ", factor4 = "+ inputTransform.createRVector(factor4);
+		}
+		if (design != "CRD") {
+			command = command + ", rep1 = \""+ rep1 +"\"";
+		}
+		if (design == "LSD" || design == "SplitLSD" || design == "Split2LSD"|| design == "Split3LSD") {
+			command = command + ", rep2 = \""+ rep2 +"\"";
+		}
+		if (set != null) {
+			command = command + ", set = \""+ set +"\"";
+		} 
+		if (descriptive) {
+			command = command + ", descriptive = "+ String.valueOf(descriptive).toUpperCase();
+		}
+		if (normality) {
+			command = command + ", normality = "+ String.valueOf(normality).toUpperCase();
+		}
+		if (homogeneity) {
+			command = command + ", homogeneity = "+ String.valueOf(homogeneity).toUpperCase();
+		}
+		if (pwtest != null && pwvar != null) {
+			command = command + ", pwTest = "+ inputTransform.createRVector(pwtest);
+			command = command + ", pwVar = "+ inputTransform.createRVector(pwvar);
+		}
+		if (contrastOption) {
+			command = command + ", contrastOption = contrast.option";
+		}
+		command = command + ", sig = "+ sig +", outputPath = \""+ outputPath+"\")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		String sinkOut = "sink()";
+		
+		System.out.println(rmvStmt);
+		if (contrastOption) {
+			System.out.println(loadWorkspace);
+			System.out.println(contrastStmt);
+		}		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		if (contrastOption) {
+			rEngine.eval(loadWorkspace);
+			rEngine.eval(contrastStmt);
+		}	
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String[] getResult = null;
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in AOVTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		} else {
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+			// create a boxplot of the raw data
+			String boxplotCommand = "for (i in (1:length("+ inputTransform.createRVector(respvar) +"))) {\n";
+			boxplotCommand = boxplotCommand + "    png(file = paste(\""+ outputPath +""+design+"Boxplot_\","+ inputTransform.createRVector(respvar) +"[i],\".png\", sep = \"\"))\n";
+			if (set == null) {
+				boxplotCommand = boxplotCommand + "    boxplot(AOVResult$data[,"+ inputTransform.createRVector(respvar) +"[i]], horizontal = TRUE, main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), xlab = "+ inputTransform.createRVector(respvar) +"[i]) \n";				
+			} else {
+				boxplotCommand = boxplotCommand + "    boxplot(AOVResult$data[,"+ inputTransform.createRVector(respvar) +"[i]] ~ AOVResult$data[,\""+ set +"\"], main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), ylab = "+ inputTransform.createRVector(respvar) +"[i], xlab = \""+ set +"\") \n";
+			}
+			boxplotCommand = boxplotCommand + "    dev.off() \n";
+			boxplotCommand = boxplotCommand + "}\n";
+			System.out.println(boxplotCommand);
+			rEngine.eval(boxplotCommand);
+			
+			String saveWorkspace = "save(dataRead, AOVResult, file = \""+ outputPath +"tempANOVAWorkspace.RData\")";
+			System.out.println(saveWorkspace);
+			rEngine.eval(saveWorkspace);
+			
+			String saveData = "write.csv(AOVResult$data, file = paste(\""+ outputPath +"\", \"residualData.csv\", sep = \"\"),row.names = FALSE)";
+			System.out.println(saveData);
+			rEngine.eval(saveData);
+			
+			getResult = rEngine.eval("AOVResult$rvWithSigEffect").asStringArray();
+			System.out.println(Arrays.toString(getResult));
+
+		}
+
+		
+		//String[] gr2 = rEngine.rniGetStringArray(Long.parseLong(rEngine.eval("AOVResult$rvWithSigEffect").asStringArray()));
+		rEngineEnd();
+		return getResult;
+	}
+	
+	@Override
+	public String[] doANOVACombined(String dataFileName, String outputPath, 
+			String design, String[] respvar, String[] factor1, 
+			String[] factor2, String[] factor3, String[] factor4, 
+			String rep1, String rep2, String set, boolean descriptive,
+			boolean normality, boolean homogeneity, String[] pwtest, 
+			String[] pwvar, boolean contrastOption, double sig){
+		
+		//defining the R statements for ANOVA 
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String loadWorkspace = null;
+		String contrastStmt = null;
+		
+		if (contrastOption) {
+			// String fileExistsStmt = "if (file.exists(file = \""+ outputPath +"tempContrastWorkspace.RData\")) {\n";
+			// fileExistsStmt = fileExistsStmt + "   load(file = \""+ outputPath +"tempContrastWorkspace.RData\")\n";
+			// fileExistsStmt = fileExistsStmt + "   if (exists(\"resultContrast\")) {\n";
+			// fileExistsStmt = fileExistsStmt + "         funcStmt = funcStmt + ";
+			// fileExistsStmt = fileExistsStmt + "   }\n}";
+			loadWorkspace = "load(file = \""+ outputPath +"tempContrastWorkspace.RData\")";
+			contrastStmt = "contrast.option <- resultContrast$contrast.option";
+		}
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + design +"Output.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "AOVResult <- combAOVTest(data = \"dataRead\", design = \""+ design +"\", respvar = "+ inputTransform.createRVector(respvar);
+		command = command + ", factor1 = "+ inputTransform.createRVector(factor1);
+		if (design == "SplitCRD" || design == "SplitRCBD" || design == "SplitLSD" || design == "Strip") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+		}
+		if (design == "Split2CRD" || design == "Split2RCBD" || design == "Split2LSD" || design == "Strip-Split") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+			command = command + ", factor3 = "+ inputTransform.createRVector(factor3);
+		}
+		if (design == "Split3CRD" || design == "Split3RCBD" || design == "Split3LSD" || design == "Strip-Split2") {
+			command = command + ", factor2 = "+ inputTransform.createRVector(factor2);
+			command = command + ", factor3 = "+ inputTransform.createRVector(factor3);
+			command = command + ", factor4 = "+ inputTransform.createRVector(factor4);
+		}
+		if (design != "CRD") {
+			command = command + ", rep1 = \""+ rep1 +"\"";
+		}
+		if (design == "LSD" || design == "SplitLSD" || design == "Split2LSD"|| design == "Split3LSD") {
+			command = command + ", rep2 = \""+ rep2 +"\"";
+		}
+		command = command + ", set = \""+ set +"\"";
+		if (descriptive) {
+			command = command + ", descriptive = "+ String.valueOf(descriptive).toUpperCase();
+		}
+		if (normality) {
+			command = command + ", normality = "+ String.valueOf(normality).toUpperCase();
+		}
+		//if (homogeneity) {
+		//	command = command + ", homogeneity = "+ String.valueOf(homogeneity).toUpperCase();
+		//}
+		command = command + ", homogeneity = TRUE";
+		if (pwtest != null && pwvar != null) {
+			command = command + ", pwTest = "+ inputTransform.createRVector(pwtest);
+			command = command + ", pwVar = "+ inputTransform.createRVector(pwvar);
+		}
+		if (contrastOption) {
+			command = command + ", contrastOption = contrast.option";
+		}
+		command = command + ", sig = "+ sig +", outputPath = \""+ outputPath+"\")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		String sinkOut = "sink()";
+		
+		System.out.println(rmvStmt);
+		if (contrastOption) {
+			System.out.println(loadWorkspace);
+			System.out.println(contrastStmt);
+		}		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		if (contrastOption) {
+			rEngine.eval(loadWorkspace);
+			rEngine.eval(contrastStmt);
+		}	
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String[] getResult = null;
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in combAOVTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		} else {
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+			// create a boxplot of the raw data
+//			String boxplotCommand = "for (i in (1:length("+ inputTransform.createRVector(respvar) +"))) {\n";
+//			boxplotCommand = boxplotCommand + "    png(file = paste(\""+ outputPath +""+design+"Boxplot_\","+ inputTransform.createRVector(respvar) +"[i],\".png\", sep = \"\"))\n";
+//			if (set == null) {
+//				boxplotCommand = boxplotCommand + "    boxplot(AOVResult$data[,"+ inputTransform.createRVector(respvar) +"[i]], horizontal = TRUE, main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), xlab = "+ inputTransform.createRVector(respvar) +"[i]) \n";				
+//			} else {
+//				boxplotCommand = boxplotCommand + "    boxplot(AOVResult$data[,"+ inputTransform.createRVector(respvar) +"[i]] ~ AOVResult$data[,\""+ set +"\"], main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), ylab = "+ inputTransform.createRVector(respvar) +"[i], xlab = \""+ set +"\") \n";
+//			}
+//			boxplotCommand = boxplotCommand + "    dev.off() \n";
+//			boxplotCommand = boxplotCommand + "}\n";
+//			System.out.println(boxplotCommand);
+//			rEngine.eval(boxplotCommand);
+//			
+			String saveWorkspace = "save(dataRead, AOVResult, file = \""+ outputPath +"tempANOVAWorkspace.RData\")";
+			System.out.println(saveWorkspace);
+			rEngine.eval(saveWorkspace);
+			
+			getResult = rEngine.eval("AOVResult$rvWithSigEffect").asStringArray();
+			System.out.println(Arrays.toString(getResult));
+
+		}
+
+		
+		//String[] gr2 = rEngine.rniGetStringArray(Long.parseLong(rEngine.eval("AOVResult$rvWithSigEffect").asStringArray()));
+		rEngineEnd();
+		return getResult;
+	}
+	
+	@Override
+	public void doPairwiseANOVA(String filePath, 
+			String[] respvar, String[] method, String design, 
+			double sig, boolean combined){
+		
+		//defining the R statements for pairwise comparison
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String loadWorkspace = "load(file = \""+ filePath +"tempANOVAWorkspace.RData\")";
+		String sinkIn = "sink(\"" + filePath + "PairwiseOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\nResult of Pairwise Comparison\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String respvarStmt = "respvar <- "+ inputTransform.createRVector(respvar);
+		String posStmt = "pos <- match(respvar, AOVResult$rvWithSigEffect)";
+		String commandStmt = null;
+		if (combined) {
+			commandStmt = "for (i in (1:length(pos))) {\n";
+			commandStmt = commandStmt + "   if (!is.null(AOVResult$pwOption[[pos[i]]]$sigEffect)) {\n";
+			commandStmt = commandStmt + "       cat(\"Response Variable:\", AOVResult$pwOption[[pos[i]]]$rv, \"\\n\\n\")\n";
+			commandStmt = commandStmt + "       for (j in (1:length(AOVResult$pwOption[[pos[i]]]$sigEffect))) {\n";
+			commandStmt = commandStmt + "            pairwiseComparison(aovTable = AOVResult$aovTable[[pos[i]]], \n";
+			commandStmt = commandStmt + "                               design = \""+ design +"\",\n";
+			commandStmt = commandStmt + "                               effect = AOVResult$pwOption[[pos[i]]]$sigEffect[j], \n";
+			commandStmt = commandStmt + "                               data = AOVResult$data, \n";
+			commandStmt = commandStmt + "                               respvar = AOVResult$pwOption[[pos[i]]]$rv,\n";
+			commandStmt = commandStmt + "                               pwTest = "+ inputTransform.createRVector(method) +",\n";
+			commandStmt = commandStmt + "                               siglevel = "+ sig+")";
+			commandStmt = commandStmt + "\n       }\n   }\n}";			
+		} else {
+			commandStmt = "for (i in (1:length(pos))) {\n";
+			commandStmt = commandStmt + "     for (j in (1:length(AOVResult$pwOption[[pos[i]]]))) {\n";
+			commandStmt = commandStmt + "          if (j == 1) cat(\"Response Variable: \", AOVResult$pwOption[[pos[i]]][[j]]$rv, \"\\n\\n\") \n";
+			commandStmt = commandStmt + "          if (!is.null(AOVResult$pwOption[[pos[i]]][[j]]$sigEffect)) {\n";
+			commandStmt = commandStmt + "               for (k in (1:length(AOVResult$pwOption[[pos[i]]][[j]]$sigEffect))) {\n";
+			commandStmt = commandStmt + "                    if (AOVResult$pwOption[[pos[i]]][[j]]$setvar != \"NULL\") { \n";
+			commandStmt = commandStmt + "                         cat(AOVResult$pwOption[[pos[i]]][[j]]$setvar, \" = \", AOVResult$pwOption[[pos[i]]][[j]]$set, \"\\n\\n\")\n";
+			commandStmt = commandStmt + "                         pairwiseComparison(aovTable = AOVResult$aovTable[[pos[i]]][[j]], \n"; 
+			commandStmt = commandStmt + "                                            design = \""+ design +"\", effect = AOVResult$pwOption[[pos[i]]][[j]]$sigEffect[k], \n";
+			commandStmt = commandStmt + "                                            data = AOVResult$data[AOVResult$data[,AOVResult$pwOption[[pos[i]]][[j]]$setvar] == AOVResult$pwOption[[pos[i]]][[j]]$set,], \n";
+			commandStmt = commandStmt + "                                            respvar = AOVResult$pwOption[[pos[i]]][[j]]$rv, \n";
+			commandStmt = commandStmt + "                                            pwTest = "+ inputTransform.createRVector(method) +", \n";
+			commandStmt = commandStmt + "                                            siglevel = "+ sig +")\n";
+			commandStmt = commandStmt + "                    } else {\n";
+			commandStmt = commandStmt + "                         pairwiseComparison(aovTable = AOVResult$aovTable[[pos[i]]][[j]], \n"; 
+			commandStmt = commandStmt + "                                            design = \""+ design +"\", effect = AOVResult$pwOption[[pos[i]]][[j]]$sigEffect[k], \n";
+			commandStmt = commandStmt + "                                            data = AOVResult$data, \n";
+			commandStmt = commandStmt + "                                            respvar = AOVResult$pwOption[[pos[i]]][[j]]$rv, \n";
+			commandStmt = commandStmt + "                                            pwTest = "+ inputTransform.createRVector(method) +", \n";
+			commandStmt = commandStmt + "                                            siglevel = "+ sig +")\n";
+			commandStmt = commandStmt + "                    } \n";
+			commandStmt = commandStmt + "               }\n";
+			commandStmt = commandStmt + "          }\n";
+			commandStmt = commandStmt + "     }\n";
+			commandStmt = commandStmt + "}\n";		
+		}
+		String sinkOut = "sink()";
+		
+		System.out.println(rmvStmt);
+		System.out.println(loadWorkspace);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(respvarStmt);
+		System.out.println(posStmt);
+		System.out.println(commandStmt);
+		System.out.println(sinkOut);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		rEngine.eval(loadWorkspace);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(respvarStmt);
+		rEngine.eval(posStmt);
+		
+		rEngine.eval(commandStmt);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doContrast(String filePath, String[] respvar,
+			String[] factor, String[] type, String[] level, 
+			String[] coef, boolean combined){
+		
+		//defining the R statements for pairwise comparison
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String loadWorkspace = "load(file = \""+ filePath +"tempANOVAWorkspace.RData\")";
+		String sinkIn = "sink(\"" + filePath + "ContrastAnalysisOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\nResult of Contrast Analysis\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String respvarStmt = "respvar <- "+ inputTransform.createRVector(respvar);
+		String contrastStmt = "contrast.option <- list()";
+		String contrastFactorStmt = "contrast.option$factor <- "+ inputTransform.createRVector(factor);
+		String contrastTypeStmt = "contrast.option$type <- "+ inputTransform.createRVector(type);
+		String contrastLevelStmt = "contrast.option$level <- "+ inputTransform.createRVector(level);
+		String contrastCoefStmt = "if (length(which(contrast.option$type == \"user\")) != 0) {\n";
+		contrastCoefStmt = contrastCoefStmt + "   path <- "+ inputTransform.createRVector(coef)+"\n";
+		contrastCoefStmt = contrastCoefStmt + "   contrast.option$coef<- list()\n";
+		contrastCoefStmt = contrastCoefStmt + "   for (i in (1:length(path))) {\n";
+		contrastCoefStmt = contrastCoefStmt + "        temp <- read.csv(path[i], header = TRUE, na.strings = c(\"NA\",\".\"), blank.lines.skip=TRUE, sep = \",\", , row.names = 1)\n";
+		contrastCoefStmt = contrastCoefStmt + "        names(temp) <- levels(factor(dataRead[,contrast.option$factor[i]]))\n";
+		contrastCoefStmt = contrastCoefStmt + "        contrast.option$coef[[i]] <- as.matrix(temp)\n";
+		contrastCoefStmt = contrastCoefStmt + "   }\n}\n";
+		String commandStmt = null;
+		if (combined) {
+			commandStmt = "for (i in (1:length(respvar))) {\n";
+			commandStmt = commandStmt + "   mymodel <- paste(respvar[i], \"~\", AOVResult$model)\n";
+			commandStmt = commandStmt + "   mymodel2 <- paste(respvar[i], \"~\", AOVResult$model2)\n";
+			commandStmt = commandStmt + "   resultContrast <- ContrastCompute(data = AOVResult$data, aovTable = AOVResult$aovTable[[i]], mymodel, mymodel2, contrast.option)";
+			commandStmt = commandStmt + "\n}";
+		} else {
+			commandStmt = "for (i in (1:length(respvar))) {\n";
+			commandStmt = commandStmt + "   mymodel <- paste(respvar[i], \"~\", AOVResult$model)\n";
+			commandStmt = commandStmt + "   mymodel2 <- paste(respvar[i], \"~\", AOVResult$model2)\n";
+			commandStmt = commandStmt + "   for (j in (1:length(AOVResult$pwOption[[i]]))) {\n";
+			commandStmt = commandStmt + "        if (AOVResult$pwOption[[i]][[j]]$setvar != \"NULL\") {\n";
+			commandStmt = commandStmt + "             cat(AOVResult$pwOption[[i]][[j]]$setvar, \" = \", AOVResult$pwOption[[i]][[j]]$set, \"\\n\\n\")\n";
+			commandStmt = commandStmt + "             ContrastCompute(data = AOVResult$data[AOVResult$data[,AOVResult$pwOption[[i]][[j]]$setvar] == AOVResult$pwOption[[i]][[j]]$set,], \n";
+			commandStmt = commandStmt + "                             aovTable = AOVResult$aovTable[[i]][[j]], mymodel, mymodel2, contrast.option) \n";
+			commandStmt = commandStmt + "        } else { \n";
+			commandStmt = commandStmt + "             ContrastCompute(data = AOVResult$data, aovTable = AOVResult$aovTable[[i]][[j]], mymodel, mymodel2, contrast.option) \n";
+			commandStmt = commandStmt + "        } \n";
+			commandStmt = commandStmt + "   } \n";
+			commandStmt = commandStmt + "}\n";	
+		}
+		
+		String sinkOut = "sink()";
+		String saveWorkspace = "save(resultContrast, file = \""+ filePath +"tempContrastWorkspace.RData\")";
+				
+		System.out.println(rmvStmt);
+		System.out.println(loadWorkspace);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(respvarStmt);
+		System.out.println(contrastStmt);
+		System.out.println(contrastFactorStmt);
+		System.out.println(contrastTypeStmt);
+		System.out.println(contrastLevelStmt);
+		System.out.println(contrastCoefStmt);
+		System.out.println(commandStmt);
+		System.out.println(sinkOut);
+		System.out.println(saveWorkspace);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		rEngine.eval(loadWorkspace);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(respvarStmt);
+		rEngine.eval(contrastStmt);
+		rEngine.eval(contrastFactorStmt);
+		rEngine.eval(contrastTypeStmt);
+		rEngine.eval(contrastLevelStmt);
+		rEngine.eval(contrastCoefStmt);
+		rEngine.eval(commandStmt);
+		rEngine.eval(sinkOut);
+		rEngine.eval(saveWorkspace);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public String[] doBIBD(String dataFileName, String outputPath, 
+			String[] respvar, String treatment, String block, String set, String[] method, 
+			boolean descriptive, boolean normality, boolean homogeneity, double sig){
+		
+		//defining the R statements for ANOVA 
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + "BIBDOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "BIBDResult <- BIBDTest(data = \"dataRead\", respvar = "+ inputTransform.createRVector(respvar);
+		command = command + ", trmt = \""+ treatment +"\", block = \""+ block +"\"";
+		if (set != null) {
+			command = command + ", set = \""+ set + "\"";
+		}
+		if (method != null) {
+			command = command + ", method = "+ inputTransform.createRVector(method);
+		}
+		if (descriptive) {
+			command = command + ", descriptive = "+ String.valueOf(descriptive).toUpperCase();
+		}
+		if (normality) {
+			command = command + ", normality = "+ String.valueOf(normality).toUpperCase();
+		}
+		if (homogeneity) {
+			command = command + ", homogeneity = "+ String.valueOf(homogeneity).toUpperCase();
+		}
+		command = command + ", alpha = "+ sig +", outputPath = \""+ outputPath+"\")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		String sinkOut = "sink()";
+		
+		System.out.println(rmvStmt);
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+				
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+				
+		String[] getResult = null;
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in BIBDTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		} else {
+
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+			// create a boxplot of the raw data
+			String boxplotCommand = "for (i in (1:length("+ inputTransform.createRVector(respvar) +"))) {\n";
+			boxplotCommand = boxplotCommand + "    png(file = paste(\""+ outputPath +""+"BIBDBoxplot_\","+ inputTransform.createRVector(respvar) +"[i],\".png\", sep = \"\"))\n";
+			if (set == null) {
+				boxplotCommand = boxplotCommand + "    boxplot(BIBDResult$data[,"+ inputTransform.createRVector(respvar) +"[i]], horizontal = TRUE, main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), xlab = "+ inputTransform.createRVector(respvar) +"[i]) \n";				
+			} else {
+				boxplotCommand = boxplotCommand + "    boxplot(BIBDResult$data[,"+ inputTransform.createRVector(respvar) +"[i]] ~ AOVResult$data[,\""+ set +"\"], main = paste(\"Boxplot of \", "+ inputTransform.createRVector(respvar) +"[i], sep = \"\"), ylab = "+ inputTransform.createRVector(respvar) +"[i], xlab = \""+ set +"\") \n";
+			}
+			boxplotCommand = boxplotCommand + "    dev.off() \n";
+			boxplotCommand = boxplotCommand + "}\n";
+			System.out.println(boxplotCommand);
+			rEngine.eval(boxplotCommand);
+			
+			String saveWorkspace = "save(dataRead, BIBDResult, file = \""+ outputPath +"tempANOVAWorkspace.RData\")";
+			System.out.println(saveWorkspace);
+			rEngine.eval(saveWorkspace);
+			
+			String saveData = "write.csv(BIBDResult$data, file = paste(\""+ outputPath +"\", \"residualData.csv\", sep = \"\"),row.names = FALSE)";
+			System.out.println(saveData);
+			rEngine.eval(saveData);
+			
+			getResult = rEngine.eval("BIBDResult$rvWithSigEffect").asStringArray();
+			System.out.println(Arrays.toString(getResult));
+
+		}
+
+		rEngineEnd();
+		return getResult;
+	}
+	
+	@Override
+	public void doPairwiseBIBD(String filePath, String[] respvar, String[] method) {
+		//defining the R statements for pairwise comparison
+		String rmvStmt = "rm(list=ls(all=TRUE))";
+		String loadWorkspace = "load(file = \""+ filePath +"tempANOVAWorkspace.RData\")";
+		String sinkIn = "sink(\"" + filePath + "PairwiseOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\nResult of Pairwise Comparison\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String methodStmt = "method <- "+ inputTransform.createRVector(method);
+		String respvarStmt = "respvar <- "+ inputTransform.createRVector(respvar);
+		String posStmt = "pos <- na.omit(match(respvar, BIBResult$rvWithSigEffect))";
+		String commandStmt = null;
+		commandStmt = commandStmt + "if (length(pos) >= 1) {\n";
+		commandStmt = commandStmt + "     for (i in (1:length(pos))) { \n";
+		commandStmt = commandStmt + "          printRVLabel <- FALSE \n";
+		commandStmt = commandStmt + "          for (j in (1:length(BIBResult$result[[pos[i]]]$set))) { \n";
+		commandStmt = commandStmt + "               if (length(BIBResult$result[[pos[i]]]$set[[j]]) > 1 && BIBResult$result[[pos[i]]]$set[[j]]$sigTrmt) { \n";
+		commandStmt = commandStmt + "                    trmtLabel <- trimStrings(rownames(BIBResult$result[[pos[i]]]$set[[j]]$ANOVA.adjblk)[1]) \n";
+		commandStmt = commandStmt + "                    if (!printRVLabel) { \n";
+		commandStmt = commandStmt + "                         cat(\"Response Variable:\", BIBResult$rvWithSigEffect[pos[i]], \"\n\n\") \n";
+		commandStmt = commandStmt + "                         printRVLabel <- TRUE \n";
+		commandStmt = commandStmt + "                    } \n";
+		commandStmt = commandStmt + "                    if (!is.null(BIBResult$set)) { \n";
+		commandStmt = commandStmt + "                         cat(BIBResult$set, \"=\", BIBResult$result[[pos[i]]]$set[[j]]$setValue, \"\n\n\") \n";
+		commandStmt = commandStmt + "                    } \n";
+		commandStmt = commandStmt + "                    printBIBDPairwise(object = BIBResult$result[[pos[i]]]$set[[j]]$pw, dfError = BIBResult$result[[pos[i]]]$set[[j]]$dfError, MSError = BIBResult$result[[pos[i]]]$set[[j]]$MSError, method = method, trmtLabel = trmtLabel) \n";
+		commandStmt = commandStmt + "               } \n";
+		commandStmt = commandStmt + "          } \n";
+		commandStmt = commandStmt + "     } \n";
+		commandStmt = commandStmt + "} \n";
+		
+		String sinkOut = "sink()";
+		
+		System.out.println(rmvStmt);
+		System.out.println(loadWorkspace);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(methodStmt);
+		System.out.println(respvarStmt);
+		System.out.println(posStmt);
+		System.out.println(commandStmt);
+		System.out.println(sinkOut);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(rmvStmt);
+		rEngine.eval(loadWorkspace);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(methodStmt);
+		rEngine.eval(respvarStmt);
+		rEngine.eval(posStmt);
+		rEngine.eval(commandStmt);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doBivariateCorr(String dataFileName, String outFileName, String[] respvar, String[] method, String alternative, 
+			String statistics, String outputPlot, String graphFileName){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		String methodVector= inputTransform.createRVector(method);
+
+		//defining the R statements for correlation test
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\nResult of Correlation Analysis\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcBivariateCorr = "result <- try(";
+		String command = "BivariateCorrelationTest(data = \"dataRead\", var = " + respvarVector +", method = "+ methodVector + ", alternative = \"" + alternative +"\", statistics = "+statistics+")";
+		funcBivariateCorr = funcBivariateCorr + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcBivariateCorr);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcBivariateCorr);
+		
+		String sinkOut = "sink()";
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in BivariateCorrelationTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		} 
+		else {
+			//display scatter plot for all pairs of the response variables
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+			if (outputPlot == "TRUE") {
+				String plot1 = "pairs.var <- t(combn(" + respvarVector +",2))";
+				String plot2 = "for (i in (1:nrow(pairs.var))) { \n";
+				plot2 = plot2 + "   png(file = paste (\"" + graphFileName + "\", pairs.var[i,1],\"_\",pairs.var[i,2],\".png\",sep=\"\")) \n";
+				plot2 = plot2 + "   plot(dataRead[,pairs.var[i,1]], dataRead[,pairs.var[i,2]], main = paste(\"Scatterplot of \", pairs.var[i,1],\" and \", pairs.var[i,2], sep = \"\"), ylab = pairs.var[i,2], xlab = pairs.var[i,1])\n";
+				plot2 = plot2 + "   dev.off() \n";
+				plot2 = plot2 + "}";
+				
+				String plot3a = "png(file = paste(\""+ graphFileName+"\", \"ALL.png\", sep = \"\"))";
+				String plot3b = "pairs(formula(paste(\"~\", paste("+ respvarVector +", collapse = \"+\", sep = \"\"), sep = \"\")), data = dataRead, main = \"Simple Scatterplot Matrix\")";
+				String plot3c = "dev.off()";
+				
+				System.out.println(plot1);
+				System.out.println(plot2);
+				System.out.println(plot3a);
+				System.out.println(plot3b);
+				System.out.println(plot3c);
+
+				rEngine.eval(plot1);
+				rEngine.eval(plot2);
+				rEngine.eval(plot3a);
+				rEngine.eval(plot3b);
+				rEngine.eval(plot3c);
+			}
+		}
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doLinearReg(String dataFileName, String outputPath, 
+			String[] depvar, String[] indepvar, boolean constant, 
+			boolean confInt, double confLevel, boolean covMatrix, 
+			boolean VIF, boolean autoCorr, String[] heteroskedasticity, 
+			String[] normality, boolean COOKS, boolean leverage) {
+		
+		String depvarVector= inputTransform.createRVector(depvar);
+		String indepvarVector= inputTransform.createRVector(indepvar);
+		
+		//defining the R statements for signed rank test 
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\""+ outputPath +"LinearRegOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "LinearRegressionAnalysis(data = \"dataRead\", depVar = "+ depvarVector +", indepVar = "+ indepvarVector;
+		command = command + ", constant = "+ String.valueOf(constant).toUpperCase();
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", confInt = "+ String.valueOf(confInt).toUpperCase() +", confLevel = " + confLevel;
+		}
+		if (normality != null) {
+			command = command + ", normality = "+ inputTransform.createRVector(normality);
+		}
+		if (heteroskedasticity != null) {
+			command = command + ", heteroskedasticity = "+ inputTransform.createRVector(heteroskedasticity);
+		}
+		if (autoCorr) {
+			command = command + ", autoCorr = "+ String.valueOf(autoCorr).toUpperCase();
+		}
+		if (VIF && indepvar.length > 1) {
+			command = command + ", VIF = "+ String.valueOf(VIF).toUpperCase();
+		}
+		if (COOKS) {
+			command = command + ", COOKS = "+ String.valueOf(COOKS).toUpperCase();
+		}
+		if (leverage) {
+			command = command + ", leverage = "+ String.valueOf(leverage).toUpperCase();
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		String sinkOut = "sink()";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in LinearRegressionAnalysis:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		} 
+		else {
+			String saveData = "write.csv(result$data, file = \""+ outputPath +"LinearRegNewData.csv\", row.names = FALSE)";
+			String yVar = "depvar <- "+ depvarVector;
+			String xVar = "indepvar <-" + indepvarVector;
+			String diagplotStmt = "for (i in (1:length(result$modelFit))) {\n png(file = paste(\""+ outputPath+"\",depvar[i],\"_DiagPlot.png\", sep = \"\"), width = 960, height = 480) \n par(mfrow = c(1,2)) \n plot(fitted.values(result$modelFit[[i]]), residuals(result$modelFit[[i]]), main = \"Residual vs Fitted\", xlab = \"Fitted Values\", ylab = \"Residuals\") \n qqnorm(residuals(result$modelFit[[i]])) \n qqline(residuals(result$modelFit[[i]])) \n dev.off()\n}";
+			String scatterplotStmt = "for (i in (1:length(depvar))) { \n";
+			scatterplotStmt = scatterplotStmt + "    for (j in (1:length(indepvar))) { \n";
+			scatterplotStmt = scatterplotStmt + "        png(file = paste(\""+ outputPath+"\",depvar[i],\"_\", indepvar[j], \"_Scatterplot.png\", sep = \"\"))\n";
+			scatterplotStmt = scatterplotStmt + "        plot(dataRead[,depvar[i]] ~ dataRead[,indepvar[j]],\n";
+			scatterplotStmt = scatterplotStmt + "             main = paste(\"Scatterplot of \", indepvar[j], \" vs \", depvar[i], sep = \"\"), \n";
+			scatterplotStmt = scatterplotStmt + "             ylab = depvar[i], xlab = indepvar[j], \n";
+			scatterplotStmt = scatterplotStmt + "             ylim = c(min(dataRead[,depvar[i]]), max(dataRead[,depvar[i]])), \n";
+			scatterplotStmt = scatterplotStmt + "             xlim = c(min(dataRead[,indepvar[j]]), max(dataRead[, indepvar[j]]))) \n";
+			scatterplotStmt = scatterplotStmt + "        if (length(indepvar) == 1) { abline(lm(dataRead[,depvar[i]] ~ dataRead[,indepvar[j]])) } \n";
+			scatterplotStmt = scatterplotStmt + "        dev.off()\n";
+			scatterplotStmt = scatterplotStmt + "    } \n";
+			scatterplotStmt = scatterplotStmt + "}";
+			
+			System.out.println(saveData);
+			System.out.println(yVar);		
+			System.out.println(xVar);
+			System.out.println(sinkOut);
+			System.out.println();
+			System.out.println(diagplotStmt);
+			System.out.println(scatterplotStmt);
+			
+			rEngine.eval(saveData);
+			rEngine.eval(yVar);
+			rEngine.eval(xVar);
+			rEngine.eval(sinkOut);
+			rEngine.eval(diagplotStmt);
+			rEngine.eval(scatterplotStmt);
+		}
+
+		rEngineEnd();
+	}
+	
+	public void doLinearRegSelection(String dataFileName, String outputPath, 
+			String[] depvar, String[] indepvar, boolean constant, boolean correlate,
+			String selection, String selectionStat, boolean confInt, double confLevel, 
+			boolean covMatrix, String[] normality, String[] heteroskedasticity,   
+			boolean autoCorr, boolean VIF, boolean COOKS, boolean leverage, boolean scatterplot) {
+		
+		String depvarVector= inputTransform.createRVector(depvar);
+		String indepvarVector= inputTransform.createRVector(indepvar);
+		
+		//defining the R statements 
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\""+ outputPath +"LinearRegOutput.txt\")";
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/allPossibleReg.R\")";
+//	  	String sourceRun2 = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/LinearRegressionSelection.R\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "LinearRegressionSelection(data = \"dataRead\", depVar = "+ depvarVector +", indepVar = "+ indepvarVector;
+		command = command + ", constant = "+ String.valueOf(constant).toUpperCase();
+		if (correlate) {
+			command = command + ", correlate = " + String.valueOf(correlate).toUpperCase();
+		}
+		command = command + ", selection = \"" + selection + "\", selectionStat = \"" + selectionStat + "\"";
+
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", confInt = "+ String.valueOf(confInt).toUpperCase() +", confLevel = " + confLevel;
+		}
+		
+		if (covMatrix) {
+			command = command + ", covMatrix = " + String.valueOf(covMatrix).toUpperCase();
+		}
+		
+		if (normality != null) {
+			command = command + ", normality = "+ inputTransform.createRVector(normality);
+		}
+		if (heteroskedasticity != null) {
+			command = command + ", heteroskedasticity = "+ inputTransform.createRVector(heteroskedasticity);
+		}
+		if (autoCorr) {
+			command = command + ", autoCorr = "+ String.valueOf(autoCorr).toUpperCase();
+		}
+		if (VIF && indepvar.length > 1) {
+			command = command + ", VIF = "+ String.valueOf(VIF).toUpperCase();
+		}
+		if (COOKS) {
+			command = command + ", COOKS = "+ String.valueOf(COOKS).toUpperCase();
+		}
+		if (leverage) {
+			command = command + ", leverage = "+ String.valueOf(leverage).toUpperCase();
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		String sinkOut = "sink()";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+//		System.out.println(sourceRun);
+//		System.out.println(sourceRun2);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+//		rEngine.eval(sourceRun);
+//		rEngine.eval(sourceRun2);
+		rEngine.eval(pkgName);
+
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in LinearRegressionAnalysis:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		} 
+		else {
+			if (!selection.equals("allposs")) {
+				String saveData = "write.csv(result$data, file = \""+ outputPath +"LinearRegNewData.csv\", row.names = FALSE)";
+				String yVar = "depvar <- "+ depvarVector;
+				String xVar = "indepvar <-" + indepvarVector;
+				String diagplotStmt = "for (i in (1:length(result$modelFit))) {\n png(file = paste(\""+ outputPath+"\",depvar[i],\"_DiagPlot.png\", sep = \"\"), width = 960, height = 480) \n par(mfrow = c(1,2)) \n plot(fitted.values(result$modelFit[[i]]), residuals(result$modelFit[[i]]), main = \"Residual vs Fitted\", xlab = \"Fitted Values\", ylab = \"Residuals\") \n qqnorm(residuals(result$modelFit[[i]])) \n qqline(residuals(result$modelFit[[i]])) \n dev.off()\n}";
+
+				System.out.println(saveData);
+				System.out.println(yVar);		
+				System.out.println(xVar);
+				System.out.println(sinkOut);
+				System.out.println();
+				System.out.println(diagplotStmt);
+
+				rEngine.eval(saveData);
+				rEngine.eval(yVar);
+				rEngine.eval(xVar);
+				rEngine.eval(sinkOut);
+				rEngine.eval(diagplotStmt);
+
+				if (scatterplot) {
+					String scatterplotStmt1 = "png(file = paste(\""+ outputPath +"\", \"ScatterplotMatrix.png\", sep = \"\"))";
+					String scatterplotStmt2 = "pairs(formula(paste(\"~\", paste("+ depvarVector +", collapse = \"+\", sep = \"\"), \"+\", paste("+ indepvarVector +", collapse = \"+\", sep = \"\"), sep = \"\")), data = dataRead, main = \"Scatterplot Matrix\")";
+					String scatterplotStmt3 = "dev.off()";
+
+					System.out.println(scatterplotStmt1);
+					System.out.println(scatterplotStmt2);
+					System.out.println(scatterplotStmt3);
+
+					rEngine.eval(scatterplotStmt1);
+					rEngine.eval(scatterplotStmt2);
+					rEngine.eval(scatterplotStmt3);
+
+				}
+			}
+		}
+
+		rEngineEnd();
+	}
+	
+	 
+	public void doNonlinearRegression(String dataFileName, String outputPath, 
+			String[] depvar, String indepvar, boolean statistics, String model, String modelExp, 
+			String startValues, boolean covMatrix, boolean normality, boolean confInterval, double confLevel 
+//			 , String[] heteroskedasticity,   
+			) {
+		
+		String depvarVector= inputTransform.createRVector(depvar);
+		
+		//defining the R statements 
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\""+ outputPath +"NonLinearRegOutput.txt\")";
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/confInt2.R\")";
+	  	String sourceRun2 = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/NonLinearRegression.R\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "NonLinearRegression(data = \"dataRead\", depVar = "+ depvarVector +", indepVar = \""+ indepvar + "\"";
+
+		if (statistics) {
+			command = command + ", statistics = " + String.valueOf(statistics).toUpperCase();
+		}
+
+		command = command + ", model = \"" + model + "\"";
+		
+		if (model.equals("custom")) { 
+			command = command + ", modelExp = \"" + modelExp + "\", startValues = \"" + startValues + "\"";
+		} else command = command + ", modelExp = NULL, startValues = NULL"; 
+		
+		if (covMatrix) {
+			command = command + ", covMatrix = " + String.valueOf(covMatrix).toUpperCase();
+		}
+
+		if (normality) {
+			command = command + ", normality = "+ String.valueOf(normality).toUpperCase();
+		}
+
+		if (confInterval) {
+			confLevel = confLevel/100;
+			command = command + ", confInterval = "+ String.valueOf(confInterval).toUpperCase() +", confLevel = " + confLevel;
+		}
+		
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		String sinkOut = "sink()";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+//		System.out.println(sourceRun);
+		System.out.println(sourceRun2);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+//		rEngine.eval(sourceRun);
+		rEngine.eval(sourceRun2);
+		rEngine.eval(pkgName);
+
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in NonLinearRegressionAnalysis:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		} 
+		else {
+			String saveData = "write.csv(result$data, file = \""+ outputPath +"NonLinearRegNewData.csv\", row.names = FALSE)";
+			String yVar = "depvar <- "+ depvarVector;
+			String xVar = "indepvar <- \"" + indepvar + "\"";
+			String plotData = "plotData <- result$data";
+//			String diagplotStmt = "for (i in (1:length(result$nlsFit))) {\n png(file = paste(\""+ outputPath+"\",depvar[i],\"_DiagPlot.png\", sep = \"\"), width = 960, height = 480) \n par(mfrow = c(1,2)) \n plot(fitted.values(result$nlsFit[[i]]), residuals(result$nlsFit[[i]]), main = \"Residual vs Fitted\", xlab = \"Fitted Values\", ylab = \"Residuals\") \n qqnorm(residuals(result$nlsFit[[i]])) \n qqline(residuals(result$nlsFit[[i]])) \n dev.off()\n}";
+			String scatterplotStmt = "for (i in (1:length(depvar))) { \n";
+			scatterplotStmt = scatterplotStmt + "yPredVar = paste(depvar[i], \"_pred\", sep = \"\") \n";
+			scatterplotStmt = scatterplotStmt + "png(file = paste(\""+ outputPath+"\",depvar[i],\"_\", indepvar, \"_Scatterplot.png\", sep = \"\"))\n";
+			scatterplotStmt = scatterplotStmt + "plot(plotData[,depvar[i]] ~ plotData[,indepvar],\n";
+			scatterplotStmt = scatterplotStmt + "   main = paste(\"Scatterplot of \", indepvar, \" vs \", depvar[i], sep = \"\"), \n";
+			scatterplotStmt = scatterplotStmt + "   ylab = depvar[i], xlab = indepvar, \n";
+			scatterplotStmt = scatterplotStmt + "   ylim = c(min(plotData[,depvar[i]]), max(plotData[,depvar[i]])), \n";
+			scatterplotStmt = scatterplotStmt + "   xlim = c(min(plotData[,indepvar]), max(plotData[, indepvar]))) \n";
+			scatterplotStmt = scatterplotStmt + "lines(plotData[,indepvar], plotData[,yPredVar], type = \"l\") \n";
+			scatterplotStmt = scatterplotStmt + "dev.off()\n";
+			scatterplotStmt = scatterplotStmt + "}";
+			
+			System.out.println(saveData);
+			System.out.println(yVar);		
+			System.out.println(xVar);
+			System.out.println(plotData);
+			System.out.println(sinkOut);
+			System.out.println();
+//			System.out.println(diagplotStmt);
+			System.out.println(scatterplotStmt);
+			
+			rEngine.eval(saveData);
+			rEngine.eval(yVar);
+			rEngine.eval(xVar);
+			rEngine.eval(plotData);
+			rEngine.eval(sinkOut);
+//			rEngine.eval(diagplotStmt);
+			rEngine.eval(scatterplotStmt);
+		}
+
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doOneMedian(String dataFileName, String outFileName,
+			String[] respvar, Integer testValue, String altHypo,  
+			boolean confInt, float confLevel){
+		
+		//defining the R statements for signed rank test (Nonparametric One Sample)
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "NonParOneOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(" ;
+		String command = "CompareMedian(data = \"dataRead\", varX = "+ inputTransform.createRVector(respvar) + ", hypoValue = " + testValue + ", procedure = \"one\", altHypo = \""+ altHypo +"\"" ;
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", confInt = TRUE, confLevel = " + confLevel;
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMedian:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+	
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doPairedMedian(String dataFileName, String outFileName,
+			String[] varX, String[] varY, String altHypo, boolean confInt, 
+			float confLevel){
+		
+		String varXVector= inputTransform.createRVector(varX);
+		String varYVector= inputTransform.createRVector(varY);
+		
+		//defining the R statements for Paired sample t-test
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\""+ outFileName + "NonParPairedOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(" ;
+		String command = "CompareMedian(data = \"dataRead\", varX = "+ varXVector + ", varY = "+ varYVector +", procedure = \"paired\", altHypo = \""+ altHypo +"\"" ;
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", confInt = TRUE, confLevel = " + confLevel;
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMedian:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doIndependentMedian(String dataFileName, String outFileName,
+			String[] respvar, String grp, String altHypo, boolean confInt, 
+			float confLevel){
+		
+		String respvarVector= inputTransform.createRVector(respvar);
+		
+		//defining the R statements for two independent sample t-test
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "NonPar2IndependentOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(" ;
+		String command = "CompareMedian(data = \"dataRead\", varX = "+ respvarVector + ", grp = \""+ grp + "\", procedure = \"independent\", altHypo = \""+ altHypo+"\"" ;
+		if (confInt) {
+			confLevel = confLevel/100;
+			command = command + ", confInt = TRUE, confLevel = " + confLevel;
+		}
+		command = command + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in CompareMedian:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+
+	@Override
+	public void doKruskal(String dataFileName, String outFileName,
+			String[] respvar, String[] grp){
+		
+		//defining the R statements for two independent sample t-test
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outFileName + "NonParKIndependentOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command = "KruskalWallisTest(data = \"dataRead\", var = "+ inputTransform.createRVector(respvar) + ", grp = " + inputTransform.createRVector(grp) + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in KruskalWallisTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doFriedman(String dataFileName, String resultFolderPath,
+			String[] respvar, String treatment, String block){
+		
+		//defining the R statements for two related non-parametric sample 
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + resultFolderPath + "NonParKRelatedOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcStmt = "result <- try(";
+		String command  = "FriedmanTest(data = \"dataRead\", var = "+ inputTransform.createRVector(respvar) + ", trmt = \""+ treatment +"\", block = \""+ block +"\")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+		
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt);
+				
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in FriedmanTest:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		}
+		
+		String sinkOut = "sink()";
+		System.out.println(sinkOut);
+		rEngine.eval(sinkOut);
+		
+		rEngineEnd();
+	}
+	
+	@Override
+		public void doUnbalancedAnalysis(String dataFileName, String resultFolderPath, 
+				String design, String[] respvars, String environment, String factor,
+				String block, String rep, String row, String column, boolean descriptiveStat, 
+				boolean varianceComponents, String performPairwise, double levelSig, 
+				String[] control, boolean boxplotRawData, boolean histogramRawData, 
+				boolean heatmapResiduals, String heatmapRow, String heatmapColumn, 
+				boolean diagnosticPlot) {
+			
+			String respvarVector= inputTransform.createRVector(respvars);
+
+			//defining the R statements for Unbalanced Analysis 
+			String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+			String sinkIn = "sink(\""+ resultFolderPath +"IncompleteBlock"+ design +"Output.txt\")";
+			String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\nIncomplete Block\\n\", date(),\"\\n\\n\", sep = \"\")";
+			String funcStmt = "result <- try(";
+			String command = "ssaTest(exptl.design = \""+ design +"\", data = dataRead, respvar = "+respvarVector+", geno = \""+factor+"\"";
+			if (design == "AugRCB" || design == "BIBD") {
+				command = command + ", row = \""+ block +"\", column = NULL, rep = NULL";
+			}
+			if (design == "AugLS") {
+				command = command + ", row = \""+ row +"\", column = \""+ column +"\", rep = NULL";
+			}
+			if (design == "Alpha") { 
+				command = command + ", row = \""+ block +"\", column = NULL, rep = \""+rep+"\"";
+			}
+			if (design == "RowCol") {
+				command = command + ", row = \""+ row +"\", column = \""+ column +"\", rep = \""+ rep +"\"";
+			}
+			if (environment != null) {
+				command = command + ", env = \""+ environment +"\"";
+			}
+			if (descriptiveStat) {
+				command = command + ", descriptive = TRUE";	
+			}
+			if (varianceComponents) {
+				command = command + ", varComp = TRUE";	
+			}
+			if (performPairwise != "none") {
+				command = command + ", alpha = "+ levelSig ;
+			}
+			if (performPairwise == "control") {
+				command = command + ", pairwise = \"Dunnett\"";
+				if (control != null) {
+					command = command + ", exclude = "+ inputTransform.createRVector(control);
+				}
+			}
+			if (performPairwise == "all") {
+				command = command + ", pairwise = \"Tukey\", ";	
+			}
+			if (diagnosticPlot) {
+				command = command + ", diagPlot = TRUE, outputPath = \""+ resultFolderPath +"\"";
+			}
+			command = command + ")";
+			funcStmt = funcStmt + command + ", silent = TRUE)";
+			String sinkOut = "sink()";			
+		
+			System.out.println(readData);
+			System.out.println(sinkIn);
+			System.out.println(pkgName);
+			System.out.println(funcStmt);
+			
+			rEngine.eval(readData);
+			rEngine.eval(sinkIn);
+			rEngine.eval(pkgName);
+			rEngine.eval(funcStmt);
+						
+			String runSuccessCommand = rEngine.eval("class(result)").asString();
+			if (runSuccessCommand.equals("try-error")) {
+				String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+				String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+				String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+				String errorMsg4 = "cat(\"Error in ssaTest:\\n\",msg, sep = \"\")";
+
+				System.out.println(errorMsg1);
+				System.out.println(errorMsg2);
+				System.out.println(errorMsg3);
+				System.out.println(errorMsg4);
+				
+				rEngine.eval(errorMsg1);
+				rEngine.eval(errorMsg2);
+				rEngine.eval(errorMsg3);
+				rEngine.eval(errorMsg4);
+			}  
+			else {
+				
+				String saveSummaryStat ="write.csv(result$summary.statistics, file = paste(\""+ resultFolderPath +"SummaryStatistics.csv\", sep = \"\"), row.names = FALSE)";
+				System.out.println(saveSummaryStat);
+				rEngine.eval(saveSummaryStat);
+				
+				String saveResiduals ="write.csv(result$residData, file = paste(\""+ resultFolderPath +"Residuals.csv\", sep = \"\"), row.names = FALSE)";
+				System.out.println(saveResiduals);
+				rEngine.eval(saveResiduals);
+				
+				String var = "respvar <- "+ respvarVector;
+				System.out.println(var);
+				rEngine.eval(var);
+
+				if (boxplotRawData) {
+					String boxplotCommand;
+					if (environment == null) {
+						boxplotCommand = "for (i in (1:length(respvar))) {\n";
+						boxplotCommand = boxplotCommand + "     png(file = paste (\""+ resultFolderPath + "\",\"boxplotSEA_\", respvar[i],\".png\", sep = \"\"))\n";
+						boxplotCommand = boxplotCommand + "     boxplot(dataRead[,respvar[i]], horizontal = TRUE, main = paste(\"Boxplot of \", respvar[i],sep = \"\"), xylab = respvar[i])\n";
+						boxplotCommand = boxplotCommand + "     dev.off()\n";
+						boxplotCommand = boxplotCommand + "}";
+					} 
+					else {
+						boxplotCommand = "for (i in (1:length(respvar))) {\n";
+						boxplotCommand = boxplotCommand + "     png(file = paste (\""+ resultFolderPath + "\",\"boxplotSEA_\", respvar[i],\".png\", sep = \"\"))\n";
+						boxplotCommand = boxplotCommand + "     boxplot(dataRead[,respvar[i]] ~ dataRead[,\""+ environment +"\"], main = paste(\"Boxplot of \", respvar[i],\" by "+environment+"\",sep = \"\"), ylab = respvar[i], xlab = \""+environment+"\")\n";
+						boxplotCommand = boxplotCommand + "     dev.off()\n";
+						boxplotCommand = boxplotCommand + "}";
+					}
+					System.out.println(boxplotCommand);
+					rEngine.eval(boxplotCommand);
+				}
+				
+				if (histogramRawData) {
+					String loadLibrary = "library(lattice)";
+					String histplotCommand;
+					
+					if (environment == null) {
+						histplotCommand = "for (i in (1:length(respvar))) {\n";
+						histplotCommand = histplotCommand + "     png(file = paste (\""+ resultFolderPath + "\",\"histSEA_\", respvar[i],\".png\", sep = \"\"))\n";
+						histplotCommand = histplotCommand + "     print(histogram(dataRead[,respvar[i]], main = paste(\"Histogram of \", respvar[i],sep = \"\"), xlab = respvar[i]))\n";
+						histplotCommand = histplotCommand + "     dev.off()\n";
+						histplotCommand = histplotCommand + "}";
+					} 
+					else {
+						histplotCommand = "for (i in (1:length(respvar))) {\n";
+						histplotCommand = histplotCommand + "     png(file = paste (\""+ resultFolderPath + "\",\"histSEA_\", respvar[i],\".png\", sep = \"\"))\n";
+						histplotCommand = histplotCommand + "     print(histogram(~dataRead[,respvar[i]] | dataRead[,\""+ environment +"\"], data = dataRead, main = paste(\"Histogram of \", respvar[i],\" by "+ environment +"\",sep = \"\"), ylab = respvar[i], xlab = \""+ environment +"\"))\n";
+						histplotCommand = histplotCommand + "     dev.off()\n";
+						histplotCommand = histplotCommand + "}";
+					}
+					System.out.println(loadLibrary);
+					System.out.println(histplotCommand);
+					rEngine.eval(loadLibrary);
+					rEngine.eval(histplotCommand);
+				}
+				
+				if (heatmapResiduals) {
+					String loadLibrary2 = "library(lattice)";
+					String heatmapCommand;
+
+					if (environment != null) {
+						heatmapCommand = "for (i in (1:length(respvar))) {\n";
+						heatmapCommand = heatmapCommand + "     for (j in (1:length(unique(dataRead[,\""+ environment +"\"])))) {\n";
+						heatmapCommand = heatmapCommand + "     	png(file = paste (\""+ resultFolderPath + "\",\"heatmapSEA_\",respvar[i], \"_\",unique(dataRead[,\""+ environment+"\"])[j],\".png\", sep = \"\"))\n";
+						heatmapCommand = heatmapCommand + "     	lp = levelplot(result$residData[result$residData[,\""+ environment +"\"] == unique(dataRead[,\""+ environment +"\"])[j], paste(respvar[i],\"_resid\", sep = \"\")] ~ \n";
+						heatmapCommand = heatmapCommand + "                        dataRead[dataRead[,\""+ environment +"\"] == unique(dataRead[,\""+ environment +"\"])[j], \""+heatmapRow+"\"] *\n";
+						heatmapCommand = heatmapCommand + "                        dataRead[dataRead[,\""+ environment +"\"] == unique(dataRead[,\""+ environment +"\"])[j], \""+heatmapColumn+"\"], \n";
+						heatmapCommand = heatmapCommand + "                        main = paste(respvar[i], \"_resid\",sep = \"\"),\n";
+						heatmapCommand = heatmapCommand + "                        sub = paste(\""+ environment +" = \", unique(dataRead[,\""+ environment +"\"])[j], sep = \"\"),\n";
+						heatmapCommand = heatmapCommand + "                        xlab = \""+ heatmapRow +"\", ylab = \""+ heatmapColumn +"\",\n";
+						heatmapCommand = heatmapCommand + "                        col.regions = colorRampPalette(c(\"yellow\",\"red\"))(50))\n";
+						heatmapCommand = heatmapCommand + "     	print(lp)\n";
+						heatmapCommand = heatmapCommand + "     	dev.off()\n";
+						heatmapCommand = heatmapCommand + "     }\n";
+						heatmapCommand = heatmapCommand + "}";
+					} 
+					else {
+						heatmapCommand = "for (i in (1:length(respvar))) {\n";
+						heatmapCommand = heatmapCommand + "   png(file = paste (\""+ resultFolderPath + "\",\"heatmapSEA_\", respvar[i],\".png\", sep = \"\"))\n";
+						heatmapCommand = heatmapCommand + "   lp = levelplot(result$residData[, paste(respvar[i],\"_resid\", sep = \"\")] ~ dataRead[, \""+heatmapRow+"\"] * dataRead[, \""+heatmapColumn+"\"], \n";
+						heatmapCommand = heatmapCommand + "                  main = paste(respvar[i], \"_resid\",sep = \"\"),\n";
+						heatmapCommand = heatmapCommand + "                  xlab = \""+ heatmapRow +"\", ylab = \""+ heatmapColumn +"\",\n";
+						heatmapCommand = heatmapCommand + "                  col.regions = colorRampPalette(c(\"yellow\",\"red\"))(50))\n";
+						heatmapCommand = heatmapCommand + "   print(lp)\n";
+						heatmapCommand = heatmapCommand + "   dev.off()\n";
+						heatmapCommand = heatmapCommand + "}";
+					}
+					System.out.println(loadLibrary2);
+					System.out.println(heatmapCommand);
+					rEngine.eval(loadLibrary2);
+					rEngine.eval(heatmapCommand);
+				}
+			}
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		
+		}
+	
+//	@Override
+//	public void doPairwiseBIBD(String filePath, String[] respvar, String[] method) { 
+//	
+//	}
+	
+	@Override
+	public void doPCA(String dataFileName, 
+			String outputPath, String[] var, String idVar, boolean descriptiveStat, 
+			String matx,String transform, boolean saveScore, boolean scree, boolean biplot, 
+			boolean pcaplot, boolean useIdVar){
+
+		String varVector= inputTransform.createRVector(var);
+		//defining the R statements for principal component analysis
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + "PCAOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcPCA = "result <- try(";
+		String command = "PCA(data = \"dataRead\", var = "+ varVector ;
+		command = command + ", idVar = \""+ idVar +"\"";
+		command = command + ", matx = \""+ matx +"\"";
+		command = command + ", transform = \""+ transform +"\"" ;
+		if (saveScore){
+			command = command+ ",saveScore = TRUE, outputPath = \""+ outputPath +"\"";
+		} else command = command+ ",saveScore = FALSE";
+		if (scree){
+			command = command+ ",scree = TRUE";
+		} else command = command+ ",scree = FALSE";
+		if (biplot){
+			command = command+ ",biplot = TRUE";
+		} else command = command+ ",biplot = FALSE";
+		if (pcaplot){
+			command = command+ ",pcaplot = TRUE";
+		} else command = command+ ",pcaplot = FALSE";
+		if (useIdVar){
+			command = command+ ",useIdVar = TRUE";
+		} else command = command+ ",useIdVar = FALSE";
+		command = command + ")";
+		funcPCA = funcPCA + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcPCA);
+        
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcPCA);
+
+		String sinkOut = "sink()\n";
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in PCA:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}
+		else {			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);			
+		}
+	
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doClusterAgglo(String dataFileName, String outputPath, String[] var, String idVar,
+								String[] binVar, String[] factorVar,
+								boolean stand, String distance,String clusmethod, boolean distMatrix, 
+								boolean clusterMem, boolean descriptiveStat, Integer clusterNum, 
+								boolean dendrogram, boolean clusterBox, boolean saveMem){
+
+		//defining the R statements for cluster analysis (agglomerative)
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + "ClusterAggloOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String funcClusteragglo = " result <- try( ";
+		String command = "ClusterAgglo(\"dataRead\"";
+
+		if(var == null){
+			command = command + ", var = NULL";
+			}else{command = command + ", var = " + inputTransform.createRVector(var);}
+		
+		command = command + ", idVar = \""+ idVar +"\"";
+		
+		if(binVar == null){
+		command = command + ", binVar = NULL";
+		}else{command = command + ", binVar = " + inputTransform.createRVector(binVar);}
+		
+		if(factorVar == null){
+			command = command + ", factorVar = NULL";
+			}else{command = command + ", factorVar = " + inputTransform.createRVector(factorVar);}
+		
+		if (stand){
+			command = command+ ",stand = TRUE";
+		} else command = command+ ",stand = FALSE";
+		
+		command = command + ", distance = \""+ distance +"\"";
+		
+		if (distMatrix){
+			command = command+ ",distMatrix = TRUE";
+		}else command = command+ ",distMatrix = FALSE";
+		if (clusterMem){
+			command = command+ ",clusterMem = TRUE";
+		} else command = command+ ",clusterMem = FALSE";
+		if (descriptiveStat){
+			command = command+ ",descriptiveStat = TRUE";
+		} else command = command+ ",descriptiveStat = FALSE";
+		if (dendrogram){					
+			command = command+ ",dendrogram = TRUE, outputPath = \""+ outputPath +"\""; 
+		} else command = command+ ", dendrogram = FALSE";
+		if (clusterBox){
+			command = command+ ", clusterBox = TRUE";
+		} else command = command+ ", clusterBox = FALSE";
+		if (saveMem){
+			command = command+ ", saveMem = TRUE";
+		} else command = command+ ", saveMem = FALSE";
+		command = command + ", clusterNum = " + clusterNum + ")";
+		
+		funcClusteragglo = funcClusteragglo + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcClusteragglo);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcClusteragglo);
+
+		String sinkOut = "sink()\n";
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in ClusterAgglo:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}		
+		else{
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+			
+		}
+		rEngineEnd();		
+	}
+	
+	@Override
+	public void doClusterDivisive(String dataFileName, String outputPath, 
+								  String[] var, String idVar, String[] binVar, String[] factorVar, 
+								  boolean stand, String distance, boolean distMatrix,
+								  boolean clusterMem, boolean descriptiveStat, Integer clusterNum, 
+								  boolean dendrogram, boolean clusterBox, boolean saveMem){
+		
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + "ClusterDivisiveOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\n\", date(),\"\n\n\", sep = \"\")";
+		String funcClusterdiv = "result <- try(";
+		String command = "ClusterDivisive(\"dataRead\"";
+		if(var == null){
+			command = command + ", var = NULL";
+			}else{command = command + ", var = " + inputTransform.createRVector(var);}
+		
+		command = command + ", idVar = \""+ idVar +"\"";
+		
+		if(binVar == null){
+		command = command + ", binVar = NULL";
+		}else{command = command + ", binVar = " + inputTransform.createRVector(binVar);}
+		
+		if(factorVar == null){
+			command = command + ", factorVar = NULL";
+			}else{command = command + ", factorVar = " + inputTransform.createRVector(factorVar);}
+		
+		if (stand){
+			command = command + ",stand = TRUE";
+		} else command = command+ ",stand = FALSE";
+		
+		command = command + ", distance = \""+ distance +"\"";
+		
+		if (distMatrix){
+			command = command+ ",distMatrix = TRUE";
+		}else command = command+ ",distMatrix = FALSE";
+		if (clusterMem){
+			command = command+ ",clusterMem = TRUE";
+		} else command = command+ ",clusterMem = FALSE";
+		if (descriptiveStat){
+			command = command+ ",descriptiveStat = TRUE";
+		} else command = command+ ",descriptiveStat = FALSE";
+		if (dendrogram){
+			command = command+ ",dendrogram = TRUE, outputPath = \""+ outputPath +"\"";
+		} else command = command+ ", dendrogram = FALSE";
+		if (clusterBox){
+			command = command+ ", clusterBox = TRUE";
+		} else command = command+ ", clusterBox = FALSE";
+		if (saveMem){
+			command = command+ ", saveMem = TRUE";
+		} else command = command+ ", saveMem = FALSE";
+		
+		command = command + ", clusterNum = " + clusterNum + ")";
+		funcClusterdiv = funcClusterdiv + command + ", silent = TRUE)";
+
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcClusterdiv);
+		
+		//R statements passed on to the R engine
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcClusterdiv);
+
+		String sinkOut = "sink()\n";
+
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in ClusterDivisive:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}	
+		else{
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		}
+		
+		rEngineEnd();	
+	}
+	
+	@Override
+	public void doClusterKmeans(String dataFileName, String outputPath, 
+								String[] var, String idVar, boolean clusterMem, 
+								boolean descriptiveStat,Integer clusterNum, boolean kgraph, boolean saveMem){
+		
+		String varVector= inputTransform.createRVector(var);
+	
+		String readData = "dataRead <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\", \"\", \" \"), blank.lines.skip=TRUE, sep = \",\")";
+		String sinkIn = "sink(\"" + outputPath + "ClusterKmeansOutput.txt\")";
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\n\", date(),\"\n\n\", sep = \"\")";
+		String funcClusterKmeans = "result <-try(";
+		String command = "ClusterKmeans(\"dataRead\", var = "+ varVector;
+		command = command + ", idVar = \""+ idVar +"\"";
+		if (clusterMem){
+			command = command+ ",clusterMem = TRUE";
+		}else command = command+ ", clusterMem = FALSE";
+		if (descriptiveStat){
+			command = command+ ",descriptiveStat = TRUE";
+		}else command = command+ ", descriptiveStat = FALSE";
+		if (kgraph){
+			command = command+ ",kgraph = TRUE, outputPath = \""+ outputPath +"\"";
+		}else command = command+ ", kgraph = FALSE";
+		if (saveMem){
+			command = command+ ", saveMem = TRUE";
+		} else command = command+ ", saveMem = FALSE";
+		
+		command = command + ", clusterNum = " + clusterNum + ")";
+		funcClusterKmeans = funcClusterKmeans + command + ", silent = TRUE)";
+		
+		System.out.println(readData);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcClusterKmeans);
+		
+		//R Statements passed on to the R engine
+		rEngine.eval(readData);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcClusterKmeans);
+		
+		String sinkOut = "sink()\n";
+
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in ClusterKmeans:\\n\",msg, sep = \"\")";
+
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+		
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}	
+		else{
+			
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+
+		}
+		rEngineEnd();
+	}	
+
+	@Override
+	public void doFitDistribution(String dataFileName, String outputPath,  
+			String yVar, String byVar, String[] distrib, String fitMethod) {
+
+		String distribVector= inputTransform.createRVector(distrib);
+		if (byVar == null) byVar = "NULL"; else byVar = "\"" + byVar + "\"";
+		
+		//create R data set given csv file named dataFileName
+		String readData = "data <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\",\"\"), blank.lines.skip = TRUE, sep = \",\")";
+	  	String outFilePath = outputPath + "FitDistributionOutput.txt";
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/plot_DiscDist.R\")";
+//	  	String source2Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/Fit_distrib.R\")";
+		String removeObjects = "rm(list=ls())";
+	  	String sinkIn = "sink(\"" + outFilePath + "\")";
+		String funcStmt = "result <- try(";
+		String command  = "FitDistrib(data, \"" + outputPath + "\", \"" + yVar + "\", " + byVar + ", " + distribVector + ", \"" + fitMethod + "\")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+//		String warningCatcher = "result <- try(" + command + ", warning = function(w) {print(paste(\"Warning: \", w))} , error = function(e) {print(paste(\"Error:  \",e))}  )";
+
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String sinkOut = "sink()";
+
+		System.out.println(readData);
+//		System.out.println(sourceRun);
+//		System.out.println(source2Run);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(removeObjects);
+		rEngine.eval(readData);
+//		rEngine.eval(sourceRun);
+//		rEngine.eval(source2Run);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt); //call statement
+//		rEngine.eval(sinkOut);
+//		rEngine.eval(warningCatcher); //call statement
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in FitDistrib:\\n\",msg, sep = \"\")";
+			String errorMsg5 = "if (regexpr(\"mle failed to estimate the parameters\",msg) > 0) cat(\"\\nTry a different fitting method/distribution.\\n\")";
+	
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			System.out.println(errorMsg5);
+			System.out.println(sinkOut);
+		
+			rEngine.eval(sinkIn);
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			rEngine.eval(errorMsg5);
+			rEngine.eval(sinkOut);
+			
+		} else {
+//			rEngine.eval("sink(\"" + outputPath + "FitDistributionOutput.txt\", append = TRUE)");//			rEngine.eval("sink(\"" + outputPath + "FitDistributionWarnings.txt\")");
+//			rEngine.eval("if (!is.null(warnings())) print(warnings())"); //call statement
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doManova(String dataFileName, String outputPath,  
+			String[] yVars, String factorVar, String repVar, String testStat, 
+			String descriptive, String correlate, String doNormalTest, String doBoxM, String doSphericity,
+			String saveSSH, String saveSSE) {
+
+		String yVarsVector= inputTransform.createRVector(yVars);
+		if (repVar == null) repVar = "NULL"; else repVar = "\"" + repVar + "\"";
+		
+		//create R data set given csv file named dataFileName
+		String readData = "data <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\",\"\"), blank.lines.skip = TRUE, sep = \",\")";
+	  	String outFilePath = outputPath + "MANOVAOutput.txt";
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/ClassInformationMultiResponse.R\")";
+//	  	String source2Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/mshapiro.test.R\")";
+//	  	String source3Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/BoxsMTest.R\")";
+//	  	String source4Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/MAOVTest.R\")";
+		String removeObjects = "rm(list=ls())";
+	  	String sinkIn = "sink(\"" + outFilePath + "\")";
+		String funcStmt = "result <- try(";
+		String command  = "MAOVTest(data, \"" + outputPath + "\", " + yVarsVector + ", \"" + factorVar + "\", " + repVar + ", \"" + testStat + "\"," +
+								descriptive + ", " + correlate + ", " + doNormalTest + ", " + doBoxM + ", " + doSphericity + ", " +
+								saveSSH + ", " + saveSSE + ")";
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String sinkOut = "sink()";
+
+		System.out.println(readData);
+//		System.out.println(sourceRun);
+//		System.out.println(source2Run);
+//		System.out.println(source3Run);
+//		System.out.println(source4Run);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(removeObjects);
+		rEngine.eval(readData);
+//		rEngine.eval(sourceRun);
+//		rEngine.eval(source2Run);
+//		rEngine.eval(source3Run);
+//		rEngine.eval(source4Run);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt); //call statement
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in MAOVTest:\\n\",msg, sep = \"\")";
+	
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			System.out.println(sinkOut);
+		
+			rEngine.eval(sinkIn);
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			rEngine.eval(sinkOut);
+			
+		} else {
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}
+		rEngineEnd();
+	}
+	
+	@Override
+	public void doMDS(String dataFileName, String outputPath,  
+			String[] vars, String idVar, String type, String distClass, String distNonmet, int dimnum, 
+			boolean useIdVar, int[] pChars, double[] pSizes, String[] pCol, boolean showLeg,
+			String legTitle, String legPos, int legNcol, boolean descriptive, boolean correlate) {
+		String varsVector= inputTransform.createRVector(vars);
+		String pCharsVector;
+		if (!useIdVar) pCharsVector = inputTransform.createRNumVector(pChars); //if useIdVar = TRUE, pChars will be the levels of idVar
+		else pCharsVector = null; //?
+		
+		String pSizesVector = inputTransform.createRNumVector(pSizes);
+		String pColVector = inputTransform.createRColorRGBVector(pCol);
+		String distOne = null;
+		if (distClass.equals("NULL")) distOne = distClass;
+		else distOne = "\"" + distClass + "\""; 
+		String distTwo = null;
+		if (distNonmet.equals("NULL")) distTwo = distNonmet;
+		else distTwo = "\"" + distNonmet + "\"";
+		//create R data set given csv file named dataFileName
+		String readData = "data <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\",\"\"), blank.lines.skip = TRUE, sep = \",\")";
+	  	String outFilePath = outputPath + "MDSOutput.txt";
+	  	//add library vegan
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/mdsGraph.R\")";
+//	  	String source2Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/mds.R\")";
+		String removeObjects = "rm(list=ls())";
+	  	String sinkIn = "sink(\"" + outFilePath + "\")";
+		String funcStmt = "result <- try(";
+		String command  = "MDS(data, \"" + outputPath + "\", " + varsVector + ", \"" + idVar + "\", \"" + type + "\", " + distOne + ", " + distTwo + ", " +  
+							dimnum + ", " + String.valueOf(useIdVar).toUpperCase() + ", " + pCharsVector + ", " + pSizesVector + ", " + pColVector + ", " + 
+				            String.valueOf(showLeg).toUpperCase() + ", \"" + legTitle + "\", \"" + legPos + "\", " + legNcol + ")";
+		
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String sinkOut = "sink()";
+
+		System.out.println(readData);
+//		System.out.println(sourceRun);
+//		System.out.println(source2Run);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(removeObjects);
+		rEngine.eval(readData);
+//		rEngine.eval("library(vegan)");
+//		rEngine.eval(sourceRun);
+//		rEngine.eval(source2Run);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+
+		if (descriptive) { //descriptive
+			String descStmt = "DescriptiveStatistics(data = data, var = " + varsVector + ", statistics = c(\"nnmiss\", \"mean\", \"sd\", \"se.mean\"));cat(\"\\n\");";
+			System.out.println(descStmt);
+			rEngine.eval(descStmt);
+		}	
+		
+		if (correlate) {
+			String corrStmt = "BivariateCorrelationTest(data = data, var = " + varsVector + ", method = \"pearson\", alternative = \"two.sided\", statistics = FALSE)";
+			System.out.println(corrStmt);
+			rEngine.eval("cat(\"\\n\");");
+		    rEngine.eval(corrStmt);
+		}
+		
+		rEngine.eval(funcStmt); //call statement
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in MDS:\\n\",msg, sep = \"\")";
+	
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			System.out.println(sinkOut);
+		
+			rEngine.eval(sinkIn);
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			rEngine.eval(sinkOut);
+			
+		} else {
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}
+		rEngineEnd();
+	}
+
+	public void doDiscriminant(String dataFileName, String outputPath,
+			String[] vars, String grpVar, boolean descriptive,
+			boolean doNormalTest, boolean doBoxM, String priorProb,
+			boolean classifyNew, String dataFileName2) {
+
+		String varsVector= inputTransform.createRVector(vars);
+		
+		//create R data set given csv file named dataFileName
+		String readData = "data <- read.csv(\"" + dataFileName + "\", header = TRUE, na.strings = c(\"NA\",\".\",\"\"), blank.lines.skip = TRUE, sep = \",\")";
+		String readData2 = "data2 <- NULL";
+		if (classifyNew) readData2 = "data2 <- read.csv(\"" + dataFileName2 + "\", header = TRUE, na.strings = c(\"NA\",\".\",\"\"), blank.lines.skip = TRUE, sep = \",\")";
+		
+	  	String outFilePath = outputPath + "DiscriminantOutput.txt";
+		String prior = null;
+		if (priorProb.equals("NULL")) prior = priorProb;
+		else prior = "\"" + priorProb + "\"";
+
+//	  	String sourceRun = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/lda.R\")";
+//	  	String source2Run = "source(\"E:/App Files/workspace_Juno/RJavaManager/rscript/Discriminant.R\")";
+		String removeObjects = "rm(list=ls())";
+	  	String sinkIn = "sink(\"" + outFilePath + "\")";
+		String funcStmt = "result <- try(";
+		String command  = "Discriminant(data, \"" + outputPath + "\", " + varsVector + ", \"" + grpVar + "\", " + String.valueOf(descriptive).toUpperCase() + ", " + 
+				String.valueOf(doNormalTest).toUpperCase() + ", " + String.valueOf(doBoxM).toUpperCase() + ", " + prior + ", " + 
+				String.valueOf(classifyNew).toUpperCase() + ", data2)";
+		
+		funcStmt = funcStmt + command + ", silent = TRUE)";
+
+		String pkgName = "cat(\"Statistical Tool for Agricultural Research (STAR)\\n\", date(),\"\\n\\n\", sep = \"\")";
+		String sinkOut = "sink()";
+
+		System.out.println(readData);
+		System.out.println(readData2);
+//		System.out.println(sourceRun);
+//		System.out.println(source2Run);
+		System.out.println(sinkIn);
+		System.out.println(pkgName);
+		System.out.println(funcStmt);
+
+		rEngine.eval(removeObjects);
+		rEngine.eval(readData);
+		rEngine.eval(readData2);
+//		rEngine.eval(sourceRun);
+//		rEngine.eval(source2Run);
+		rEngine.eval(sinkIn);
+		rEngine.eval(pkgName);
+		rEngine.eval(funcStmt); //call statement
+		
+		String runSuccessCommand = rEngine.eval("class(result)").asString();
+		
+		if (runSuccessCommand.equals("try-error")) {
+			String errorMsg1 = "msg <- trimStrings(strsplit(result, \":\")[[1]])";
+			String errorMsg2 = "msg <- trimStrings(paste(strsplit(msg, \"\\n\")[[length(msg)]], collapse = \" \"))";
+			String errorMsg3 = "msg <- gsub(\"\\\"\", \"\", msg)";
+			String errorMsg4 = "cat(\"Error in Discriminant:\\n\",msg, sep = \"\")";
+	
+			System.out.println(errorMsg1);
+			System.out.println(errorMsg2);
+			System.out.println(errorMsg3);
+			System.out.println(errorMsg4);
+			System.out.println(sinkOut);
+		
+			rEngine.eval(sinkIn);
+			rEngine.eval(errorMsg1);
+			rEngine.eval(errorMsg2);
+			rEngine.eval(errorMsg3);
+			rEngine.eval(errorMsg4);
+			rEngine.eval(sinkOut);
+			
+		} else {
+			System.out.println(sinkOut);
+			rEngine.eval(sinkOut);
+		}
+		rEngineEnd();
+	}
+	
+}
+

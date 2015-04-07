@@ -1,0 +1,70 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2Alpha_missing.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DESIGN: NORTH CAROLINA EXPERIMENT II IN CRD (INBRED)
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels             
+ Trial     2              1  2               
+ Treatment 12             T1  T10  T11 ... T9
+ male      4              1  2  3  4         
+ fem       3              1  2  3            
+
+ Number of observations read: 44
+ Number of observations used: 44
+
+
+ANOVA TABLE:
+
+               Df      Sum Sq     Mean Sq F value Pr(>F)
+Trial           1 325165.9000 325165.9000    8.89 0.0074
+male            3 137562.1000  45854.0300    1.25 0.3170
+fem             2  45958.8600  22979.4300    0.63 0.5437
+Trial:male      3 118115.5000  39371.8400    1.08 0.3816
+Trial:fem       2  16314.2600   8157.1280    0.22 0.8021
+male:fem        6 210213.2000  35035.5400    0.96 0.4777
+Trial:male:fem  6 320645.0000  53440.8400    1.46 0.2416
+Residuals      20 731580.6000  36579.0300               
+-------
+REMARK: Raw dataset is unbalanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  Y ~ 1 + (1|Trial) + (1|male) + (1|fem) + (1|male:fem) + (1|Trial:male) + (1|Trial:fem) + (1|Trial:male:fem) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 598.8051 614.8628 -290.4025 591.5465 580.8051
+
+ Random Effects:                                         
+ Groups           Variance Std. Deviation
+ Trial:male:fem  2503.5000        50.0350
+ male:fem           0.0000         0.0016
+ Trial:male       500.9000        22.3810
+ Trial:fem          0.0000         0.0000
+ male             306.7200        17.5130
+ fem                0.0000         0.0000
+ Trial          12815.0000       113.2000
+ Residual       34580.0000       185.9600
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                            
+                    Estimate
+ VA               306.720000
+ VAxE             500.900000
+ VD                 0.000003
+ VDxE            2503.500000
+ h2-narrow sense    0.008095
+ H2-broad sense     0.008095
+ Dominance Ratio    0.000130
+
+
+==============================================================

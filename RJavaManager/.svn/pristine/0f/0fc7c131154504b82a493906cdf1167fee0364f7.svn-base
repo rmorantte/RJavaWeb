@@ -1,0 +1,26 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Reza_M3_test2.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DIALLEL ANALYSIS: GRIFFING METHOD III IN RCB (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Th_grain_weight
+-----------------------------
+
+ ERROR: The number of levels of the blocking factor is 3 but at least one treatment combination is replicated 4 times in one environment.
+        Please check if the column for block is properly labeled. 
+
+
+
+-----------------------------
+RESPONSE VARIABLE: Grain_yield
+-----------------------------
+
+ ERROR: The number of levels of the blocking factor is 3 but at least one treatment combination is replicated 4 times in one environment.
+        Please check if the column for block is properly labeled. 
+
+
+
+==============================================================

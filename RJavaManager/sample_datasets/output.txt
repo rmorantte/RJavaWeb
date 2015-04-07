@@ -1,0 +1,307 @@
+
+DESIGN: NORTH CAROLINA EXPERIMENT I IN RCB (INBRED)
+
+
+RESPONSE VARIABLE: respvar
+
+-----------------------------
+ANALYSIS FOR: environment = Env1
+-----------------------------
+
+DATA SUMMARY: 
+ Factors     Number of Levels   Levels                 
+ environment 1                  Env1                   
+ block       3                  A  B  C                
+ female      24                 1  10  11  12  13 ... 9
+ male        24                 1  10  11  12  13 ... 9
+
+Number of observations read: 1728
+Number of missing observations: 0
+
+
+ANOVA TABLE FOR THE EXPERIMENT
+              Df   Sum Sq Mean Sq F value Pr(>F)
+block          2    13162    6581   0.192 0.8249
+male          23  1194451   51933   1.519 0.0553
+male:female  552 19551628   35420   1.036 0.3110
+Residuals   1150 39315171   34187               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|block) + (1|male/female) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 22975.22 23002.49 -11482.61 22970.46 22965.22
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 272.7684     5.4864 49.7168
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ female:male   426.8600        20.6610
+ male          229.3400        15.1440
+ block           0.0000         0.0000
+ Residual    34139.1500       184.7680
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:                         
+                 Estimate
+ VA              458.6800
+ VD              197.5200
+ h2-narrow sense   0.0132
+ H2-broad sense    0.0189
+ Dominance Ratio   0.9280
+
+
+ESTIMATES OF HERITABILITY:
+          Family Selection Narrow Sense Broad sense
+ male                 0.32         0.01        0.02
+ female               0.04         0.02        0.03
+ Full-sib             0.05         0.02        0.02
+
+
+-----------------------------
+ANALYSIS FOR: environment = Env2
+-----------------------------
+
+DATA SUMMARY: 
+ Factors     Number of Levels   Levels                 
+ environment 1                  Env2                   
+ block       3                  A  B  C                
+ female      24                 1  10  11  12  13 ... 9
+ male        24                 1  10  11  12  13 ... 9
+
+Number of observations read: 1728
+Number of missing observations: 0
+
+
+ANOVA TABLE FOR THE EXPERIMENT
+              Df   Sum Sq Mean Sq F value Pr(>F)
+block          2    43732   21866   0.577  0.562
+male          23   662859   28820   0.761  0.783
+male:female  552 19208194   34797   0.919  0.873
+Residuals   1150 43551976   37871               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|block) + (1|male/female) 
+
+     AIC      BIC    logLik deviance REMLdev
+ 23072.5 23099.77 -11531.25 23067.39 23062.5
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept)  278.423     4.6117 60.3736
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ female:male     0.0000         0.0000
+ male            0.0000         0.0000
+ block           0.0000         0.0000
+ Residual    36750.0000       191.7000
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:                         
+                 Estimate
+ VA                0.0000
+ VD                0.0000
+ h2-narrow sense   0.0000
+ H2-broad sense    0.0000
+ Dominance Ratio      NaN
+
+
+ESTIMATES OF HERITABILITY:
+          Family Selection Narrow Sense Broad sense
+ male                    0            0           0
+ female                  0            0           0
+ Full-sib                0            0           0
+
+
+-----------------------------
+ANALYSIS FOR: environment = Env3
+-----------------------------
+
+DATA SUMMARY: 
+ Factors     Number of Levels   Levels                 
+ environment 1                  Env3                   
+ block       3                  A  B  C                
+ female      24                 1  10  11  12  13 ... 9
+ male        24                 1  10  11  12  13 ... 9
+
+Number of observations read: 1728
+Number of missing observations: 0
+
+
+ANOVA TABLE FOR THE EXPERIMENT
+              Df   Sum Sq Mean Sq F value Pr(>F)
+block          2    32561   16280   0.434  0.648
+male          23  1094010   47566   1.268  0.179
+male:female  552 19615096   35535   0.947  0.768
+Residuals   1150 43150693   37522               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|block) + (1|male/female) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 23083.25 23110.52 -11536.62 23078.41 23073.25
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 273.1916     5.2709 51.8299
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ female:male     0.0000         0.0000
+ male          148.7800        12.1980
+ block           0.0000         0.0000
+ Residual    36854.0000       191.9700
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:                         
+                 Estimate
+ VA              297.5600
+ VD                0.0000
+ h2-narrow sense   0.0080
+ H2-broad sense    0.0080
+ Dominance Ratio   0.0000
+
+
+ESTIMATES OF HERITABILITY:
+          Family Selection Narrow Sense Broad sense
+ male                 0.23         0.00        0.00
+ female               0.00         0.00        0.00
+ Full-sib             0.01         0.00        0.00
+
+
+-----------------------------
+ANALYSIS FOR: environment = Env4
+-----------------------------
+
+DATA SUMMARY: 
+ Factors     Number of Levels   Levels                 
+ environment 1                  Env4                   
+ block       3                  A  B  C                
+ female      24                 1  10  11  12  13 ... 9
+ male        24                 1  10  11  12  13 ... 9
+
+Number of observations read: 1728
+Number of missing observations: 0
+
+
+ANOVA TABLE FOR THE EXPERIMENT
+              Df   Sum Sq Mean Sq F value Pr(>F)
+block          2    26928   13464   0.390  0.677
+male          23   881625   38332   1.110  0.326
+male:female  552 17105539   30988   0.897  0.928
+Residuals   1150 39716296   34536               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|block) + (1|male/female) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 22908.66 22935.94 -11449.33  22903.6 22898.66
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 265.7357     4.7096 56.4238
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ female:male     0.0000         0.0000
+ male           68.9750         8.3051
+ block           0.0000         0.0000
+ Residual    33362.0000       182.6500
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:                         
+                 Estimate
+ VA              137.9500
+ VD                0.0000
+ h2-narrow sense   0.0041
+ H2-broad sense    0.0041
+ Dominance Ratio   0.0000
+
+
+ESTIMATES OF HERITABILITY:
+          Family Selection Narrow Sense Broad sense
+ male                 0.13         0.00        0.00
+ female               0.00         0.00        0.00
+ Full-sib             0.01         0.00        0.00
+
+
+-----------------------------
+ANALYSIS FOR: environment = Env5
+-----------------------------
+
+DATA SUMMARY: 
+ Factors     Number of Levels   Levels                 
+ environment 1                  Env5                   
+ block       3                  A  B  C                
+ female      24                 1  10  11  12  13 ... 9
+ male        24                 1  10  11  12  13 ... 9
+
+Number of observations read: 1728
+Number of missing observations: 0
+
+
+ANOVA TABLE FOR THE EXPERIMENT
+              Df   Sum Sq Mean Sq F value Pr(>F)
+block          2       21      10   0.000 0.9997
+male          23  1236996   53782   1.569 0.0427
+male:female  552 18947639   34325   1.001 0.4889
+Residuals   1150 39418509   34277               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|block) + (1|male/female) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 22961.34 22988.61 -11475.67 22956.61 22951.34
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 267.0716      5.579  47.871
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ female:male     0.0000         0.0010
+ male          271.2700        16.4700
+ block           0.0000         0.0000
+ Residual    34252.0000       185.0700
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:                         
+                 Estimate
+ VA              542.5400
+ VD                0.0000
+ h2-narrow sense   0.0156
+ H2-broad sense    0.0156
+ Dominance Ratio   0.0000
+
+
+ESTIMATES OF HERITABILITY:
+          Family Selection Narrow Sense Broad sense
+ male                 0.36         0.01        0.01
+ female               0.00         0.00       -0.01
+ Full-sib             0.02         0.01        0.00
+
+
+==============================================================

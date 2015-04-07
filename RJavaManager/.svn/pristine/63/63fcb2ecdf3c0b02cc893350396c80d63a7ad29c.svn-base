@@ -1,0 +1,133 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2Alpha_missing.csv
+
+DESIGN: TRIPLE TEST CROSS (NO PARENTS) IN RCB
+
+------------------------------
+RESPONSE VARIABLE: Y2
+------------------------------
+------------------------------
+ANALYSIS FOR: Trial  =  1 
+------------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+------------------------------
+ANALYSIS FOR: Trial  =  2 
+------------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+------------------------------
+ANALYSIS FOR: Trial  =  1 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors     No of Levels   Levels    
+ Trial       1              1         
+ replication 2              1  2      
+ male        4              1  2  3  4
+ fem         3              1  2  3   
+
+Number of observations read:  21 
+Number of observations used:  21 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+ ERROR: Too many missing values. Cannot perform ANOVA for balanced data.
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = fem:male)
+
+Model: Y ~ Crosses + (1|replication) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq  Mean Sq F value  Denom Pr(>F)
+Crosses 11 327113.4 29737.58 46.8653 8.0338 0.0000
+
+
+ANOVA FOR TESTING EPISTASIS:
+
+ ERROR: Too many missing values. Cannot perform test for epistasis and estimation of genetic variance components.
+
+
+------------------------------
+ANALYSIS FOR: Trial  =  2 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors     No of Levels   Levels    
+ Trial       1              2         
+ replication 2              1  2      
+ male        4              1  2  3  4
+ fem         3              1  2  3   
+
+Number of observations read:  23 
+Number of observations used:  23 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+            Df      Sum Sq    Mean Sq F value Pr(>F)
+replication  1  48378.1200 48378.1200    0.78 0.3950
+fem          2  32040.6300 16020.3200    0.26 0.7760
+male         3 152912.0000 50970.6600    0.83 0.5068
+fem:male     6 355291.7000 59215.2900    0.96 0.4939
+Residuals   10 679029.2000 61729.9300               
+-------
+REMARK: Raw data and estimates of the missing values are used. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = fem:male)
+
+Model: Y ~ Crosses + (1|replication) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq Mean Sq F value Denom Pr(>F)
+Crosses 11 524064.2 47642.2  0.7245    11 0.6990
+
+
+ANOVA FOR TESTING EPISTASIS:
+                                                     
+ SV          Df      Sum Sq    Mean Sq F value Pr(>F)
+ AxA          1  31850.6284 31850.6284    0.52 0.5238
+ AxD and DxD  3 137460.5267 45820.1756    0.74 0.5927
+ Total        4 169311.1551 42327.7888    0.69 0.6469
+ Residual     3 184517.2307 61505.7436               
+-------
+REMARK: Raw data and estimates of the missing values are used. 
+
+
+ANOVA TABLE:
+                                              
+ SV   Df      Sum Sq    Mean Sq F value Pr(>F)
+ s     3 152911.9852 50970.6617    0.53 0.6924
+ e(s)  3 286793.6913 95597.8971               
+ d     3 287777.9701 95925.9900    1.95 0.2986
+ e(d)  3 147748.9998 49249.6666               
+-------
+REMARK: Raw data and estimates of the missing values are used. 
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+
+                               Estimate                SE
+VA                             0.000000 2086571784.140412
+VD                         23338.161718 1162732522.412485
+VE                         95597.897087                  
+VP                        118936.058805                  
+Broad Sense Heritability       0.196224          0.308158
+Narrow Sense Heritability      0.000000          0.333333
+Dominance Ratio                     Inf                  
+
+
+
+==============================

@@ -1,0 +1,5 @@
+
+*** 
+ERROR in GraphBoxplot function:
+  object 'cVar' not found
+***

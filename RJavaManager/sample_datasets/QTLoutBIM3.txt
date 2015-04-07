@@ -1,0 +1,188 @@
+QTL ANALYSIS
+
+Method: Bayesian Interval Mapping
+
+Trait:  T264 
+
+function (cross, data = qb.data(cross, ...), model = qb.model(cross, 
+    ...), mydir = ".", n.iter = 3000, n.thin = 20, n.burnin = 0.01 * 
+    n.iter * n.thin, genoupdate = TRUE, seed = 0, verbose = TRUE, 
+    ...) 
+{
+    if (class(cross)[2] != "cross") 
+        stop("The first input variable is not an object of class cross", 
+            call. = FALSE)
+    algorithm <- "M-H"
+    cross.name <- deparse(substitute(cross))
+    tmp <- make.names(cross.name)
+    is.transient.cross <- tmp != cross.name
+    if (is.transient.cross) {
+        tmp <- make.dir.name(tmp, "")
+        assign(tmp, cross, envir = parent.frame())
+        cross.name <- tmp
+    }
+    if (is.null(cross$geno[[1]]$prob)) {
+        warning("First running qb.genoprob with default step size", 
+            call. = FALSE, immediate. = TRUE)
+        cross <- qb.genoprob(cross)
+    }
+    n.ind = nind(cross)
+    n.chr = nchr(cross)
+    n.gen = dim(cross$geno[[1]]$prob)[3]
+    multiple.trait = 0
+    if (data$multiple.trait) {
+        multiple.trait = 1
+        if (tolower(data$multiple.type) == "traditional") 
+            multiple.trait = 1
+        if (tolower(data$multiple.type) == "sur") 
+            multiple.trait = 2
+    }
+    loci <- pull.loci(cross)
+    n.loci <- sapply(loci, length)
+    loci <- unlist(loci)
+    tmp <- unlist(lapply(cross$geno, function(x) dim(x$prob)[2]))
+    if (any(tmp != n.loci)) 
+        stop("Please first run qb.genoprob")
+    prob <- unlist(lapply(cross$geno, function(x) x$prob))
+    pheno = data$pheno.col
+    n.pheno = length(pheno)
+    yvalue = data$yvalue
+    if (data$trait == "normal") 
+        traittype = 1
+    if (data$trait == "binary") 
+        traittype = 2
+    if (data$trait == "ordinal") 
+        traittype = 3
+    ncategory = data$ncategory
+    nrancov = data$nrancov
+    nfixcov = data$nfixcov
+    envi = data$envi
+    fixcoef = data$fixcoef
+    rancoef = data$rancoef
+    nran = data$nran
+    if (is.null(data$censor)) {
+        censor.lo = rep(-1e+07, n.ind)
+        censor.hi = rep(1e+07, n.ind)
+    }
+    if (!is.null(data$censor)) {
+        censor.lo = data$censor[, 1]
+        censor.lo[censor.lo == -Inf] = -1e+07
+        censor.lo[is.na(censor.lo)] = 999
+        censor.hi = data$censor[, 2]
+        censor.hi[censor.hi == Inf] = 1e+07
+        censor.hi[is.na(censor.hi)] = 999
+    }
+    epis = model$epistasis
+    emainqtl = model$main.nqtl
+    eqtl = model$mean.nqtl
+    mnqtl = model$max.nqtl
+    interval = model$interval
+    chrnqtl = model$chr.nqtl
+    qtl_envi = model$qtl_envi
+    intcov = model$intcov
+    depen = model$depen
+    prop = model$prop
+    contrast = model$contrast
+    if (multiple.trait == 2) 
+        diff.loc = model$diff.loc
+    else diff.loc = FALSE
+    if (multiple.trait) {
+        Y <- yvalue
+        Y[Y == 999] = NA
+        sigma.initial <- var(Y, na.rm = TRUE, use = "complete.obs")
+        sigma.initial <- solve(sigma.initial)
+    }
+    totaliter = n.iter * n.thin + n.burnin
+    intcov <- check.intcov(intcov, nfixcov)
+    if (verbose) {
+        cat(paste("qb.mcmc is running", format(totaliter, big.mark = ","), 
+            "iterations. The current iterations are saved: \n", 
+            sep = " "))
+        start.walltime = Sys.time()
+    }
+    allTraits = colnames(cross$pheno)
+    if (!multiple.trait) {
+        output = output.dir(qbDir = mydir, traitName = allTraits[pheno])
+        z <- .C("RSingleTraitMCMCSetup", as.integer(n.ind), as.integer(n.chr), 
+            as.integer(n.gen), as.integer(n.loci), as.double(loci), 
+            as.double(prob), as.double(yvalue), as.integer(traittype), 
+            as.integer(ncategory), as.integer(n.iter), as.integer(n.thin), 
+            as.integer(n.burnin), as.integer(genoupdate), as.integer(epis), 
+            as.integer(emainqtl), as.integer(eqtl), as.integer(mnqtl), 
+            as.double(interval), as.integer(chrnqtl), as.integer(envi), 
+            as.integer(qtl_envi), as.integer(nrancov), as.integer(nfixcov), 
+            as.integer(intcov), as.double(rancoef), as.double(fixcoef), 
+            as.integer(nran), as.integer(depen), as.double(prop), 
+            as.integer(contrast), as.double(censor.lo), as.double(censor.hi), 
+            as.integer(seed), as.integer(verbose), PACKAGE = "qtlbim")
+        if (verbose) {
+            cat("MCMC sample has been saved to: ")
+            cat(output)
+            cat(".\n")
+        }
+        deviances = read.table(file = paste(output, "/deviance.dat", 
+            sep = ""))
+        pD = mean(deviances[1:n.iter, 1], na.rm = TRUE) - deviances[n.iter + 
+            1, 1]
+        DIC = mean(deviances[1:n.iter, 1], na.rm = TRUE) + pD
+        qb = c(cross.name = cross.name, cross = class(cross)[1], 
+            output.dir = output, n.iter = n.iter, n.thin = n.thin, 
+            n.burnin = n.burnin, algorithm = algorithm, genoupdate = genoupdate, 
+            pD = pD, DIC = DIC, step = attr(cross$geno[[1]]$prob, 
+                "step"), seed = seed, verbose = verbose, data, 
+            model)
+    }
+    if (multiple.trait) {
+        yvalue = as.matrix(yvalue)
+        dimnames(yvalue) <- NULL
+        qtlloc = 1
+        if (algorithm == "M-H") 
+            algorithm = 0
+        else algorithm = 1
+        output = output.dir(qbDir = mydir, traitName = allTraits[pheno][1])
+        z <- .C("RMultipleTraitsMCMCSetup", as.integer(n.ind), 
+            as.integer(n.chr), as.integer(n.gen), as.integer(n.pheno), 
+            as.integer(n.loci), as.double(loci), as.double(prob), 
+            as.vector(yvalue, mode = "double"), as.integer(multiple.trait), 
+            as.integer(traittype), as.integer(ncategory), as.integer(n.iter), 
+            as.integer(n.thin), as.integer(n.burnin), as.integer(algorithm), 
+            as.integer(genoupdate), as.integer(epis), as.integer(emainqtl), 
+            as.integer(eqtl), as.integer(mnqtl), as.double(interval), 
+            as.integer(chrnqtl), as.integer(envi), as.integer(qtl_envi), 
+            as.integer(nrancov), as.integer(nfixcov), as.integer(intcov), 
+            as.double(rancoef), as.double(fixcoef), as.integer(nran), 
+            as.integer(depen), as.double(prop), as.integer(seed), 
+            as.integer(verbose), as.integer(diff.loc), as.integer(qtlloc), 
+            PACKAGE = "qtlbim")
+        if (verbose) {
+            cat("MCMC sample has been saved to: ")
+            cat(output)
+            cat(".\n")
+        }
+        qb = list(cross.name = cross.name, cross = class(cross)[1], 
+            output.dir = output, n.iter = n.iter, n.pheno = n.pheno, 
+            n.thin = n.thin, n.burnin = n.burnin, algorithm = algorithm, 
+            genoupdate = genoupdate, step = attr(cross$geno[[1]]$prob, 
+                "step"), seed = seed, verbose = verbose)
+        qb = c(qb, data, model)
+    }
+    defaults <- qb.genoprob.defaults(cross)
+    for (i in names(defaults)) if (is.null(qb[[i]])) 
+        qb[[i]] <- defaults[[i]]
+    if (verbose) {
+        stop.walltime = Sys.time()
+        walltime = difftime(stop.walltime, start.walltime, units = "min")
+        cat("Bayesian MCMC took ")
+        cat(as.character(round(walltime, digits = 2)))
+        cat(" minutes. \n")
+        qb = c(qb, time = walltime)
+    }
+    qb = qb.reorder(qb)
+    gc()
+    class(qb) = "qb"
+    qb <- qb.legacy(qb, remove = TRUE)
+    if (is.transient.cross) 
+        remove(list = cross.name, pos = 1)
+    qb
+}
+<environment: namespace:qtlbim>

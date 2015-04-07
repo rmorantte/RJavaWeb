@@ -1,0 +1,92 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2Alpha_missing.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DESIGN: TRIPLE TEST CROSS (NO PARENTS) IN CRD
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DATA SUMMARY:
+
+ Factors   No of Levels   Levels             
+ Trial     2              1  2               
+ Treatment 12             T1  T10  T11 ... T9
+ male      4              1  2  3  4         
+ fem       3              1  2  3            
+
+Number of observations read:  44 
+Number of observations used:  44 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+               Df      Sum Sq     Mean Sq F value Pr(>F)
+Trial           1 325165.9000 325165.9000    8.89 0.0074
+male            3 137562.1000  45854.0300    1.25 0.3170
+fem             2  45958.8600  22979.4300    0.63 0.5437
+Trial:male      3 118115.5000  39371.8400    1.08 0.3816
+Trial:fem       2  16314.2600   8157.1280    0.22 0.8021
+male:fem        6 210213.2000  35035.5400    0.96 0.4777
+Trial:male:fem  6 320645.0000  53440.8400    1.46 0.2416
+Residuals      20 731580.6000  36579.0300               
+-------
+REMARK: Raw dataset is unbalanced. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = fem:male)
+
+Model: Y ~ Crosses + (1|Trial) + (1|Crosses:Trial) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq  Mean Sq F value  Denom Pr(>F)
+Crosses 11 424588.2 38598.93  1.0354 31.018 0.4409
+
+
+ANOVA FOR TESTING EPISTASIS:
+                                                      
+ SV           Df      Sum Sq    Mean Sq F value Pr(>F)
+ AxA           1  42257.0999 42257.0999 -214.73 1.0000
+ AxD and DxD   3 106332.8727 35444.2909    3.56 0.1625
+ AAxE          1   -196.7885  -196.7885    0.00 1.0000
+ ADxE or DDxE  3  29888.1500  9962.7167    0.17 0.1259
+ Total         8 192131.9287 24016.4911    0.41 0.8712
+ Residual      4 237164.5742 59291.1436               
+-------
+REMARK: Raw dataset is unbalanced. 
+
+
+ANOVA TABLE:
+                                              
+ SV   Df      Sum Sq    Mean Sq F value Pr(>F)
+ s     3  83069.0407 27689.6802    0.33 0.8051
+ sxe   3  86577.8561 28859.2854    0.34 0.7961
+ e(s)  4 335139.9887 83784.9972               
+ d     3  95148.7861 31716.2620    0.90 0.5148
+ dxe   3 230526.9072 76842.3024    2.18 0.2327
+ e(d)  4 140837.6956 35209.4239               
+-------
+REMARK: Raw dataset is unbalanced. 
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                         
+                 Estimate
+ VA              0.000000
+ VD              0.000000
+ h2-narrow sense 0.000000
+ H2-broad sense  0.000000
+ Dominance Ratio      NaN
+
+
+------------------------------
+RESPONSE VARIABLE: Y2
+------------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+
+==============================

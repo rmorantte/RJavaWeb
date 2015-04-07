@@ -1,0 +1,512 @@
+cat("CLASSICAL MULTIDIMENSIONAL SCALING \n\n")
+if (inputType == "raw") {
+distClass <- match.arg(distClass)
+d <- dist(tempData[,vars], method = tolower(distClass))
+} else d <- tempData[,-1]
+capture.output(fit <- cmdscale(d, eig=TRUE, k=as.numeric(dimnum))) # k is the number of dimensions
+points <- data.frame(fit$points)
+colnames(points) <- make.unique(rep("MDS",dimnum+1),sep ="")[2:(dimnum+1)]
+cat("\nPOINTS\n\n")
+print(points)
+cat("\n")
+eigenOut <- data.frame(fit$eig)
+# 	  cat("\nEIGENVALUES\n")
+# 	  colnames(eigenOut) <- ""
+#     print(eigenOut)
+if (nrow(eigenOut)>10) { xLength = 10
+} else xLength = nrow(eigenOut)
+png(filename = paste(outputPath,"MDS_Screeplot.png",sep=""))
+plot(as.numeric(rownames(eigenOut))[1:xLength], eigenOut[1:xLength,1], xaxt = "n", xlab = "Eigenvalue number", ylab = "Eigenvalue", main = paste(type,"Scree Plot"),
+type = "b", pch = 16)
+axis(1, at = as.numeric(rownames(eigenOut))[1:xLength])
+dev.off()
+cat("\nP_", dimnum, " criterion: ", round(fit$GOF[2], digits = 4), sep = "") #2nd GOF statistic
+}else if (type == "Nonmetric"){
+cat("NON-METRIC MULTIDIMENSIONAL SCALING \n\n")
+#   	  distNonmet <- match.arg(distNonmet)
+if (inputType == "raw") {
+distNonmet <- match.arg(distNonmet)
+if (tolower(distNonmet) == "bray") {
+d <- vegdist(tempData[,vars], method = "bray")
+} else d <- dist(tempData[,vars], method = tolower(distNonmet))
+capture.output(fit <- monoMDS(d, k=as.numeric(dimnum)))
+#       capture.output(fit <- metaMDS(tempData[, vars], distance = tolower(distNonmet), k=as.numeric(dimnum), model="global"))
+} else {
+d <- as.dist(tempData[,-1])
+capture.output(fit <- monoMDS(d=d, k=as.numeric(dimnum)))
+##        capture.output(fit <- metaMDS(tempData[,-1], distance = NULL, k=as.numeric(dimnum), model="global", autotransform = FALSE, wascores = FALSE, noshare = FALSE))
+#       capture.output(fit <- metaMDS(tempData2, distance = distNonmetric, k=as.numeric(dimnum), model="global"))
+}
+cat("\nPOINTS \n\n")
+print(fit$points[1:dim(fit$points)[1], 1:dimnum])
+#       #print gof
+#   	  cat("\nGOODNESS OF FIT \n ")
+#   	  gofOut <- data.frame(goodness(fit))
+#       colnames(gofOut) <- ""
+#       print(gofOut[1:length(gofOut)])
+#print stress statistic
+stressStat <- as.matrix(round(fit$stress, digits = 4))
+rownames(stressStat) <- ""
+cat("\nStress Statistic: ", stressStat[1,1], sep ="")
+cat("\n")
+#       #create Shepard diagram
+#       png(filename = paste(outputPath,"ShepardDiagram.png",sep=""))
+#       shepOut <- Shepard(d=d,x=fit$points)
+#   	  plot(shepOut, pch = ".")
+#   	  lines(shepOut$x, shepOut$yf, type = "S")
+#       dev.off()
+#create stressplot
+png(filename = paste(outputPath,"Stressplot.png",sep=""))
+stressplot(fit)
+dev.off()
+#       #create scree plot
+#       fit2<- NULL
+#       stressValues <- NULL
+#   	  if (nrow(tempData)>10) { nStress = 10
+#   	  } else nStress = nrow(tempData)
+# #       nStress = nrow(tempData)
+#       for (i in 1:(nStress)) {
+#         fit2 <- monoMDS(d=d, k=i)
+#         stressValues[i] <- fit2$stress/100
+#       }
+#   	  png(filename = paste(outputPath,"MDS_Screeplot.png",sep=""))
+#   	  plot(c(1:nStress), stressValues, xaxt = "n", xlab = "Dimension number", ylab = "Stress statistic", main = paste(type,"Scree Plot"),
+#   	       type = "b", pch = 16)
+#       axis(1, at = c(1:nStress))
+#   	  dev.off()
+}
+#create plot
+if (inputType == "raw")  {
+grpLevels = levels(factor(data[, idVar]))
+idData = data[,idVar]
+} else {
+grpLevels = levels(factor(data[,1]))
+idData = data[,1]
+}
+if(!useIdVar) {
+grpCode<- data.frame(grpLevels, pChars, pCol)
+pCharNames <- make.unique(c(names(data),"pCharCode"), sep = "")
+pCharName <- pCharNames[length(pCharNames)]
+pColName <- make.unique(c(pCharNames,"pColCode"), sep = "")
+pColName <- pColName[length(pColName)]
+tempData2 <- cbind(data,grpCode$pChars[match(idData, grpCode[,"grpLevels"])], grpCode$pCol[match(idData, grpCode[,"grpLevels"])])
+colnames(tempData2)[ncol(tempData2)-1]<- pCharName
+colnames(tempData2)[ncol(tempData2)]<- pColName
+} else {
+pCharName = NULL
+pColName = NULL
+tempData2 = data
+}
+mdsGraph(tempData2, idVar, outputPath, pCharName, pColName, grpLevels, idData, dimnum, fit, type, useIdVar, pChars, pSizes, pCol,
+showLeg, legTitle, legPos, legNcol)
+rstudio::viewData(data)
+data <- read.csv("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/PCAex.csv", header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = ",")
+sink("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/MDSOutput.txt")
+cat("Statistical Tool for Agricultural Research (STAR)\n", date(),"\n\n", sep = "")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/", "raw", c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"), "SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(0, 0, 0, 0, 0), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(227, 139, 144, max=255),rgb(218, 254, 245, max=255),rgb(136, 173, 226, max=255),rgb(28, 241, 38, max=255),rgb(125, 17, 226, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+sink()
+source('~/.active-rstudio-document')
+sink("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/MDSOutput.txt")
+cat("Statistical Tool for Agricultural Research (STAR)\n", date(),"\n\n", sep = "")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Classical", "Euclidean", "Euclidean", 2, FALSE,
+c(5, 6, 7, 8, 9),
+c(1.0, 1.0, 1.0, 1.0, 1.0),
+c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255), rgb(255, 255, 0, max=255),rgb(255, 0, 255, max=255)),
+TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+sink()
+sink("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/MDSOutput.txt")
+cat("Statistical Tool for Agricultural Research (STAR)\n", date(),"\n\n", sep = "")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Classical", "Euclidean", "Euclidean", 2, FALSE,
+c(1,2,3,4,5),
+c(1.0, 1.0, 1.0, 1.0, 1.0),
+c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255), rgb(255, 255, 0, max=255),rgb(255, 0, 255, max=255)),
+TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+sink()
+library(qtl)
+data <- read.csv("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/PCAex.csv", header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = ",")
+source("E:/App Files/workspace_Juno/RJavaManager/rscript/mdsGraph.R")
+source("E:/App Files/workspace_Juno/RJavaManager/rscript/mds.R")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(0, 0, 0, 0, 0), c(1.0, 1.0, 1.0, 1.0, 1.0), c("blue","red","green","black","yellow"), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result
+library(vegan)
+library(STAR)
+source("E:/App Files/workspace_Juno/RJavaManager/rscript/mdsGraph.R")
+source("E:/App Files/workspace_Juno/RJavaManager/rscript/mds.R")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(0, 0, 0, 0, 0), c(1.0, 1.0, 1.0, 1.0, 1.0), c("blue","red","green","black","yellow"), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+data=data
+outputPath="E:/App Files/workspace_Juno/RJavaManager/sample_datasets/"
+inputType="raw"
+vars<-c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING")
+idVar<-"SPECIES"
+type="Classical" #"Nonmetric"
+distClass="Euclidean"
+distNonmet="Euclidean"
+dimnum=2
+useIdVar = FALSE
+pChars=c(5, 6, 7, 8, 9)
+pSizes= c(1.0, 1.0, 1.0, 1.0, 1.0)
+pCol = c("blue","red","green","black","yellow")
+showLeg = TRUE
+legTitle="Legend:"
+legPos = "bottomright"
+legNcol = 1
+descriptive = FALSE
+correlate = FALSE
+pCol
+if (is.character(data)) {
+nameData <- data
+if (!exists(nameData)) { stop(paste("The object '", nameData,"' does not exist.", sep = "")) }
+tempData <- eval(parse(text = data))
+} else {
+if (is.data.frame(data)) {
+nameData <- paste(deparse(substitute(data)))
+tempData <- data
+} else { stop ("The argument should either be a data frame or a character string indicating the name of the data frame.") }
+}
+inputType
+data[, idVar] <- factor(data[, idVar])
+# -- PRINTING CLASS LEVEL INFORMATION -- #
+#ClassInformation(data[, c(vars, idVar)], respvar = vars)
+#cat("\n\n")
+numObsNM = nrow((na.omit(data[,vars])))
+numObs = nrow((data[,vars]))
+if (numObs == numObsNM) { cat("Number of Observations:", numObs,"\n")
+} else {
+cat("Number of Observations:", numObs,"\n")
+cat("Number of Observations Used:", numObsNM,"\n\n")
+}
+tempData <- na.omit(tempData[,c(vars, idVar)])
+if (!is.data.frame(tempData)) { stop("The object should be of type data frame.") }
+options(width = 5000, digits = 6)
+descriptive
+type
+cat("CLASSICAL MULTIDIMENSIONAL SCALING \n\n")
+if (inputType == "raw") {
+distClass <- match.arg(distClass)
+d <- dist(tempData[,vars], method = tolower(distClass))
+} else d <- tempData[,-1]
+capture.output(fit <- cmdscale(d, eig=TRUE, k=as.numeric(dimnum))) # k is the number of dimensions
+inputType
+distClass <- match.arg(distClass)
+d <- dist(tempData[,vars], method = tolower(distClass))
+d
+if (inputType == "raw") {
+distClass <- match.arg(distClass)
+d <- dist(tempData[,vars], method = tolower(distClass))
+} else d <- tempData[,-1]
+d=NULL
+if (inputType == "raw") {
+distClass <- match.arg(distClass)
+d <- dist(tempData[,vars], method = tolower(distClass))
+} else d <- tempData[,-1]
+d
+distClass
+d <- dist(tempData[,vars], method = tolower(distClass))
+capture.output(fit <- cmdscale(d, eig=TRUE, k=as.numeric(dimnum))) # k is the number of dimensions
+points <- data.frame(fit$points)
+colnames(points) <- make.unique(rep("MDS",dimnum+1),sep ="")[2:(dimnum+1)]
+cat("\nPOINTS\n\n")
+print(points)
+cat("\n")
+eigenOut <- data.frame(fit$eig)
+if (nrow(eigenOut)>10) { xLength = 10
+} else xLength = nrow(eigenOut)
+png(filename = paste(outputPath,"MDS_Screeplot.png",sep=""))
+plot(as.numeric(rownames(eigenOut))[1:xLength], eigenOut[1:xLength,1], xaxt = "n", xlab = "Eigenvalue number", ylab = "Eigenvalue", main = paste(type,"Scree Plot"),
+type = "b", pch = 16)
+axis(1, at = as.numeric(rownames(eigenOut))[1:xLength])
+dev.off()
+cat("\nP_", dimnum, " criterion: ", round(fit$GOF[2], digits = 4), sep = "") #2nd GOF statistic
+distNonmet
+cat("NON-METRIC MULTIDIMENSIONAL SCALING \n\n")
+inputType
+distNonmet <- match.arg(distNonmet)
+d <- dist(tempData[,vars], method = tolower(distNonmet))
+capture.output(fit <- monoMDS(d, k=as.numeric(dimnum)))
+cat("\nPOINTS \n\n")
+print(fit$points[1:dim(fit$points)[1], 1:dimnum])
+rstudio::viewData(data)
+inputType
+grpLevels = levels(factor(data[, idVar]))
+idData = data[,idVar]
+grpLevels
+idData
+useIdVar
+grpCode<- data.frame(grpLevels, pChars, pCol)
+pCharNames <- make.unique(c(names(data),"pCharCode"), sep = "")
+pCharName <- pCharNames[length(pCharNames)]
+pColName <- make.unique(c(pCharNames,"pColCode"), sep = "")
+pColName <- pColName[length(pColName)]
+pCharName
+pColName
+data
+grpCode$pChars
+grpCode$pChars[match(idData, grpCode[,"grpLevels"])]
+grpCode$pCol
+grpCode$pCol[match(idData, grpCode[,"grpLevels"])]
+tempData2 <- cbind(data,grpCode$pChars[match(idData, grpCode[,"grpLevels"])], grpCode$pCol[match(idData, grpCode[,"grpLevels"])])
+colnames(tempData2)[ncol(tempData2)-1]<- pCharName
+colnames(tempData2)[ncol(tempData2)]<- pColName
+rstudio::viewData(tempData2)
+mdsGraph(tempData2, idVar, outputPath, pCharName, pColName, grpLevels, idData, dimnum, fit, type, useIdVar, pChars, pSizes, pCol,
+showLeg, legTitle, legPos, legNcol)
+data=tempData2
+x <- fit$points
+x
+useIdVar
+plotType = "p"
+pCharData = data[,pCharName]
+pCharData
+dimnum
+plot(x[,1], x[,2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = data[,pColName])
+data[,pColName]
+x[,1], x[,2]
+x[,1]
+x[,2]
+x[c(1:6),1]
+plot(x[c(1:6),1], x[c(1:6),2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = data[,pColName])
+data[,pColName]
+plot(x[c(1:6),1], x[c(1:6),2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = data[c(1:6),pColName])
+text(x[,1], x[,2], labels = idData, cex = pSizes, col = data[,pColName])
+if (useIdVar) text(x[,1], x[,2], labels = idData, cex = pSizes, col = data[c(1:6),pColName])
+text(x[,1], x[,2], labels = idData, cex = pSizes, col = data[c(1:6),pColName])
+data[c(1:6),pColName]
+if (useIdVar) text(x[,1], x[,2], labels = idData, cex = pSizes, col = "blue")#data[c(1:6),pColName])
+text(x[,1], x[,2], labels = idData, cex = pSizes, col = "blue")#data[c(1:6),pColName])
+plot(x[c(1:6),1], x[c(1:6),2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = "blue")
+plot(x[c(1:6),1], x[c(1:6),2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = c("blue","green"))
+data[c(1:6),pColName]
+c("blue"
+)
+colVec = data[,pColName]
+colVec
+colVec = vector(data[,pColName])
+colVec = as.vector(data[,pColName])
+colVec
+plot(x[c(1:6),1], x[c(1:6),2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = colVec)
+plot(x[,1], x[,2], xlab = "Coordinate 1", ylab = "Coordinate 2", main = paste(type,"MDS"),
+type = plotType, pch = pCharData, cex = pSizes, col = colVec)#data[c(1:6),pColName])
+rstudio::viewData(tempData2)
+source('E:/App Files/workspace_Juno/RJavaManager/rscript/mdsGraph.R')
+source('~/.active-rstudio-document')
+data <- read.csv("E:/App Files/workspace_Juno/RJavaManager/sample_datasets/PCAex.csv", header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = ",")
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(0, 0, 0, 0, 0), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(227, 139, 144, max=255),rgb(218, 254, 245, max=255),rgb(136, 173, 226, max=255),rgb(28, 241, 38, max=255),rgb(125, 17, 226, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(1,2,3,4,5), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(227, 139, 144, max=255),rgb(218, 254, 245, max=255),rgb(136, 173, 226, max=255),rgb(28, 241, 38, max=255),rgb(125, 17, 226, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(1,2,3,4,5), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255),rgb(0, 255, 255, max=255),rgb(255, 255, 0, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(1,2,3,4,5), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255),rgb(255, 255, 0, max=255),rgb(255, 255, 0, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Nonmetric", "Euclidean", "Bray", 2, FALSE, c(1,2,3,4,5), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255),rgb(255, 0, 255, max=255),rgb(127, 127, 127, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+result <- try(MDS(data, "E:/App Files/workspace_Juno/RJavaManager/sample_datasets/",
+"raw",
+c("SPKLT","SPKWD","SLLT","SLWD","AWLT","AWWD","ANLT","STGLT","STYLT","FLLT","FLWD","LLT_2ND","LWD_2ND","LIGLT","PANLT","DIST","PANBR","CULT","CUDI","DAYS_TO_FLOWERING"),
+"SPECIES", "Classical", "Euclidean", "Bray", 2, FALSE, c(1,2,3,4,5), c(1.0, 1.0, 1.0, 1.0, 1.0), c(rgb(255, 0, 0, max=255),rgb(0, 255, 0, max=255),rgb(0, 0, 255, max=255),rgb(255, 0, 255, max=255),rgb(127, 127, 127, max=255)), TRUE, "Legend:", "bottomright", 1, FALSE, FALSE), silent = TRUE)
+library(PBTools)
+library(qtl)
+a<-matrix(rep("", (ncol(P.data)*2)), 2, ncol(P.data))
+summary(bristle3)
+library(qtl)
+data(bristle3)
+summary(bristle3)
+plot(bristle3)
+install.packages("qtlbim")
+library(qtlbim)
+plot
+demo(qtlbim::qtlbim)
+?crosstype
+??crosstype
+install.packages("qtl")
+outputPath
+dataFormat
+outputPath
+getwd()
+setwd(E:/App Files/workspace_Juno/RJavaManager/sample_datasets)
+setwd("E:/App Files/workspace_Juno/RJavaManager/sample_datasets")
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+source('E:/StarPbtools/QTL/irri_new/createQTLdata.R')
+source('~/.active-rstudio-document')
+formatsep <- function(fformat) {
+switch(fformat,
+csv = ",",
+ctxt = ",",
+stxt = " ",
+ttxt = "\t",
+sctxt = ";")
+}
+format1
+format1 = "csv"
+sep1 = formatsep(format1)
+sep1
+sep2 = formatsep(format2)
+sep3 = formatsep(format3)
+format3 = "csv"
+fomat2 = "csv"
+format3 = "csv"
+sep2 = formatsep(format2)
+format2 = "csv"
+sep2 = formatsep(format2)
+sep3 = formatsep(format3)
+sep2
+sep3 = formatsep(format3)
+sep3
+#read in datasets
+data1 <- read.table(file1, header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = sep1)
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+###
+library(STAR)
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "GENOTYPE"
+###
+library(STAR)
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "GENOTYPE"
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "GENO
+###
+# library(STAR)
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "Geno"
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "Geno"
+formatOpt = NULL
+datFile = file1
+formatsep <- function(fformat) {
+switch(fformat,
+csv = ",",
+ctxt = ",",
+stxt = " ",
+ttxt = "\t",
+sctxt = ";")
+}
+dataFormat
+sep1 = formatsep(format1)
+sep2 = formatsep(format2)
+sep3 = formatsep(format3)
+#read in datasets
+data1 <- read.table(file1, header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = sep1)
+data2 <- read.table(file2, header = FALSE, na.strings = c("NA","."), blank.lines.skip=TRUE, sep = sep2)
+data3 <- read.table(file3, header = FALSE, na.strings = c("NA","."), blank.lines.skip=TRUE, sep = sep3)
+formatOpt = NULL
+datFile = file1
+sep1 = formatsep(format1)
+sep2 = formatsep(format2)
+###
+# library(STAR)
+library(qtl)
+###input files
+outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+# input data files - as in current PBTools
+format1 = "csv"
+file1 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_pheno.csv"
+#genotypic and map files
+format2 = "csv"
+file2 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_geno.csv"
+format3 = "csv"
+file3 <- "E:/StarPbtools/QTL/irri_new/data/listeria1_map.csv"
+dataFormat = "default"
+P_geno = "Geno"
+formatOpt = NULL
+datFile = file1
+formatsep <- function(fformat) {
+switch(fformat,
+csv = ",",
+ctxt = ",",
+stxt = " ",
+ttxt = "\t",
+sctxt = ";")
+}
+dataFormat
+sep1 = formatsep(format1)
+sep2 = formatsep(format2)
+sep3 = formatsep(format3)
+#read in datasets
+data1 <- read.table(file1, header = TRUE, na.strings = c("NA",".",""), blank.lines.skip = TRUE, sep = sep1)
+data2 <- read.table(file2, header = FALSE, na.strings = c("NA","."), blank.lines.skip=TRUE, sep = sep2)
+data3 <- read.table(file3, header = FALSE, na.strings = c("NA","."), blank.lines.skip=TRUE, sep = sep3)
+rstudio::viewData(data1)

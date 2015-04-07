@@ -1,0 +1,120 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NCI_ME_missing.csv
+
+DESIGN: NORTH CAROLINA EXPERIMENT II IN CRD (INBRED)
+
+-----------------------------
+RESPONSE VARIABLE: respvar
+-----------------------------
+-----------------------------
+ANALYSIS FOR: environment = A
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels         
+ environment 1              A              
+ male        4              1  2  3  4     
+ female      11             1  10  11 ... 9
+
+Number of observations read: 83
+Number of observations used: 82
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+            Df   Sum Sq  Mean Sq F value Pr(>F)
+male         3 452.7559 150.9186   20.74 0.0000
+female      10 486.2622  48.6262    6.68 0.0000
+male:female 28 641.5358  22.9120    3.15 0.0005
+Residuals   40 291.0300   7.2758               
+-------
+REMARK: Raw dataset is unbalanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|male) + (1|female) + (1|male:female) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 465.3037 477.3373 -227.6519 457.9222 455.3037
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept)  28.2742      1.482  19.079
+
+ Random Effects:                                    
+ Groups      Variance Std. Deviation
+ male:female   8.0543         2.8380
+ female        3.3938         1.8422
+ male          6.4043         2.5307
+ Residual      7.3045         2.7027
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                                                    
+                                            Estimate
+ VA                                         9.798100
+ VD                                         8.054300
+ Narrow sense heritability(plot-mean based) 0.389480
+ Broad sense heritability(plot-mean based)  0.709642
+ Dominance Ratio                            1.282206
+
+
+-----------------------------
+ANALYSIS FOR: environment = B
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels         
+ environment 1              B              
+ male        4              1  2  3  4     
+ female      11             1  10  11 ... 9
+
+Number of observations read: 86
+Number of observations used: 86
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+            Df   Sum Sq  Mean Sq F value Pr(>F)
+male         3 402.9389 134.3130   16.40 0.0000
+female      10 224.5928  22.4593    2.74 0.0105
+male:female 29 665.7204  22.9559    2.80 0.0011
+Residuals   43 352.0750   8.1878               
+-------
+REMARK: Raw dataset is unbalanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  respvar ~ 1 + (1|male) + (1|female) + (1|male:female) 
+
+      AIC     BIC    logLik deviance  REMLdev
+ 482.7563 495.028 -236.3782 475.0286 472.7563
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept)  28.2619     1.2462 22.6777
+
+ Random Effects:                                    
+ Groups      Variance Std. Deviation
+ male:female   7.3189         2.7054
+ female        0.0000         0.0000
+ male          5.1505         2.2695
+ Residual      8.1878         2.8614
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                                                    
+                                            Estimate
+ VA                                         5.150500
+ VD                                         7.318900
+ Narrow sense heritability(plot-mean based) 0.249332
+ Broad sense heritability(plot-mean based)  0.603635
+ Dominance Ratio                            1.685828
+
+
+
+==============================================================

@@ -1,0 +1,512 @@
+row.names(mm)[2] <- "REP(ENV)"
+row.names(mm)[3] <- "GEN     "
+mm[1, 4] <- mm[1, 3]/mm[2, 3]
+mm[1, 5] <- 1 - pf(mm[1, 4], mm[1, 1], mm[2, 1])
+#print(mm)
+DFE <- df.residual(modelo)
+MSE <- deviance(modelo)/DFE
+medy <- mean(Y,na.rm=TRUE)
+#cat("\nCoeff var", "\tMean", name.y, "\n")
+#cat(sqrt(MSE) * 100/medy, "\t", medy, "\n")
+} else {
+DFE <- nenv * (ngen - 1) * (REP - 1)
+DFEa <- nenv * (REP - 1)
+nrep <- REP
+modelo <- aov(Y ~ ENV + GEN + ENV:GEN)
+xx <- as.matrix(anova(modelo))
+xx <- rbind(xx[1, ], xx[1, ], xx[2:4, ])
+xx[2, 1] <- DFEa
+xx[2, 2:5] <- NA
+xx[, 2] <- xx[, 2] * nrep
+xx[, 3] <- xx[, 3] * nrep
+xx[5, 1] <- DFE
+xx[5, 3] <- MSE
+xx[5, 2] <- MSE * DFE
+xx[1, 4] <- NA
+xx[3, 4] <- xx[3, 3]/MSE
+xx[4, 4] <- xx[4, 3]/MSE
+xx[1, 5] <- NA
+xx[3, 5] <- 1 - pf(xx[3, 4], xx[3, 1], DFE)
+xx[4, 5] <- 1 - pf(xx[4, 4], xx[4, 1], DFE)
+row.names(xx)[1] <- "ENV     "
+row.names(xx)[2] <- "REP(ENV)"
+#cat("\nREP: ", REP)
+#cat("\n\nNumber of means: ", length(na.omit(Y)), "\n")
+#cat("\nDependent Variable:", name.y, "\n\nAnalysis of variance\n")
+#print(xx, na.print = "")
+medy <- mean(Y,na.rm=TRUE)
+#cat("\nCoeff var", "\tMean", name.y, "\n")
+#cat(sqrt(MSE) * 100/medy, "\t", medy, "\n")
+}
+raw <- data.frame(ENV, GEN, Y)
+MEDIAS <- tapply(raw[, 3], raw[, c(1, 2)], mean)
+xx <- rownames(MEDIAS)
+yy <- colnames(MEDIAS)
+fila <- length(xx)
+col <- length(yy)
+total <- fila * col
+x <- character(length = total)
+y <- character(length = total)
+z <- numeric(length = total)
+k <- 0
+for (i in 1:fila) {
+for (j in 1:col) {
+k <- k + 1
+x[k] <- xx[i]
+y[k] <- yy[j]
+z[k] <- MEDIAS[i, j]
+}
+}
+MEDIAS <- data.frame(ENV=x, GEN=y, Y=z)
+x <- MEDIAS[, 1]
+y <- MEDIAS[, 2]
+z <- MEDIAS[, 3]
+modelo2 <- lm(z ~ x + y)
+for (i in 1:length(z)) {
+if (is.na(z[i]))
+z[i] <- predict(modelo2, data.frame(x = MEDIAS[i,
+1], y = MEDIAS[i, 2]))
+}
+MEDIAS <- data.frame(ENV = x, GEN = y, Y = z)
+modelo1 <- lm(Y ~ ENV , data = MEDIAS)     #### modified this part by VIB
+residual <- modelo1$residuals
+MEDIAS <- data.frame(MEDIAS, RESIDUAL = residual)
+mlabel <- names(MEDIAS)
+names(MEDIAS) <- c(mlabel[1:2], yVar, mlabel[4])
+OUTRES <- MEDIAS[order(MEDIAS[, 1], MEDIAS[, 2]), ]
+OUTRES2 <- by(OUTRES[, 4], OUTRES[, c(2, 1)], function(x) sum(x))
+OUTMED <- by(OUTRES[, 3], OUTRES[, c(2, 1)], function(x) sum(x))
+s <- svd(OUTRES2)
+U <- s$u
+L <- s$d
+V <- s$v
+L <- L[1:minimo]
+SS <- (L^2) * nrep
+SUMA <- sum(SS)
+percent <- round(((1/SUMA) * SS) * 100, 1)
+minimo <- min(ngen, nenv)
+DFAMMI <- rep(0, minimo)
+acum <- DFAMMI
+MSAMMI <- DFAMMI
+F.AMMI <- DFAMMI
+PROBF <- DFAMMI
+acumula <- 0
+for (i in 1:minimo) {
+DF <- (ngen - 1) + (nenv - 1) - (2 * i - 1)
+if (DF <= 0) break
+DFAMMI[i] <- DF
+acumula <- acumula + percent[i]
+acum[i] <- acum[i] + acumula
+MSAMMI[i] <- SS[i]/DFAMMI[i]
+F.AMMI[i] <- round(MSAMMI[i]/MSE, 2)
+PROBF[i] <- round(1 - pf(F.AMMI[i], DFAMMI[i], DFE), 4)
+}
+SS <- round(SS, 6)
+MSAMMI <- round(MSAMMI, 6)
+SSAMMI <- data.frame(percent, acum, Df = DFAMMI, "Sum Sq" = SS,
+"Mean Sq" = MSAMMI, "F value" = F.AMMI, Pr.F = PROBF)
+nssammi<-nrow(SSAMMI)
+SSAMMI<-SSAMMI[SSAMMI$Df>0,]
+nss<-nrow(SSAMMI)
+row.names(SSAMMI) <- paste("PC", 1:nss, sep = "")
+#cat("\nAnalysis\n")
+#print(SSAMMI)
+if (f == 0.5) {
+LL <- sqrt(diag(L))
+SCOREG <- U %*% LL
+SCOREE <- V %*% LL
+}
+if (f == 0) {
+SCOREG <- U
+SCOREE <- V %*% diag(L)
+}
+if (f == 1)  {
+SCOREG <- U %*% diag(L)
+SCOREE <- V
+}
+SCORES <- rbind(SCOREG, SCOREE)
+colnames(SCORES) <- paste("PC", 1:nssammi, sep = "")
+MSCORES <- SCORES[1:ngen, ]
+NSCORES <- SCORES[(ngen + 1):(ngen + nenv), ]
+MGEN <- data.frame(type = "GEN", Y = apply(OUTMED, 1, mean),
+MSCORES)
+MENV <- data.frame(type = "ENV", Y = apply(OUTMED, 2, mean),
+NSCORES)
+# added by NSALES
+commonRowNames<-intersect(row.names(MGEN),row.names(MENV))
+if (length(commonRowNames)>0) {
+row.names(MGEN)<-paste("GEN_",row.names(MGEN),sep="") #added by NSALES
+row.names(MENV)<-paste("ENV_",row.names(MENV),sep="") #added by NSALES
+}
+bplot <- rbind(MGEN, MENV)
+bplot<- bplot[,1:(nss+2)]
+mlabel <- names(bplot)
+names(bplot) <- c(mlabel[1], yVar, mlabel[c(-1, -2)])
+maxy <- max(bplot[, 4])
+miny <- min(bplot[, 4])
+maxx <- max(bplot[, 3])
+minx <- min(bplot[, 3])
+row.names(bplot) <- c(row.names(MGEN), row.names(MENV))
+cp.name <- rownames(SSAMMI)[1:3]
+cp.per <- SSAMMI[1:3, 1]
+#create string to be used for filenames -added by NSALES
+forFilename<-"GGE"
+Type.code <- as.numeric(bplot$type)
+(graph == "biplot")
+(f==0.5)
+(mean(MENV$PC1) < 0)
+MENV$PC1 <- -MENV$PC1
+MENV$PC2 <- -MENV$PC2
+bplot_new <- rbind(MGEN, MENV)
+(ncol(bplot_new)>3)
+par(cex=0.8)
+plot(bplot_new[,3],bplot_new[,4],cex=0.8, xlab = "PC 1", ylab = "PC 2", frame = TRUE, pch=Type.code, col="white", main=paste(forFilename, " Biplot for ", gsub("_means", "", yVar), sep=""))
+if (number == TRUE) {
+#text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4]+abs(0.04*max(MGEN[, 4])), labels = as.character(1:nrow(MGEN)), col = "blue"))
+text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4], labels = as.character(1:nrow(MGEN)), col = "blue"))
+}
+if (number == FALSE) {
+#text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4]+abs(0.04*max(MGEN[, 4])), labels = row.names(MGEN), col = "blue"))
+text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4], labels = row.names(MGEN), col = "blue"))
+#text(MGEN[, 3], MGEN[, 4]+2, cex = 0, labels = row.names(MGEN), col = "blue")
+}
+points(MENV[, 3], MENV[, 4], cex = 0, text(MENV[, 3], MENV[, 4], labels = row.names(MENV), col = "red"))
+abline(h = 0, v = 0, lty = 2.5, col = "green", lwd = 1)
+s <- seq(length(MENV[, 3]))
+arrows(0, 0, 0.9 * MENV[, 3][s], 0.9 * MENV[, 4][s], col = "brown", lwd = 1.8, length = 0.1, code = 2)
+pc_percent<-paste("PC1=", cp.per[1], "%; PC2=", cp.per[2], "%", sep="")
+mtext(text = pc_percent, side=3, cex=0.8, adj=0)
+par(cex=0.8)
+plot(bplot_new[,3],bplot_new[,4],cex=0.8, xlab = "PC 1", ylab = "PC 2", frame = TRUE, pch=Type.code,col="white", main=paste("What-won-where Biplot for ", gsub("_means", "", yVar), sep=""))
+if (number == TRUE) {
+text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4], labels = as.character(1:nrow(MGEN)), col = "blue"))
+}
+if (number == FALSE) {
+text(MGEN[, 3], MGEN[, 4], cex = 0, text(MGEN[, 3], MGEN[, 4], labels = row.names(MGEN), col = "blue"))
+}
+points(MENV[, 3], MENV[, 4], cex = 0, text(MENV[, 3], MENV[, 4], labels = row.names(MENV), col = "red"))
+s <- seq(length(MENV[, 3]))
+mtext(text = pc_percent, side=3, cex=0.8, adj=0)
+bplotGen <- bplot_new[1:ngen,3:4]
+CH <- chull(bplotGen$PC1,bplotGen$PC2)
+hull <- c(CH, CH[1])
+lines(bplot_new[hull,3:4], col="green")
+polygonPoints<-bplot_new[hull,3:4]
+polygonPoints
+l=1
+slope <- (polygonPoints[l,2]-polygonPoints[l+1,2])/(polygonPoints[l,1]-polygonPoints[l+1,1])
+slope
+yIntercept<-(-1*polygonPoints[l,2])-(slope*polygonPoints[l,1])
+yIntercept
+xIntercept<-((-1*polygonPoints[l,2]))+(slope*polygonPoints[l,1]))/slope
+xIntercept<-((-1*polygonPoints[l,2])+(slope*polygonPoints[l,1]))/slope
+xIntercept
+minx
+(mean(MENV$PC1) < 0)
+minx_new <- min(bplot_new[, 3])
+minx_new
+xPoints <- seq(minx_new*1.7,0,length=20)
+xPoints
+(slope>0)
+(yhat < max(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2>min(polygonPoints[l,2], polygonPoints[l+1,2]))
+perp.slope = -1/slope
+yhat <- perp.slope*max(polygonPoints[l,1], polygonPoints[l+1,1])
+yhat2 <- perp.slope*min(polygonPoints[l,1], polygonPoints[l+1,1])
+(yhat < max(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2>min(polygonPoints[l,2], polygonPoints[l+1,2]))
+xPoints <- seq(minx_new*1.7,0,length=20)
+yPoints <- perp.slope*xPoints
+lines(xPoints,yPoints, lty=1, col=1)
+(polygonPoints[l,1]<0 && polygonPoints[l+1,1]<0)
+maxx_new <- max(bplot_new[, 3])
+(yhat < max(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2>min(polygonPoints[l,2], polygonPoints[l+1,2]))
+l=2
+slope <- (polygonPoints[l,2]-polygonPoints[l+1,2])/(polygonPoints[l,1]-polygonPoints[l+1,1])
+perp.slope = -1/slope
+yhat <- perp.slope*max(polygonPoints[l,1], polygonPoints[l+1,1])
+yhat2 <- perp.slope*min(polygonPoints[l,1], polygonPoints[l+1,1])
+(polygonPoints[l,1]<0 && polygonPoints[l+1,1]<0)
+(slope>0)
+(yhat < max(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2>min(polygonPoints[l,2], polygonPoints[l+1,2]))
+xPoints <- seq(minx_new*1.7,0,length=20)
+yPoints <- perp.slope*xPoints
+lines(xPoints,yPoints, lty=1, col=1)
+l=3
+slope <- (polygonPoints[l,2]-polygonPoints[l+1,2])/(polygonPoints[l,1]-polygonPoints[l+1,1])
+perp.slope = -1/slope
+yhat <- perp.slope*max(polygonPoints[l,1], polygonPoints[l+1,1])
+yhat2 <- perp.slope*min(polygonPoints[l,1], polygonPoints[l+1,1])
+(polygonPoints[l,1]<0 && polygonPoints[l+1,1]<0)
+(polygonPoints[l,1]>0 && polygonPoints[l+1,1]>0)
+(polygonPoints[l,2]>0 && polygonPoints[l+1,2]>0)
+(slope>0)
+(yhat > min(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2<max(polygonPoints[l,2], polygonPoints[l+1,2]))
+xPoints <- seq(0,maxx_new*1.7,length=20)
+yPoints <- perp.slope*xPoints
+lines(xPoints,yPoints, lty=1, col=1)
+l=4
+slope <- (polygonPoints[l,2]-polygonPoints[l+1,2])/(polygonPoints[l,1]-polygonPoints[l+1,1])
+perp.slope = -1/slope
+yhat <- perp.slope*max(polygonPoints[l,1], polygonPoints[l+1,1])
+yhat2 <- perp.slope*min(polygonPoints[l,1], polygonPoints[l+1,1])
+(polygonPoints[l,1]<0 && polygonPoints[l+1,1]<0)
+(polygonPoints[l,1]>0 && polygonPoints[l+1,1]>0)
+(slope>0)
+(yhat > min(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2<max(polygonPoints[l,2], polygonPoints[l+1,2]))
+xPoints <- seq(0,maxx_new*1.7,length=20)
+yPoints <- perp.slope*xPoints
+lines(xPoints,yPoints, lty=1, col=1)
+l=5
+slope <- (polygonPoints[l,2]-polygonPoints[l+1,2])/(polygonPoints[l,1]-polygonPoints[l+1,1])
+perp.slope = -1/slope
+yhat <- perp.slope*max(polygonPoints[l,1], polygonPoints[l+1,1])
+yhat2 <- perp.slope*min(polygonPoints[l,1], polygonPoints[l+1,1])
+(polygonPoints[l,1]<0 && polygonPoints[l+1,1]<0)
+(polygonPoints[l,1]>0 && polygonPoints[l+1,1]>0)
+(polygonPoints[l,2]>0 && polygonPoints[l+1,2]>0)
+(polygonPoints[l,2]<0 && polygonPoints[l+1,2]<0)
+(slope>0)
+(yhat < max(polygonPoints[l,2], polygonPoints[l+1,2]) && yhat2>min(polygonPoints[l,2], polygonPoints[l+1,2]))
+xPoints <- seq(0,maxx_new*1.7,length=20)
+yPoints <- perp.slope*xPoints
+lines(xPoints,yPoints, lty=1, col=1)
+library(PBTools)
+dataMeaTwoStage <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/summaryStats2_b.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+meaTwo1 <- try(GETwoStage.test(dataMeaTwoStage, c("Y3_Mean","Plot.Yield_Mean"),stderr = NULL,c("Y3_sigma2","Plot.Yield_sigma2"),c("Y3_No.rep","Plot.Yield_No.rep"),"EntryNo","Set", weight = "none", is.genoRandom = FALSE), silent=TRUE)
+meaTwo1
+dataMeaTwoStage <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/summaryStats2_b.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+data<-dataMeaTwoStage
+respvar<-c("Y3_Mean","Plot.Yield_Mean")
+stderr = NULL
+sigma2<-c("Y3_sigma2","Plot.Yield_sigma2")
+numrep<-c("Y3_No.rep","Plot.Yield_No.rep")
+geno<-"EntryNo"
+env<-"Set"
+weight = "none"
+is.genoRandom = FALSE
+library(lme4)
+options(show.signif.stars=FALSE)
+# --- TRIM THE STRINGS --- #
+respvar<-trimStrings(respvar)
+if (!is.null(stderr)) { stderr <-trimStrings(stderr) }
+sigma2 <-trimStrings(sigma2)
+numrep <-trimStrings(numrep)
+geno <-trimStrings(geno)
+env <-trimStrings(env)
+# --- CHECK INPUT --- #
+if (is.na(match(respvar, names(data))) ||
+#is.na(match(stderr , names(data))) ||
+is.na(match(sigma2 , names(data))) ||
+is.na(match(numrep, names(data))) ||
+is.na(match(geno, names(data))) ||
+is.na(match(env, names(data)))) { stop("At least one variable name does not match a column in the data frame.") }
+weight <- match.arg(weight)
+# --- SET GENO AND ENV TO FACTORS --- #
+data[,match(geno, names(data))] <- factor(data[,match(geno, names(data))])
+data[,match(env, names(data))] <- factor(data[,match(env, names(data))])
+result <- list()
+i=1
+# --- CREATE TEMP.DATA WHICH CONTAINS ALL NON-MISSING OBSERVATIONS --- #
+temp.data <- subset(data, subset = (is.na(data[,match(respvar[i], names(data))]) == F))
+temp.data[,match(geno, names(temp.data))] <- factor(trimStrings(temp.data[,match(geno, names(temp.data))]))
+temp.data[,match(env, names(temp.data))] <- factor(trimStrings(temp.data[,match(env, names(temp.data))]))
+# --- get levels of genotype and environment --- #
+levelsGeno<-levels(temp.data[,match(geno, names(temp.data))])
+levelsEnv<-levels(temp.data[,match(env, names(temp.data))])
+result[[i]]$nlevelsGeno <- length(levelsGeno)
+result[[i]]$nlevelsEnv <- length(levelsEnv)
+result[[1]]
+result[1]
+result[i]$nlevelsGeno <- length(levelsGeno)
+result[i]$nlevelsEnv <- length(levelsEnv)
+result[[i]] <- list()
+temp.data <- subset(data, subset = (is.na(data[,match(respvar[i], names(data))]) == F))
+temp.data[,match(geno, names(temp.data))] <- factor(trimStrings(temp.data[,match(geno, names(temp.data))]))
+temp.data[,match(env, names(temp.data))] <- factor(trimStrings(temp.data[,match(env, names(temp.data))]))
+# --- get levels of genotype and environment --- #
+levelsGeno<-levels(temp.data[,match(geno, names(temp.data))])
+levelsEnv<-levels(temp.data[,match(env, names(temp.data))])
+result[[i]]$nlevelsGeno <- length(levelsGeno)
+result[[i]]$nlevelsEnv <- length(levelsEnv)
+# --- recode genotype and environment levels --- #
+newCodingGeno<-data.frame(Genotype=levelsGeno, Code=paste("G",seq(1:length(levelsGeno)), sep=""))
+newCodingEnv<-data.frame(Environment=levelsEnv, Code=paste("E",seq(1:length(levelsEnv)), sep=""))
+result[[i]]$newCodingGeno <- newCodingGeno
+result[[i]]$newCodingEnv <- newCodingEnv
+# --- attach the new labels to temp.data --- #
+temp.data$CodedGeno <- newCodingGeno$Code[match(temp.data[,geno], newCodingGeno$Genotype)]
+temp.data$CodedEnv <- newCodingEnv$Code[match(temp.data[,env], newCodingEnv$Environment)]
+# --- CREATE COMPUTEDWEIGHT COLUMN --- #
+if (weight == "stderr")  {
+temp.data$computedWeight <- 1/(temp.data[, match(stderr[i], names(temp.data))]^2)
+} else {
+temp.data$computedWeight <- NULL
+}
+levelsGeno
+temp.data
+respvar[i]
+rstudio::viewData(data)
+# --- CREATE TEMP.DATA WHICH CONTAINS ALL NON-MISSING OBSERVATIONS --- #
+temp.data <- subset(data, subset = (is.na(data[,match(respvar[i], names(data))]) == F))
+temp.data
+# --- CREATE COMPUTEDWEIGHT COLUMN --- #
+if (weight == "stderr")  {
+temp.data$computedWeight <- 1/(temp.data[, match(stderr[i], names(temp.data))]^2)
+} else {
+temp.data$computedWeight <- NULL
+}
+result[[i]] <- list()
+result[[i]]$respvar <- respvar[i]
+# --- COMPUTE RESPONSE RATE --- #
+obsread <- nrow(data)
+obsused <- nrow(temp.data)
+responseRate <- obsused/obsread
+result[[i]]$obsread <- obsread
+result[[i]]$obsused <- obsused
+result[[i]]$responseRate <- responseRate
+(responseRate < 0.80)
+i=2
+# --- CREATE TEMP.DATA WHICH CONTAINS ALL NON-MISSING OBSERVATIONS --- #
+temp.data <- subset(data, subset = (is.na(data[,match(respvar[i], names(data))]) == F))
+# --- CREATE COMPUTEDWEIGHT COLUMN --- #
+if (weight == "stderr")  {
+temp.data$computedWeight <- 1/(temp.data[, match(stderr[i], names(temp.data))]^2)
+} else {
+temp.data$computedWeight <- NULL
+}
+result[[i]] <- list()
+result[[i]]$respvar <- respvar[i]
+# --- COMPUTE RESPONSE RATE --- #
+obsread <- nrow(data)
+obsused <- nrow(temp.data)
+responseRate <- obsused/obsread
+result[[i]]$obsread <- obsread
+result[[i]]$obsused <- obsused
+result[[i]]$responseRate <- responseRate
+(responseRate < 0.80)
+temp.data[,match(geno, names(temp.data))] <- factor(trimStrings(temp.data[,match(geno, names(temp.data))]))
+temp.data[,match(env, names(temp.data))] <- factor(trimStrings(temp.data[,match(env, names(temp.data))]))
+# --- get levels of genotype and environment --- #
+levelsGeno<-levels(temp.data[,match(geno, names(temp.data))])
+levelsEnv<-levels(temp.data[,match(env, names(temp.data))])
+result[[i]]$nlevelsGeno <- length(levelsGeno)
+result[[i]]$nlevelsEnv <- length(levelsEnv)
+# --- recode genotype and environment levels --- #
+newCodingGeno<-data.frame(Genotype=levelsGeno, Code=paste("G",seq(1:length(levelsGeno)), sep=""))
+newCodingEnv<-data.frame(Environment=levelsEnv, Code=paste("E",seq(1:length(levelsEnv)), sep=""))
+result[[i]]$newCodingGeno <- newCodingGeno
+result[[i]]$newCodingEnv <- newCodingEnv
+newCodingGeno
+result[[i]]$newCodingGeno <- newCodingGeno
+result[[i]]$newCodingEnv <- newCodingEnv
+# --- attach the new labels to temp.data --- #
+temp.data$CodedGeno <- newCodingGeno$Code[match(temp.data[,geno], newCodingGeno$Genotype)]
+temp.data$CodedEnv <- newCodingEnv$Code[match(temp.data[,env], newCodingEnv$Environment)]
+rstudio::viewData(temp.data)
+# --- CONSTRUCT THE MODEL --- #
+if (is.genoRandom) {
+trt.stmt <- paste("(1|", geno,")", sep = "")
+} else {
+trt.stmt <- paste(geno, sep = "")
+}
+#myformula1 <- paste("Y ~ 1 + ", trt.stmt, " + (1|", env,")", sep = "")
+myformula1 <- paste(respvar[i], " ~ 1 + ", trt.stmt, " + (1|", env,")", sep = "")
+model <- lmer(formula(myformula1), weights = temp.data$computedWeight, data = temp.data)
+result[[i]]$formula1 <- myformula1
+result[[i]]$model <- model
+# --- SUMMARY STATISTICS PER SITE --- #
+sumStat.Env <- data.frame(tapply(temp.data[, match(respvar[i], names(temp.data))], temp.data[, match(env, names(temp.data))], mean))
+sumStat.Env <- data.frame(rownames(sumStat.Env), sumStat.Env)
+colnames(sumStat.Env) <- c(env, "means")
+rownames(sumStat.Env) <- NULL
+numRep <- 1/mean(1/tapply(temp.data[, match(numrep[i], names(temp.data))] , temp.data[, match(env, names(temp.data))], mean))
+numEnv <- nlevels(temp.data[, match(env, names(temp.data))])
+error.variance <- sum(tapply(temp.data[, match(sigma2[i], names(temp.data))] , temp.data[, match(env, names(temp.data))], mean) * tapply(temp.data[, match(numrep[i], names(temp.data))] , temp.data[, match(env, names(temp.data))], mean))/sum(tapply(temp.data[, match(numrep[i], names(temp.data))] , temp.data[, match(env, names(temp.data))], mean))
+varcomp_her <- summary(model)@REmat
+error.gxe.var <- as.numeric(varcomp_her[varcomp_her[,1] == "Residual", "Variance"])    #added by NSales
+#if (weight == "none")    sigma2.ge <- attr(VarCorr(model), "sc")**2 - error.variance
+#if (weight == "stderr")  sigma2.ge <- 1
+#if (weight == "stdmean") sigma2.ge <- attr(VarCorr(model), "sc")**2 * error.variance
+if (weight == "none")    sigma2.ge <- error.gxe.var - error.variance
+if (weight == "stderr")  sigma2.ge <- 1
+#if (weight == "stdmean") sigma2.ge <- error.gxe.var * error.variance
+# --- VARIANCE COMPONENTS --- #
+varcomp <- NULL
+for (j in (1:length(VarCorr(model)))) {
+varcomp <- rbind(varcomp, data.frame(Groups = names(VarCorr(model))[j], Variance = VarCorr(model)[[j]][1], Std.Dev. = attr(VarCorr(model)[[j]], "stddev")[[1]]))
+}
+# if the value of sigma2.ge is negative, set it to zero
+if (sigma2.ge < 0) {
+sigma2.ge <- 0
+}
+varcomp <- rbind(varcomp, data.frame(Groups = paste(geno, ":", env, sep = ""), Variance = sigma2.ge, Std.Dev. = sqrt(sigma2.ge)))
+varcomp <- rbind(varcomp, data.frame(Groups = "Residual", Variance = attr(VarCorr(model), "sc")**2, Std.Dev. = attr(VarCorr(model), "sc")))
+result[[i]]$varcomp.table <- varcomp
+# --- TEST OF SIGNIFICANCE OF GENO EFFECT --- #
+myformula2 <- gsub(paste(" + ", trt.stmt, sep = ""), "", myformula1, fixed = TRUE)
+if (!is.genoRandom) {
+#model1 <- lmer(formula(myformula1), weights = temp.data$computedWeight, data = temp.data, REML = F)
+#model2 <- lmer(formula(myformula2), weights = temp.data$computedWeight, data = temp.data, REML = F)
+#model.comp <- anova(model2, model1)
+#attr(model.comp, "heading")[3] <- paste("model2: ", myformula2, sep = "")
+#attr(model.comp, "heading")[4] <- paste("model1: ", myformula1, "\n", sep = "")
+#attr(model.comp, "heading")[1] <- paste("TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:\n", sep = "")
+#result[[i]]$testsig.Geno <- model.comp
+} else {
+# --- compare the two models --- #
+model2 <- lmer(formula(myformula2), weights = temp.data$computedWeight, data = temp.data, REML = T)
+models.table2<-modelComparisonTable(model, model2)
+result[[i]]$formula2 <- myformula2
+result[[i]]$testsig.Geno <- models.table2
+}
+if (is.genoRandom) {
+# --- TEST OF SIGNIFICANCE OF ENVIRONMENT EFFECT USING LRT --- #
+myformula3 <- gsub(paste(" + (1|", env, ")", sep = ""), "", myformula1, fixed = TRUE)
+model3 <- lmer(formula(myformula3), weights = temp.data$computedWeight, data = temp.data, REML = T)
+models.table3<-modelComparisonTable(model, model3)
+result[[i]]$formula3 <- myformula3
+result[[i]]$testsig.Env <- models.table3
+# --- ESTIMATE HERITABILITY --- #
+genetic.var <- varcomp[varcomp[,1] == geno, "Variance"]
+heritability <- genetic.var/(genetic.var + (sigma2.ge/numEnv) + (error.variance/(numRep*numEnv)))
+#heritability <- as.matrix(round(heritability,digits = 2))         #RIZAM 091811
+#rownames(heritability) <- ""                    #RIZAM 091811
+heritability <- format(round(heritability,digits = 2), digits=2, nsmall=2, scientific=FALSE)
+result[[i]]$heritability <- heritability
+# --- PREDICTED MEANS/MEANS OF GENOTYPE --- #
+sumStat.Geno <- eval(parse(text = paste("coef(model)$", geno, sep = "")));
+sumStat.Geno <- cbind(rownames(sumStat.Geno), sumStat.Geno)
+colnames(sumStat.Geno) <- c(geno, "Mean")
+}
+else {
+myformula4 <- gsub("~ 1", "~ 0", myformula1, fixed = TRUE)
+model.noint <- lmer(formula(myformula4), weights = temp.data$computedWeight, data = temp.data)
+sumStat.Geno <- data.frame(summary(model.noint)@coefs)[,1:2]
+rownames(sumStat.Geno) <- gsub(geno,"", rownames(sumStat.Geno))
+sumStat.Geno <- cbind(rownames(sumStat.Geno), sumStat.Geno)
+colnames(sumStat.Geno) <- c(geno, "LSMean", "StdErrMean")
+# --- COMPUTE STANDARD ERROR OF THE DIFFERENCE --- #
+noEntries<-nlevels(temp.data[,match(geno, names(temp.data))])
+covs <- as.matrix(vcov(model.noint)[1:noEntries, 1:noEntries])
+vars <- diag(covs)
+vdiff <- outer(vars, vars, "+") - 2 * covs
+sed <- sqrt(vdiff[upper.tri(vdiff)])
+# --- DISPLAY SED TABLE --- #
+minSed<-formatC(as.numeric(format(min(sed), scientific=FALSE)), format="f")
+meanSed<-formatC(as.numeric(format(mean(sed), scientific=FALSE)), format="f")
+maxSed<-formatC(as.numeric(format(max(sed), scientific=FALSE)), format="f")
+sedCol<-rbind(minSed, meanSed, maxSed)
+rowNames<-rbind("Minimum  ", "Average  ", "Maximum  ")
+sedTable<-as.table(cbind(rowNames, sedCol))
+rownames(sedTable)<-c("","","")
+colnames(sedTable)<-c("","Estimate")
+result[[i]]$sedTable <- sedTable
+}
+rownames(sumStat.Geno) <- NULL
+result[[i]]$means.Geno <- sumStat.Geno
+result[[i]]$means.Env  <- sumStat.Env
+result[[i]]$residuals  <- resid(model)
+result[[i]]$fitted.values  <- fitted(model)
+result[[i]]$data  <- subset(temp.data, select = c(env, geno, respvar[i], stderr[i], sigma2[i], numrep[i]), CodedGeno, CodedEnv)
+result[[i]]$data  <- subset(temp.data, select = c(env, geno, respvar[i], stderr[i], sigma2[i], numrep[i], CodedGeno, CodedEnv))
+result[[i]]$data  <- subset(temp.data, select = c(env, geno, respvar[i], stderr[i], sigma2[i], numrep[i], "CodedGeno", "CodedEnv"))
+result[[2]]$data

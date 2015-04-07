@@ -1,0 +1,46 @@
+
+PARTIAL LEAST SQUARES REGRESSION
+
+
+------------------------------
+RESPONSE VARIABLE:  Yield 
+------------------------------
+
+
+Data: 	X dimension: 7 15 
+	Y dimension: 7 6
+Fit method: kernelpls
+Number of components considered: 6
+TRAINING: % variance explained
+     1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+X      49.67    74.98    94.53    98.54    99.69      100
+EE1    67.70    78.17    99.09    99.98    99.99      100
+EE2    38.90    58.97    61.90    94.20    94.20      100
+EE3    16.22    33.12    47.30    47.31    86.15      100
+EE4    85.47    89.80    90.18    94.60    97.44      100
+EE5    63.33    66.60    68.10    86.73    95.95      100
+EE6    63.50    81.75    82.71    96.85    97.55      100
+
+
+------------------------------
+
+CODES USED IN GRAPH:
+
+   Genotype Code
+1 GENOTYPE1   G1
+2 GENOTYPE2   G2
+3 GENOTYPE3   G3
+4 GENOTYPE4   G4
+5 GENOTYPE5   G5
+6 GENOTYPE6   G6
+7 GENOTYPE7   G7
+
+  Environment Code
+1        1990   E1
+2        1991   E2
+3        1992   E3
+4        1993   E4
+5        1994   E5
+6        1995   E6
+
+==============================

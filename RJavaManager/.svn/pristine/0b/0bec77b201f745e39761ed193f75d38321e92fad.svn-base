@@ -1,0 +1,1140 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv
+
+SINGLE-ENVIRONMENT ANALYSIS
+
+DESIGN: Randomized Complete Block (RCB)
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+*** 
+ERROR in ssa.test function:
+  Calculated PWRSS for a LMM is negative
+***
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: MAT
+------------------------------
+
+DESCRIPTIVE STATISTICS:
+
+   Variable     Env N_NonMissObs     Mean    StdDev
+1       MAT 11DSAGU           30 135.2667  5.993867
+2       MAT 11DSASU           30 109.4333  3.910052
+3       MAT 11DSBAT           30 113.9000  6.434551
+4       MAT 11DSBIC           30 114.8000  9.263946
+5       MAT 11DSBUL           30 101.6000  2.883963
+6       MAT 11DSCES           28 109.4286  6.724354
+7       MAT 11DSILO           30 116.8000  4.823792
+8       MAT 11DSISA           30 113.9000  2.550862
+9       MAT 11DSLBL           30 113.3000  3.611762
+10      MAT 11DSMIN            0      NaN        NA
+11      MAT 11DSNEG           30 116.4000  3.944442
+12      MAT 11DSNVS           30  94.2000  1.972221
+13      MAT 11WSAGU           30 120.0333  4.745112
+14      MAT 11WSASU           30 119.8000  4.467507
+15      MAT 11WSBAT           30 111.0667  6.005362
+16      MAT 11WSBIC            0      NaN        NA
+17      MAT 11WSBUL            0      NaN        NA
+18      MAT 11WSCES           30 118.4000  4.522739
+19      MAT 11WSILO           30 113.2000  3.652113
+20      MAT 11WSISA           30 113.2000  6.381006
+21      MAT 11WSLBL           30 109.1000  5.523305
+22      MAT 11WSMIN            0      NaN        NA
+23      MAT 11WSNEG           30 100.9000 10.949256
+24      MAT 11WSNVS           30 104.3000  3.086679
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSAGU 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups    Variance  Std.Dev.
+1     Geno 37.29259268 6.1067661
+2      Rep  0.08888889 0.2981424
+3 Residual  1.14444444 1.0697871
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 195.5624 199.7660 -94.78118                      
+Model1 140.0958 145.7006 -66.04790 57.4666  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 131.3732
+2    10 134.3428
+3     2 130.0533
+4     3 145.5614
+5     4 131.0432
+6     5 132.6930
+7     6 142.9217
+8     7 133.3529
+9     8 128.7335
+10    9 142.5917
+
+
+HERITABILITY:
+     
+0.99 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSASU 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups  Variance Std.Dev.
+1     Geno  3.925926 1.981395
+2      Rep  0.000000 0.000000
+3 Residual 11.633333 3.410767
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik  Chisq Df Pr(>Chisq)
+Model2 170.7856 174.9892 -82.39278                     
+Model1 171.1560 176.7608 -81.57801 1.6295  1     0.2018
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 109.0476
+2    10 111.2277
+3     2 110.5569
+4     3 108.2092
+5     4 107.2030
+6     5 110.0538
+7     6 108.5445
+8     7 110.3892
+9     8 108.0415
+10    9 111.0600
+
+
+HERITABILITY:
+    
+0.5 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSBAT 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 4.418395e+01 6.647101e+00
+2      Rep 3.562879e-18 1.887559e-09
+3 Residual 2.666667e-01 5.163978e-01
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 199.6772 203.8808 -96.83860                      
+Model1 111.2654 116.8702 -51.63269 90.4118  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 123.3144
+2    10 124.6450
+3     2 101.6912
+4     3 112.3365
+5     4 111.6712
+6     5 111.0058
+7     6 113.3345
+8     7 114.3325
+9     8 109.6752
+10    9 116.9938
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSBIC 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 2.860691e+01 5.348543e+00
+2      Rep 0.000000e+00 0.000000e+00
+3 Residual 1.166532e-10 1.080061e-05
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  220.8152  225.0188 -107.4076                       
+Model1 -323.6685 -318.0637  165.8342 546.4836  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   112
+2    10   138
+3     2   109
+4     3   109
+5     4   109
+6     5   112
+7     6   112
+8     7   112
+9     8   109
+10    9   126
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSBUL 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups  Variance  Std.Dev.
+1     Geno 8.2172830 2.8665804
+2      Rep 0.0000000 0.0000000
+3 Residual 0.6666667 0.8164966
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 153.1312 157.3348 -73.56561                      
+Model1 114.6742 120.2789 -53.33708 40.4571  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno     Means
+1     1 106.85781
+2    10 106.85781
+3     2 100.36669
+4     3 100.36669
+5     4 100.36669
+6     5  99.06846
+7     6 100.36669
+8     7 101.01580
+9     8  99.71757
+10    9 101.01580
+
+
+HERITABILITY:
+     
+0.97 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSCES 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  28 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups  Variance Std.Dev.
+1     Geno 43.117668 6.566404
+2      Rep  0.000000 0.000000
+3 Residual  4.069462 2.017291
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik  Chisq Df Pr(>Chisq)
+Model2 188.8646 192.8612 -91.43231                     
+Model1 156.2836 161.6124 -74.14179 34.581  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 119.3443
+2    10 118.0516
+3     2 102.2164
+4     3 105.7713
+5     4 104.4786
+6     5 103.1859
+7     6 106.0944
+8     7 114.4968
+9     8 104.4395
+10    9 112.8809
+
+
+HERITABILITY:
+     
+0.96 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSILO 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups    Variance  Std.Dev.
+1     Geno 24.04073981 4.9031357
+2      Rep  0.04444448 0.2108186
+3 Residual  0.85555555 0.9249625
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 182.9661 187.1697 -88.48306                      
+Model1 130.0277 135.6325 -61.01384 54.9384  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 121.2802
+2    10 121.2802
+3     2 110.4091
+4     3 112.7151
+5     4 111.7268
+6     5 115.6800
+7     6 119.9625
+8     7 121.2802
+9     8 111.3974
+10    9 122.2685
+
+
+HERITABILITY:
+     
+0.99 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSISA 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 4.733333e+00 2.175622e+00
+2      Rep 8.943707e-13 9.457117e-07
+3 Residual 2.100000e+00 1.449138e+00
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 146.0126 150.2162 -70.00632                      
+Model1 133.6589 139.2637 -62.82943 14.3538  1     0.0002
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 113.9871
+2    10 113.9871
+3     2 112.2448
+4     3 112.2448
+5     4 113.9871
+6     5 112.2448
+7     6 117.4718
+8     7 112.2448
+9     8 113.1160
+10    9 117.4718
+
+
+HERITABILITY:
+     
+0.87 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSLBL 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 4.348276e+00 2.085252e+00
+2      Rep 0.000000e+00 0.000000e+00
+3 Residual 2.281688e-09 4.776702e-05
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC   logLik    Chisq Df Pr(>Chisq)
+Model2  166.1830  170.3866 -80.0915                       
+Model1 -281.1521 -275.5473 144.5760 449.3351  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   115
+2    10   116
+3     2   110
+4     3   113
+5     4   110
+6     5   110
+7     6   118
+8     7   111
+9     8   110
+10    9   120
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSMIN 
+------------------------------
+
+***
+ERROR:
+Too many missing observations. Cannot proceed with the analysis.
+***
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSNEG 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 5.186207e+00 2.277325e+00
+2      Rep 0.000000e+00 0.000000e+00
+3 Residual 2.376503e-09 4.874939e-05
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  171.2935  175.4971 -82.64673                       
+Model1 -278.7516 -273.1468 143.37581 452.0451  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   117
+2    10   123
+3     2   113
+4     3   113
+5     4   113
+6     5   113
+7     6   118
+8     7   118
+9     8   113
+10    9   123
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11DSNVS 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 1.296552e+00 1.1386622542
+2      Rep 0.000000e+00 0.0000000000
+3 Residual 1.752075e-10 0.0000132366
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  131.0909  135.2945 -62.54546                       
+Model1 -343.3725 -337.7677 175.68625 476.4634  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1    97
+2    10    92
+3     2    92
+4     3    92
+5     4    92
+6     5    95
+7     6    95
+8     7    95
+9     8    97
+10    9    95
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSAGU 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups   Variance  Std.Dev.
+1     Geno 21.3111112 4.6163959
+2      Rep  0.1888889 0.4346135
+3 Residual  2.5444444 1.5951315
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 182.0123 186.2159 -88.00615                      
+Model1 151.2602 156.8650 -71.63008 32.7521  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 128.0156
+2    10 116.7955
+3     2 115.8338
+4     3 122.5659
+5     4 116.1544
+6     5 115.1927
+7     6 123.8482
+8     7 121.9247
+9     8 116.1544
+10    9 123.8482
+
+
+HERITABILITY:
+     
+0.96 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSASU 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups   Variance  Std.Dev.
+1     Geno 21.1864498 4.6028741
+2      Rep  0.0000000 0.0000000
+3 Residual  0.2333332 0.4830457
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 178.5158 182.7194 -86.25790                      
+Model1 101.9946 107.5994 -46.99731 78.5212  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 121.9920
+2    10 129.2985
+3     2 119.3350
+4     3 119.0029
+5     4 119.6672
+6     5 116.0139
+7     6 121.9920
+8     7 122.6562
+9     8 114.0212
+10    9 114.0212
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSBAT 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups    Variance  Std.Dev.
+1     Geno 36.70786293 6.0587014
+2      Rep  0.03703415 0.1924426
+3 Residual  1.86295509 1.3649011
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 195.6735 199.8771 -94.83674                      
+Model1 148.9709 154.5757 -70.48547 48.7025  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 110.6733
+2    10 115.9180
+3     2 103.7896
+4     3 105.1008
+5     4 108.3788
+6     5 107.0676
+7     6 110.3455
+8     7 115.2624
+9     8 110.0177
+10    9 124.1129
+
+
+HERITABILITY:
+     
+0.98 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSBIC 
+------------------------------
+
+***
+ERROR:
+Too many missing observations. Cannot proceed with the analysis.
+***
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSBUL 
+------------------------------
+
+***
+ERROR:
+Too many missing observations. Cannot proceed with the analysis.
+***
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSCES 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups   Variance  Std.Dev.
+1     Geno 20.8111210 4.5619208
+2      Rep  0.2814818 0.5305486
+3 Residual  0.8851849 0.9408427
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 179.2285 183.4321 -86.61423                      
+Model1 131.4546 137.0594 -61.72732 49.7738  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 119.9776
+2    10 117.6769
+3     2 117.3482
+4     3 117.0196
+5     4 117.0196
+6     5 116.0336
+7     6 118.0056
+8     7 118.9916
+9     8 112.0895
+10    9 129.8378
+
+
+HERITABILITY:
+     
+0.99 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSILO 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups Variance  Std.Dev.
+1     Geno  13.8963 3.7277739
+2      Rep   0.0000 0.0000000
+3 Residual   0.4000 0.6324555
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 166.8274 171.0310 -80.41369                      
+Model1 109.0319 114.6367 -50.51594 59.7955  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno    Means
+1     1 113.0019
+2    10 115.9734
+3     2 109.7002
+4     3 110.6907
+5     4 109.0399
+6     5 110.3606
+7     6 112.3416
+8     7 113.0019
+9     8 120.5957
+10    9 117.2941
+
+
+HERITABILITY:
+     
+0.99 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSISA 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance    Std.Dev.
+1     Geno 1.357241e+01 3.684075703
+2      Rep 0.000000e+00 0.000000000
+3 Residual 2.629037e-08 0.000162143
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  199.1925  203.3961 -96.59626                       
+Model1 -222.0217 -216.4169 115.01087 423.2143  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   109
+2    10   109
+3     2   109
+4     3   114
+5     4   109
+6     5   109
+7     6   114
+8     7   123
+9     8   109
+10    9   127
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSLBL 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 1.016897e+01 3.1888820858
+2      Rep 0.000000e+00 0.0000000000
+3 Residual 2.191025e-08 0.0001480211
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  190.8203  195.0239 -92.41013                       
+Model1 -228.2650 -222.6603 118.13252 421.0853  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   119
+2    10   106
+3     2   105
+4     3   105
+5     4   106
+6     5   107
+7     6   113
+8     7   106
+9     8   105
+10    9   119
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSMIN 
+------------------------------
+
+***
+ERROR:
+Too many missing observations. Cannot proceed with the analysis.
+***
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSNEG 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1     Geno 3.996207e+01 6.3215558969
+2      Rep 0.000000e+00 0.0000000000
+3 Residual 2.517151e-08 0.0001586553
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  230.5094  234.7130 -112.2547                       
+Model1 -213.1726 -207.5678  110.5863 445.6819  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   101
+2    10    83
+3     2   101
+4     3   108
+5     4    89
+6     5   101
+7     6   108
+8     7   108
+9     8    89
+10    9   121
+
+
+HERITABILITY:
+  
+1 
+
+
+------------------------------
+ANALYSIS FOR: Env  =  11WSNVS 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  30 
+Number of observations used:  30 
+
+ Factors   Number of Levels   Levels        
+ Geno      10                 1  10  2 ... 9
+ Rep       3                  1  2  3       
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance    Std.Dev.
+1     Geno 3.175862e+00 1.782094915
+2      Rep 0.000000e+00 0.000000000
+3 Residual 1.281062e-08 0.000113184
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  MAT ~ 1 + (1|Rep) + (1|Geno) 
+Formula for Model2:  MAT ~ 1 + (1|Rep) 
+
+             AIC       BIC    logLik    Chisq Df Pr(>Chisq)
+Model2  157.0712  161.2748 -75.53559                       
+Model1 -249.4724 -243.8677 128.73622 408.5436  1     0.0000
+
+
+PREDICTED MEANS:
+
+   Geno Means
+1     1   107
+2    10   107
+3     2    99
+4     3   103
+5     4    99
+6     5   107
+7     6   105
+8     7   106
+9     8   103
+10    9   107
+
+
+HERITABILITY:
+  
+1 
+
+
+==============================
+*** 
+ERROR in genoNpheno.corr function:
+  Correlation cannot be performed. At least two response variables are required.
+***
+
+
+==============================

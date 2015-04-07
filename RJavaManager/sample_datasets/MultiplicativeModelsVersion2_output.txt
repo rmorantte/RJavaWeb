@@ -1,0 +1,42 @@
+
+MULTIPLICATIVE MODELS
+
+
+------------------------------
+RESPONSE VARIABLE:  Yield_Mean 
+------------------------------
+
+
+AMMI ANALYSIS:
+
+     percent acum Df    Sum.Sq  Mean.Sq F.value Pr.F
+PC1     41.5 41.5 19 12.158479 0.639920     Inf  NaN
+PC2     27.6 69.1 17  8.080396 0.475317     Inf  NaN
+PC3     11.0 80.1 15  3.230585 0.215372     Inf  NaN
+PC4     10.4 90.5 13  3.058662 0.235282     Inf  NaN
+PC5      5.1 95.6 11  1.506288 0.136935     Inf  NaN
+PC6      2.4 98.0  9  0.716179 0.079575     Inf  NaN
+PC7      1.2 99.2  7  0.342502 0.048929     Inf  NaN
+PC8      0.5 99.7  5  0.158839 0.031768     Inf  NaN
+PC9      0.1 99.8  3  0.020439 0.006813     Inf  NaN
+PC10     0.0 99.8  1  0.000000 0.000000     Inf  NaN
+
+
+GGE ANALYSIS:
+
+     percent  acum Df    Sum.Sq  Mean.Sq F.value Pr.F
+PC1     39.3  39.3 19 12.159110 0.639953     Inf  NaN
+PC2     27.9  67.2 17  8.607362 0.506315     Inf  NaN
+PC3     12.0  79.2 15  3.714068 0.247605     Inf  NaN
+PC4     10.2  89.4 13  3.141530 0.241656     Inf  NaN
+PC5      5.0  94.4 11  1.531840 0.139258     Inf  NaN
+PC6      3.1  97.5  9  0.943586 0.104843     Inf  NaN
+PC7      1.5  99.0  7  0.472432 0.067490     Inf  NaN
+PC8      0.6  99.6  5  0.179672 0.035934     Inf  NaN
+PC9      0.4 100.0  3  0.132700 0.044233     Inf  NaN
+PC10     0.1 100.1  1  0.019944 0.019944     Inf  NaN
+
+
+
+
+==============================

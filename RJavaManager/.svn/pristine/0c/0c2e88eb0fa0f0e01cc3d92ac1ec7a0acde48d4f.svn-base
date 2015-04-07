@@ -1,0 +1,24 @@
+# --------------------------------------------------------       
+# printWarnings: prints warning messages (if any)
+# ARGUMENTS:
+# warnMessages - warning messsages from function output
+# --------------------------------------------------------
+
+printWarningsFitDist <- function(warnMessages) {
+  if (!is.null(warnMessages))
+    cat("\nWarning(s):\n\n")
+  for (i in 1:length(warnMessages)) {
+    print(warnMessages[i])
+  }
+  
+  ##Warnings only, no location
+  #warnMessages <- as.matrix(names(warnMessages))
+  #  rnames <- rep("",nrow(warnMessages))
+  # rownames(warnMessages) <- rnames
+  #for (i in 1:length(warnMessages))
+   # print(warnMessages[i,1],quote = F)
+  #  for (i in 1:length(warnMessages))
+  #   print(paste(names(warnMessages)[[i]],"\n",sep =""))
+  
+
+}

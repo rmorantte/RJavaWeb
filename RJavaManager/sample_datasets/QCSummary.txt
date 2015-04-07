@@ -1,0 +1,5 @@
+   step 1  : 0 marker(s) removed with > 10 % missing values 
+   step 2  : Recoding alleles 
+   step 4  : 122 marker(s) removed with maf < 0.05 
+   step 10 : No duplicated markers removed 
+   End     : 995 marker(s) remain after the check

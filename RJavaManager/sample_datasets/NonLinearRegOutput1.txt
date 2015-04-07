@@ -1,0 +1,74 @@
+Statistical Tool for Agricultural Research (STAR)
+Wed Aug 14 16:50:50 2013
+
+Descriptive Statistics
+------------------------------------------------ 
+Variable   N_NonMissObs    Mean  StdDev  SE_Mean
+------------------------------------------------ 
+density              16    0.68    0.60     0.15
+densK                16  677.06  600.66   150.17
+logConc              16    0.01    1.79     0.45
+------------------------------------------------ 
+
+NONLINEAR REGRESSION ANALYSIS
+
+Dependent Variable: density 
+
+Test for Normality 
+------------------------------------------- 
+Variable  Method         Statistics    Prob
+------------------------------------------- 
+residual  Shapiro-Wilk       0.9757  0.9199
+------------------------------------------- 
+
+Formula: density  ~  SSgompertz(logConc, Asym, b2, b3)
+
+Parameter Estimates: 
+------------------------------------------------------------------ 
+Variable   Estimate  Std. Error  t value  LL CI*  UL CI*  Pr(>|t|)
+------------------------------------------------------------------ 
+Asym           4.60      0.6532     7.05    3.19    6.01    0.0000
+b2             2.27      0.1437    15.80    1.96    2.58    0.0000
+b3             0.72      0.0221    32.48    0.67    0.76    0.0000
+------------------------------------------------------------------ 
+* At 95% Confidence Interval
+
+Residual Sum of Squares: 0.009361638
+
+Coefficient Variance-Covariance Matrix
+         Asym        b2         b3
+Asym 0.426682 0.0928451 0.01417627
+b2   0.092845 0.0206573 0.00301774
+b3   0.014176 0.0030177 0.00048673
+
+
+Dependent Variable: densK 
+
+Test for Normality 
+------------------------------------------- 
+Variable  Method         Statistics    Prob
+------------------------------------------- 
+residual  Shapiro-Wilk       0.9757  0.9199
+------------------------------------------- 
+
+Formula: densK  ~  SSgompertz(logConc, Asym, b2, b3)
+
+Parameter Estimates: 
+----------------------------------------------------------------------------------- 
+Variable   Estimate  Std. Error  t value  LL CI*  UL CI*  Pr(>|t|)       NA      NA
+----------------------------------------------------------------------------------- 
+Asym        4603.33      653.21     7.05    3.19    6.01   3192.16  6014.51  0.0000
+b2             2.27        0.14    15.80    1.96    2.58      1.96     2.58  0.0000
+b3             0.72        0.02    32.48    0.67    0.76      0.67     0.76  0.0000
+----------------------------------------------------------------------------------- 
+* At 95% Confidence Interval
+
+Residual Sum of Squares: 9361.6377
+
+Coefficient Variance-Covariance Matrix
+           Asym         b2         b3
+Asym 426681.555 92.8451371 1.4176e+01
+b2       92.845  0.0206573 3.0177e-03
+b3       14.176  0.0030177 4.8673e-04
+
+

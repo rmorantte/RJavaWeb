@@ -1,0 +1,22 @@
+
+FACTORIAL REGRESSION
+
+
+------------------------------
+RESPONSE VARIABLE:  YLD 
+------------------------------
+
+
+Analysis of Variance Table
+
+Response: YLD
+                Df Sum Sq Mean Sq F value    Pr(>F)
+ENV              7 7958.0 1136.86 54.6219 < 2.2e-16
+GENOTYPE        28 1392.6   49.73  2.3896 0.0006904
+GENOTYPE:TMAXG  28 1791.6   63.99  3.0744  1.45e-05
+GENOTYPE:TMINF  28 1669.4   59.62  2.8646  4.75e-05
+GENOTYPE:TMAXF  28  844.3   30.15  1.4487 0.0901597
+Residuals      112 2331.1   20.81                  
+
+
+==============================

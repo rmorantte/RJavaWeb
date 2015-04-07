@@ -1,0 +1,27 @@
+1. Edit the Path environment variable to include the following:
+   1.1. R-2.12.1\bin\i386
+        (For example, C:\RJavaManager\R-2.12.1\bin\i386)
+   1.2. R-2.12.1\library\rjava\jri
+        (For example, C:\RJavaManager\R-2.12.1\library\rjava\jri)
+
+   This can be done by following the steps below:
+   a. Click the "Start" button on the desktop and choose "Control Panel".
+   b. Inside "Control Panel", choose "System".
+   c. Click on the "Advanced" tab and click on the "Environment Variables" button.
+   d. Under "System Variables", find "Path" in the column "Variable". Click "Edit".
+   e. Locate the end of the text in the "Variable value" text field. Type a semi-colon and
+      the path to the i386 directory (see 2.1). 
+   f. Type another semi-colon and enter the path to the jri directory (see 2.2).
+      (Please note that there should be no space(s) between the semi-colon and 
+      paths specified)
+   g. Press the "OK" buttons to update.
+
+2. Set the R_HOME environment variable to the R-2.12.1 folder.
+
+   To do this, first follow steps a to c (above). Then:
+   d. Under "System Variables", press the "New" button.
+   e. On the "New System Variable" dialog box, type in "R_HOME" into the "Variable name" 
+      text field.
+   f. In the "Variable value" text field, enter the path of the R-2.12.1 folder
+      (For example, C:\RJavaManager\R-2.12.1).
+   g. Press the "OK" buttons to update.

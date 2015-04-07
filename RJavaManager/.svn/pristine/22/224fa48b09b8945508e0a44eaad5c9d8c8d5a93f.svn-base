@@ -1,0 +1,268 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/RCB_ME.csv
+
+MULTI-ENVIRONMENT ANALYSIS (ONE-STAGE)
+
+DESIGN: Randomized Complete Block (RCB)
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Yield
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  495 
+Number of observations used:  495 
+
+ Factors   Number of Levels   Levels                     
+ Env       11                 E1  E10  E11 ... E9        
+ Genotype  15                 GEN1  GEN10  GEN11 ... GEN9
+ Block     3                  1  2  3                    
+
+
+DESCRIPTIVE STATISTICS:
+
+  Variable N_NonMissObs     Mean   StdDev
+1    Yield          495 1718.596 1117.791
+
+
+VARIANCE COMPONENTS TABLE:
+
+        Groups   Variance  Std.Dev.
+1 Genotype:Env 664747.522 815.32050
+2    Block:Env   6497.219  80.60533
+3     Genotype   2876.978  53.63747
+4          Env 530984.967 728.68715
+5     Residual  94709.311 307.74878
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + (1|Genotype) + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+Formula for Model2:  Yield ~ 1 + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+
+            AIC      BIC    logLik  Chisq Df Pr(>Chisq)
+Model2 7627.446 7648.469 -3808.723                     
+Model1 7629.433 7654.661 -3808.717 0.0127  1     0.9102
+
+
+TESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + (1|Genotype) + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+Formula for Model2:  Yield ~ 1 + (1|Genotype) + (1|Block:Env) + (1|Genotype:Env) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 7686.930 7707.953 -3838.465                      
+Model1 7629.433 7654.661 -3808.717 59.4969  1     0.0000
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + (1|Genotype) + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+Formula for Model2:  Yield ~ 1 + (1|Genotype) + (1|Env) + (1|Block:Env) 
+
+            AIC      BIC    logLik    Chisq Df Pr(>Chisq)
+Model2 8114.369 8135.392 -4052.184                       
+Model1 7629.433 7654.661 -3808.717 486.9356  1     0.0000
+
+
+GENOTYPE X ENVIRONMENT MEANS:
+
+    Genotype Env Yield_means
+1       GEN1  E1   2967.6279
+2       GEN1  E5    362.1033
+3       GEN1  E4   1304.2393
+4       GEN1 E11   2082.3420
+5       GEN1  E7    524.2095
+6       GEN1  E3   1383.4127
+7       GEN1  E6   1810.1753
+8       GEN1 E10   1035.8357
+9       GEN1  E2    791.4654
+10      GEN1  E9   4043.6382
+11      GEN1  E8    309.3893
+12     GEN10 E10   3437.4092
+13     GEN10  E2    882.0890
+14     GEN10  E7   1508.8103
+15     GEN10  E4   1852.8143
+16     GEN10  E8    713.9822
+17     GEN10  E6   2425.9584
+18     GEN10 E11   2348.0189
+19     GEN10  E1   2195.3964
+20     GEN10  E9   1383.2766
+21     GEN10  E5   1008.3402
+22     GEN10  E3   2056.8256
+23     GEN11  E1   2769.6270
+24     GEN11 E11   3153.9459
+25     GEN11  E3   1030.8521
+26     GEN11  E2    650.7760
+27     GEN11  E8    294.4734
+28     GEN11  E6   4250.6369
+29     GEN11  E4   1351.3319
+30     GEN11  E7    404.4272
+31     GEN11  E9   3663.2014
+32     GEN11 E10   2153.2633
+33     GEN11  E5   1117.8096
+34     GEN12 E11   3029.7600
+35     GEN12  E6   3964.6040
+36     GEN12  E8    345.5635
+37     GEN12  E2    589.3432
+38     GEN12 E10   3269.5013
+39     GEN12  E5    941.7219
+40     GEN12  E4   1951.5753
+41     GEN12  E9   3755.7238
+42     GEN12  E3   1025.9671
+43     GEN12  E7    588.8517
+44     GEN12  E1   2650.4054
+45     GEN13  E2    555.4103
+46     GEN13  E3   1689.0010
+47     GEN13  E1   2716.6483
+48     GEN13  E4   2140.4604
+49     GEN13  E8    571.5213
+50     GEN13 E10   2879.2250
+51     GEN13  E6   3136.9653
+52     GEN13  E7   1016.1796
+53     GEN13  E5   1645.4881
+54     GEN13  E9   1497.1743
+55     GEN13 E11   3528.9102
+56     GEN14  E5   1237.3393
+57     GEN14 E10   1762.3671
+58     GEN14  E3    829.8063
+59     GEN14  E2    520.0252
+60     GEN14  E1   2377.9353
+61     GEN14  E4   1686.9334
+62     GEN14  E7   1410.7741
+63     GEN14 E11   6661.8885
+64     GEN14  E6   2978.2696
+65     GEN14  E9   3449.8723
+66     GEN14  E8    675.5168
+67     GEN15  E5   1780.9648
+68     GEN15  E6   4091.3827
+69     GEN15 E11   1537.5596
+70     GEN15  E8    304.7036
+71     GEN15  E3   1639.5597
+72     GEN15  E2    573.0500
+73     GEN15  E9   2417.8603
+74     GEN15  E4   2085.8003
+75     GEN15 E10   3157.0685
+76     GEN15  E1   1950.7652
+77     GEN15  E7    533.6719
+78      GEN2  E9   2396.5328
+79      GEN2  E2   2054.8056
+80      GEN2  E5   1387.1282
+81      GEN2  E7    550.6899
+82      GEN2  E6   3932.2974
+83      GEN2  E3   1246.5187
+84      GEN2  E8    309.6547
+85      GEN2 E10   2319.8603
+86      GEN2  E1   2977.2744
+87      GEN2 E11   1554.1003
+88      GEN2  E4   1307.2669
+89      GEN3  E2   2700.7597
+90      GEN3  E6   2340.7471
+91      GEN3  E9   4231.6137
+92      GEN3  E4   1614.2524
+93      GEN3 E10   1203.4661
+94      GEN3  E8    539.0008
+95      GEN3  E7   1173.8913
+96      GEN3  E3   1101.0264
+97      GEN3 E11    524.2411
+98      GEN3  E5    284.4601
+99      GEN3  E1   2104.0752
+100     GEN4  E7   1586.0003
+101     GEN4  E9   1754.4706
+102     GEN4  E6    484.3570
+103     GEN4  E4   2232.2820
+104     GEN4  E5    433.4326
+105     GEN4 E10   1872.5491
+106     GEN4  E1   2332.4438
+107     GEN4  E8    705.0617
+108     GEN4  E2   2163.1713
+109     GEN4  E3   1859.9004
+110     GEN4 E11   1785.8719
+111     GEN5  E2   1160.0359
+112     GEN5  E9   2068.5776
+113     GEN5 E11   2165.8505
+114     GEN5  E3   1343.8654
+115     GEN5  E4   1491.3286
+116     GEN5  E7    664.7750
+117     GEN5  E8    334.1670
+118     GEN5 E10    979.2135
+119     GEN5  E6   1438.4056
+120     GEN5  E1   1785.1594
+121     GEN5  E5    504.4827
+122     GEN6  E9   2947.5754
+123     GEN6  E7   1397.0413
+124     GEN6  E8    727.0829
+125     GEN6 E11   1682.5460
+126     GEN6  E5    373.4483
+127     GEN6  E3   2032.0263
+128     GEN6  E4   2630.9491
+129     GEN6  E1   1967.6996
+130     GEN6  E2   1141.1425
+131     GEN6 E10   1064.0463
+132     GEN6  E6   1757.3351
+133     GEN7  E3   1393.2271
+134     GEN7  E8    529.7830
+135     GEN7  E2   2153.6218
+136     GEN7 E10   1063.2477
+137     GEN7 E11   2433.0661
+138     GEN7  E4   1942.4757
+139     GEN7  E6   1491.9679
+140     GEN7  E7   1155.3178
+141     GEN7  E5    505.0294
+142     GEN7  E1   2740.3679
+143     GEN7  E9   1446.6848
+144     GEN8  E3   1384.1438
+145     GEN8  E5    851.6849
+146     GEN8  E8    237.6107
+147     GEN8  E4   1999.9642
+148     GEN8  E9   2524.5477
+149     GEN8 E10   2319.9505
+150     GEN8  E6   2341.2528
+151     GEN8  E1   2240.9704
+152     GEN8 E11   2274.3237
+153     GEN8  E2   3844.8549
+154     GEN8  E7    498.4965
+155     GEN9 E10    806.4248
+156     GEN9  E1   2207.9342
+157     GEN9  E6   3178.2000
+158     GEN9  E8    290.3031
+159     GEN9  E2   1242.3464
+160     GEN9  E5    557.8670
+161     GEN9 E11   1086.9741
+162     GEN9  E7   1009.3311
+163     GEN9  E4   1307.2885
+164     GEN9  E3   1835.1530
+165     GEN9  E9   1533.2220
+
+
+PREDICTED GENOTYPE MEANS:
+
+   Genotype     Mean
+1      GEN1 1709.135
+2     GEN10 1722.349
+3     GEN11 1726.594
+4     GEN12 1731.851
+5     GEN13 1728.811
+6     GEN14 1737.956
+7     GEN15 1723.421
+8      GEN2 1723.271
+9      GEN3 1714.106
+10     GEN4 1711.594
+11     GEN5 1698.069
+12     GEN6 1713.706
+13     GEN7 1710.128
+14     GEN8 1725.261
+15     GEN9 1702.693
+
+
+HERITABILITY:
+     
+0.05 
+
+
+==============================

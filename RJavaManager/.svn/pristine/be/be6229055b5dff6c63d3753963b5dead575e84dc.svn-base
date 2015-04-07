@@ -1,0 +1,57 @@
+
+MULTIPLICATIVE MODELS
+
+
+------------------------------
+RESPONSE VARIABLE:  Yield_Mean 
+------------------------------
+
+
+GGE ANALYSIS:
+
+     percent  acum Df    Sum.Sq  Mean.Sq F.value   Pr.F
+PC1     38.1  38.1 20 46.135687 2.306784   14.99 0.0000
+PC2     25.3  63.4 18 30.601256 1.700070   11.05 0.0000
+PC3     13.3  76.7 16 16.056606 1.003538    6.52 0.0000
+PC4     10.6  87.3 14 12.847234 0.917660    5.96 0.0000
+PC5      6.0  93.3 12  7.246638 0.603887    3.92 0.0000
+PC6      3.2  96.5 10  3.866702 0.386670    2.51 0.0066
+PC7      2.3  98.8  8  2.824670 0.353084    2.29 0.0216
+PC8      0.7  99.5  6  0.824213 0.137369    0.89 0.5025
+PC9      0.5 100.0  4  0.555514 0.138878    0.90 0.4643
+PC10     0.1 100.1  2  0.071978 0.035989    0.23 0.7947
+
+
+
+------------------------------
+
+CODES USED IN GRAPHS:
+
+   Genotype Code
+1       AZU   G1
+2     BGORA   G2
+3      GUAR   G3
+4     IT146   G4
+5       OL5   G5
+6       OS6   G6
+7      UPL5   G7
+8      VAND   G8
+9   W181-18   G9
+10  W56-125  G10
+11   W56-50  G11
+12  W96-1-1  G12
+
+   Environment Code
+1  BH BOHOL PI   E1
+2  CR CARIMAGU   E2
+3   CV CAVINTI   E3
+4  EL E.LA.LIB   E4
+5       MA MAN   E5
+6       MB MBE   E6
+7  MD MINDANAO   E7
+8  ML MALIGAYA   E8
+9  NT ACNATIVA   E9
+10  SG SITIUNG  E10
+11  SY AC SOYA  E11
+
+==============================

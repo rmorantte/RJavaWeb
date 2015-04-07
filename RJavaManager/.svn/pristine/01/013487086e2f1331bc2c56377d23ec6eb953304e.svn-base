@@ -1,0 +1,198 @@
+package org.irri.breedingtool.rjava.manager.api;
+
+import java.util.ArrayList;
+
+public interface IRJavaSTARDesignManager {
+	
+	/**
+	 * calls the R statements for designCRD
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param factorName - string representing R vector of factor names, 
+	 * @param factorLevel - integer representing R vector of factor levels
+	 * @param rep - integer representing the number of replicates; 
+	 * @param trial - integer representing the number of trials
+	 */
+	
+	public void doDesignCRD(String path, String fieldBookName, String[] factorName, String[] factorID, Integer[] factorLevel,
+			Integer rep, Integer trial, Integer numFieldRow, String fieldOrder);
+
+	/**
+	 * calls the R statements for designRCBD
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param factorName - string representing R vector of factor names
+	 * @param factorLevel - integer representing R vector of factor levels
+	 * @param rep - integer representing the number of replicates; 
+	 * @param trial - integer representing the number of trials
+	 */
+	
+	public void doDesignRCBD(String path, String fieldBookName, String[] factorName, String[] factorID, Integer[] factorLevel,
+			Integer blk, Integer trial, Integer numFieldRow, Integer rowPerBlk, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designLSD
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param factorName - string representing R vector of factor names
+	 * @param factorLevel - integer representing R vector of factor levels
+	 * @param trial - integer representing the number of trials
+	 */
+	
+	public void doDesignLSD(String path, String fieldBookName, String[] factorName, String[] factorID, Integer[] factorLevel, 
+			Integer trial, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designSplit
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param main - string representing the name of the main plot factor
+	 * @param sub - string representing the name of the sub plot factor
+	 * @param ssub - NULL or string representing the name of the sub-sub plot factor
+	 * @param sssub - NULL or string representing the name of the sub-sub-sub plot factor
+	 * @param factorLevel - integer representing R vector of factor levels
+	 * @param rep - NULL (if design = "lsd") or an integer representing the number of replicates/block
+	 * @param trial - integer representing the number of trials
+	 * @param design - a string representing the design structure used
+	 * 				 - possible value: "crd", "rcbd" or "lsd"
+	 */
+	
+	public void doDesignSplit(String path, String fieldBookName, String main, String sub, String ssub, 
+			String sssub, String[]  factorID, Integer[] factorLevel, Integer rep, Integer trial, String design, 
+			Integer numFieldRow, Integer rowPerBlk, Integer rowPerMain, Integer rowPerSub, Integer rowPerSubSub, 
+			String fieldOrder);
+	
+	/**
+	 * calls the R statements for designStrip
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param vertical - string representing the name of the vertical factor
+	 * @param horizontal - string representing the name of the horizontal factor
+	 * @param sub - NULL or string representing the name of the sub plot factor
+	 * @param ssub - NULL or string representing the name of the sub-sub plot factor
+	 * @param factorLevel - integer representing R vector of factor levels
+	 * @param rep - an integer representing the number of replicates/block
+	 * @param trial - integer representing the number of trials
+	 */
+	
+	public void doDesignStrip(String path, String fieldBookName, String vertical, String horizontal, String sub, String ssub, 
+			String[]  factorID, Integer[] factorLevel, Integer rep, Integer trial, Integer numFieldRow, Integer rowPerMain, 
+			Integer rowPerSub, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designBIBD
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param factorName - a string representing the name of the factor
+	 * @param factorLevel - an integer representing levels of the factor
+	 * @param blkSize - an integer representing the number of plots per block
+	 * @param trial - integer representing the number of trials
+	 */
+	
+	public void doDesignBIBD(String path, String fieldBookName, Integer numTrmt, Integer blkSize, 
+			Integer trial, Integer numFieldRow, Integer rowPerBlk, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designAugmented
+	 * 
+	 * @param dataFileName - path and name where the field book will be save
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param repTrmt - an integer representing number of levels of the replicated treatment
+	 * @param unrepTrmt - an integer representing number of levels of the unreplicated treatment
+	 * @param rep - NULL (if design = "lsd") or an integer representing the number of replicates/block
+	 * @param trial - integer representing the number of trials
+	 * @param design - experimental design used; possible values "rcbd" or "lsd"
+	 */
+	
+	public void doDesignAug(String dataFileName, String outFileName, 
+			Integer repTrmt, Integer unrepTrmt, Integer rep, Integer trial,
+			String design);
+	
+	/**
+	 * calls the R statements for designAugmentedLSD
+	 * 
+	 * @param path - path where output will be save
+	 * @param fieldBookName - name of the field book entered by the user
+	 * @param repTrmt - an integer representing number of levels of the replicated treatment
+	 * @param unrepTrmt - an integer representing number of levels of the unreplicated treatment
+	 * @param fieldRow - an integer representing the number of rows in the field layout
+	 * @param trial - integer representing the number of trials
+	 * @param fieldOrder - a string indicating the field book order; possible values: "Plot Order" or "Serpentine"
+	 */
+	
+	public void doDesignAugLSD(String path, String fieldBookName, Integer repTrmt, Integer unrepTrmt, Integer fieldRow, 
+			Integer trial, String fieldOrder);
+
+	/**
+	 * calls the R statements for designAugmentedRCB
+	 * 
+	 * @param path - path where output will be save
+	 * @param fieldBookName - name of the field book entered by the user
+	 * @param repTrmt - an integer representing number of levels of the replicated treatment
+	 * @param unrepTrmt - an integer representing number of levels of the unreplicated treatment
+	 * @param Blk - an interger representing the number of replicates
+	 * @param fieldRow - an integer representing the number of rows in the field layout
+	 * @param trial - integer representing the number of trials
+	 * @param fieldOrder - a string indicating the field book order; possible values: "Plot Order" or "Serpentine"
+	 */
+	
+	public void doDesignAugRCB(String path, String fieldBookName, Integer repTrmt, Integer unrepTrmt, Integer Blk, Integer fieldRow, 
+			Integer trial, String fieldOrder);
+
+	
+	/**
+	 * calls the R statements for designLattice
+	 * 
+	 * @param path - path output will be save
+	 * @param fieldBookName - name of text file and the csv file 
+	 * @param numTrmt - an integer representing levels of the factor
+	 * @param rep - an integer representing the number of replicates
+	 * @param trial - integer representing the number of trials
+	 * @param fieldOrder - a string indicating the field book order; possible values: "Plot Order" or "Serpentine"
+	 */
+	
+	public void doDesignLattice(String path, String fieldBookName,  
+			Integer numTrmt, Integer rep, Integer trial, Integer numFieldRow, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designAlphaLattice
+	 * 
+	 * @param path - path output will be save
+	 * @param fieldBookName - name of text file and the csv file 
+	 * @param numTrmt - an integer representing levels of the factor
+	 * @param blkSize - an integer representing the number of plots per block
+	 * @param rep - integer representing the number of replicates
+	 * @param trial - integer representing the number of trials
+	 * @param rowPerBlk - an integer representing the number of rows per block
+	 * @param rowPerRep - an integer representing the number of rows per replicate
+	 * @param numbFieldRow - an integer representing the number of rows in the field layout or number of rows in the design
+	 * @param fieldOrder - a string indicating the field book order; possible values: "Plot Order" or "Serpentine"
+	 */
+	
+	public void doDesignAlpha(String path, String fieldBookName, Integer numTrmt, Integer blkSize, 
+			Integer rep, Integer trial, Integer rowPerBlk, Integer rowPerRep, Integer numFieldRow, String fieldOrder);
+	
+	/**
+	 * calls the R statements for designRowColumn
+	 * 
+	 * @param path - path output will be save
+	 * @param fieldBookName - name of text file and the csv file 
+	 * @param numTrmt - an integer representing levels of the factor/treatment
+	 * @param rep - integer representing the number of replicates
+	 * @param trial - integer representing the number of trials
+	 * @param rowPerRep - an integer representing the number of rows per replicate
+	 * @param numbFieldRow - an integer representing the number of rows in the field layout or number of rows in the design
+	 * @param fieldOrder - a string indicating the field book order; possible values: "Plot Order" or "Serpentine"
+	 */
+	
+	public void doDesignRowColumn(String path, String fieldBookName, Integer numTrmt, Integer rep, Integer trial, 
+			Integer rowPerRep, Integer numFieldRow, String fieldOrder);
+	
+	
+}

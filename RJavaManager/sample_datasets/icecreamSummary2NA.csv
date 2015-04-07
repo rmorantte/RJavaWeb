@@ -1,0 +1,13 @@
+brand,numScoops,Count,Count2,Count3
+brand1,one,169,169,169
+brand1,two,70,,70
+brand1,three,11,,11
+brand2,three,80,80,80
+brand2,two,150,150,150
+brand2,one,200,200,
+brand3,one,67,67,
+brand3,two,300,300,300
+brand3,three,120,120,120
+brand3,four,,15,120
+brand2,two,,70,70
+brand4,one,,50,

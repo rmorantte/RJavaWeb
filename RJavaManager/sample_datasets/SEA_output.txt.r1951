@@ -1,0 +1,103 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/RCB_ME_env2_b.csv
+
+SINGLE-ENVIRONMENT ANALYSIS
+
+DESIGN: Randomized Complete Block (RCB)
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Yield
+------------------------------
+
+DESCRIPTIVE STATISTICS:
+
+  Variable Env N_NonMissObs     Mean    StdDev
+1    Yield  E1            6 2157.517  351.7778
+2    Yield  E2           46 1439.093 1083.6526
+
+------------------------------
+ANALYSIS FOR: Env  =  E1 
+------------------------------
+
+***
+ERROR:
+Too many missing observations. Cannot proceed with the analysis.
+***
+
+
+------------------------------
+ANALYSIS FOR: Env  =  E2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  46 
+Number of observations used:  46 
+
+ Factors   Number of Levels   Levels                      
+ Genotype  16                 GEN1  GEN10  GEN100 ... GEN9
+ Block     3                  1  2  3                     
+
+
+VARIANCE COMPONENTS TABLE:
+
+      Groups  Variance Std.Dev.
+1 Test:Check 550664.47 742.0677
+2      Block  10761.06 103.7355
+3   Residual 167643.11 409.4424
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + Check + (1|Block) + (1|Test:Check) 
+Formula for Model2:  Yield ~ 1 + Check + (1|Block)  
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 590.6843 614.4566 -282.3421                      
+Model1 574.4109 600.0119 -273.2054 18.2734  1     0.0000
+
+
+TESTING FOR THE SIGNIFICANCE OF CHECK EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+      Df  Sum Sq  Mean Sq F value  Denom Pr(>F)
+Check 10 3946883 394688.3  2.3543 5.1239 0.1750
+
+
+PREDICTED MEANS:
+
+  Genotype     Means
+1     GEN1  845.3004
+2     GEN2 2046.1097
+3     GEN3 2660.7983
+4     GEN4 2149.6674
+5     GEN5 1196.2829
+6     GEN6 1177.6413
+
+
+CHECK/CONTROL LSMEANS:
+
+   Genotype    LSMean StdErrMean
+1     GEN10  854.9667   781.1086
+2    GEN100 3199.2756   851.7903
+3     GEN11  612.4667   781.1086
+4     GEN12  547.8667   781.1086
+5     GEN13  512.4667   781.1086
+6     GEN14  474.9667   781.1086
+7     GEN15  531.2000   781.1086
+8      GEN7 2187.4667   781.1086
+9      GEN8 3958.3000   781.1086
+10     GEN9 1233.2667   781.1086
+
+
+HERITABILITY:
+    
+0.9 
+
+
+
+==============================

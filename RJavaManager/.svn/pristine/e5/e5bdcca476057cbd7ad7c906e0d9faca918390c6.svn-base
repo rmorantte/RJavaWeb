@@ -1,0 +1,512 @@
+library(PBTools)
+nc1Test
+library(agricolae)
+detach("package: PBTools")
+detach(package: PBTools)
+library(PBTools)
+adjustAnovaTable
+adjustAnovaDf
+detach(package: PBTools)
+library(PBTools)
+adjustAnovaDf
+library(PBTools)
+adjustAnovaDf
+install.packages("DiGGeR")
+for (i in 1:5) {
+name<-paste("M", i, sep="")
+name<-seq(1:10)
+}
+name
+name<-paste("M", i, sep="")
+name
+result<-list()
+for (i in 1:5) {
+result[[i]]<-list()
+result$M[[i]]<-seq(1:10)
+}
+result
+matrix(1:10, nrow=2)
+result<-list()
+for (i in 1:5) {
+#result[[i]]<-list()
+result$M[[i]]<-matrix(1:10, nrow=2)
+}
+result
+class(result$M[[4]])
+result<-list()
+for (i in 1:5) {
+#result[[i]]<-list()
+result$M[[i]]<-matrix(1:10, nrow=2)
+result$L[[i]]<-seq(1:3)
+}
+result
+result<-NULL
+result<-list()
+for (i in 1:5) {
+#result[[i]]<-list()
+result$M[[i]]<-matrix(1:10, nrow=2)
+result$L[[i]]<-seq(1:3)
+}
+result
+par(mar=c(5,4,7,1)+0.1)
+par
+data <- read.csv("E:/NSALES/personal/personal docs/TalithaJanJasarino/new/data.csv")
+viewData(data)
+rstudio::viewData(data)
+data[4,2]
+data[1,1]
+data_asti<-data[data[,1]=="ASTI",]
+rstudio::viewData(data_asti)
+data_fnri<-data[data[,1]=="FNRI",]
+data_fprdi<-data[data[,1]=="FPRDI",]
+data_mirdc<-data[data[,1]=="MIRDC",]
+data_pnri<-data[data[,1]=="PNRI",]
+data_ptri<-data[data[,1]=="PTRI",]
+n_asti<-(nrow(data_astri)/nrow(data))*133
+n_asti<-(nrow(data_asti)/nrow(data))*133
+n_asti
+n_asti<-53
+n_fnri<-(nrow(data_fnri)/nrow(data))*133
+n_fnri
+n_fprdi<-(nrow(data_fprdi)/nrow(data))*133
+n_fprdi
+n_mirdc<-(nrow(data_mirdc)/nrow(data))*133
+n_mirdc
+n_pnri<-(nrow(data_pnri)/nrow(data))*133
+n_pnri
+n_ptri<-(nrow(data_ptri)/nrow(data))*133
+n_ptri
+n_ptri<-8
+temp_asti<-sample(data_asti, n_asti+2, replace = FALSE, prob = NULL)
+n_asti+2
+temp_asti<-sample(data_asti$NAME, n_asti+2, replace = FALSE, prob = NULL)
+temp_asti
+temp<-sample(data_asti$NAME, n_asti+2, replace = FALSE, prob = NULL)
+sample_asti<-data.frame(OFFICE="ASTI", NAME=temp)
+rstudio::viewData(sample_asti)
+n_asti<-(nrow(data_asti)/nrow(data))*151
+n_asti
+n_fnri<-(nrow(data_fnri)/nrow(data))*151
+n_fnri
+n_fprdi<-(nrow(data_fprdi)/nrow(data))*151
+n_fprdi
+n_asti<-61
+n_fnri<-(nrow(data_fnri)/nrow(data))*151
+n_fnri<-16
+n_fprdi<-(nrow(data_fprdi)/nrow(data))*151
+n_fprdi
+n_fprdi<-30
+n_mirdc<-(nrow(data_mirdc)/nrow(data))*151
+n_mirdc
+n_mirdc<-7
+n_pnri<-(nrow(data_pnri)/nrow(data))*151
+n_pnri
+n_ptri<-(nrow(data_ptri)/nrow(data))*151
+n_ptri
+temp<-sample(data_asti$NAME, n_asti+2, replace = FALSE, prob = NULL)
+sample_asti<-data.frame(OFFICE="ASTI", NAME=temp)
+temp<-sample(data_fnri$NAME, n_fnri+2, replace = FALSE, prob = NULL)
+sample_fnri<-data.frame(OFFICE="FNRI", NAME=temp)
+temp<-sample(data_fnri$NAME, n_fnri+2, replace = FALSE, prob = NULL)
+sample_fnri<-data.frame(OFFICE="FNRI", NAME=temp)
+temp<-sample(data_fprdi$NAME, n_fprdi+2, replace = FALSE, prob = NULL)
+sample_fprdi<-data.frame(OFFICE="FPRDI", NAME=temp)
+temp<-sample(data_mirdc$NAME, n_mirdc+1, replace = FALSE, prob = NULL)
+sample_mirdc<-data.frame(OFFICE="MIRDC", NAME=temp)
+temp<-sample(data_pnri$NAME, n_pnri+2, replace = FALSE, prob = NULL)
+sample_pnri<-data.frame(OFFICE="FNRI", NAME=temp)
+sample_pnri<-data.frame(OFFICE="PNRI", NAME=temp)
+temp<-sample(data_ptri$NAME, n_ptri+1, replace = FALSE, prob = NULL)
+sample_ptri<-data.frame(OFFICE="PTRI", NAME=temp)
+n_ptri
+n_ptri<-9
+data <- read.csv("E:/NSALES/personal/personal docs/TalithaJanJasarino/new/data.csv")
+data_asti<-data[data[,1]=="ASTI",]
+data_fnri<-data[data[,1]=="FNRI",]
+data_fprdi<-data[data[,1]=="FPRDI",]
+data_mirdc<-data[data[,1]=="MIRDC",]
+data_pnri<-data[data[,1]=="PNRI",]
+data_ptri<-data[data[,1]=="PTRI",]
+n_asti<-(nrow(data_asti)/nrow(data))*151
+n_asti<-61
+n_fnri<-(nrow(data_fnri)/nrow(data))*151
+n_fnri<-16
+n_fprdi<-(nrow(data_fprdi)/nrow(data))*151
+n_fprdi<-30
+n_mirdc<-(nrow(data_mirdc)/nrow(data))*151
+n_mirdc<-7
+n_pnri<-(nrow(data_pnri)/nrow(data))*151
+n_pnri<-32
+n_ptri<-(nrow(data_ptri)/nrow(data))*151
+n_ptri<-9
+temp<-sample(data_asti$NAME, n_asti+2, replace = FALSE, prob = NULL)
+sample_asti<-data.frame(OFFICE="ASTI", NAME=temp)
+temp<-sample(data_fnri$NAME, n_fnri+2, replace = FALSE, prob = NULL)
+sample_fnri<-data.frame(OFFICE="FNRI", NAME=temp)
+temp<-sample(data_fprdi$NAME, n_fprdi+2, replace = FALSE, prob = NULL)
+sample_fprdi<-data.frame(OFFICE="FPRDI", NAME=temp)
+temp<-sample(data_mirdc$NAME, n_mirdc+1, replace = FALSE, prob = NULL)
+sample_mirdc<-data.frame(OFFICE="MIRDC", NAME=temp)
+temp<-sample(data_pnri$NAME, n_pnri+2, replace = FALSE, prob = NULL)
+sample_pnri<-data.frame(OFFICE="PNRI", NAME=temp)
+temp<-sample(data_ptri$NAME, n_ptri+1, replace = FALSE, prob = NULL)
+sample_ptri<-data.frame(OFFICE="PTRI", NAME=temp)
+sample<-rbind(sample_asti, sample_fnri, sample_fprdi, sample_mirdc, sample_pnri, sample_ptri)
+write.csv(sample,"E:/NSALES/personal/personal docs/TalithaJanJasarino/new/sample.csv")
+ANOVA.default
+library(PBTools)
+nc2Test
+library(PBTools)
+library(PBTools)
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+is.null(ssa1)
+!is.null(ssa1)
+class(ssa1)
+!is.null(ssa1)
+class(ssa1)
+class(ssa1)=="try-error"
+model<-ssa1
+model
+(!is.null(model) && class(model)=="try-error")
+msg <- trim.strings(strsplit(model, ":")[[1]])
+msg
+msg <- trim.strings(paste(strsplit(msg, "\n")[[length(msg)]], collapse = " "))
+msg
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/SSA_FXN.R')
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/RCB_ME_env2.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("Yield"),"Genotype","Block",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+msg <- gsub("\"", "", msg)
+msg
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc_Env3.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("YLD", "DTF"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+source('~/.active-rstudio-document')
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+library(PBTools)
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/SSA_FXN.R')
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/SSA_FXN.R')
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/SSA_FXN.R')
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GGE DATA multiloc.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+ssa1 <- try(ssa.test("RCB",data,c("MAT"),"Geno","Rep",column=NULL, rep=NULL,"Env", is.random = FALSE), silent = TRUE)
+ssa1
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/augrcbex.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+outDesc <- try(DescriptiveStatistics(data, "Y2", "ENV"), silent=TRUE)
+outDesc
+var<-"Y2"
+grp<-"ENV"
+(is.character(data))
+(is.data.frame(data))
+nameData <- paste(deparse(substitute(data)))
+tempData <- data
+(!is.data.frame(tempData))
+(!is.character(var))
+(any(is.na(match(var, names(tempData)))))
+(!is.null(grp))
+(any(is.na(match(grp, names(tempData)))))
+tempGrp <- tempData[grp]
+for (i in (1:ncol(tempGrp))) { tempGrp[,i] <- factor(tempGrp[,i]) }
+tempVar <- tempData[var]
+availableStatistics <- c("n", "nnmiss", "nmiss", "sum", "css", "ucss", "se.skew", "se.kurtosis", "range", "iqr", "var", "sd", "se.mean",
+"cv", "mean", "median", "mode", "min", "max", "q1", "q3", "skew", "kurtosis")
+(is.null(statistics))
+statistics = c("nnmiss", "mean", "sd"))
+statistics = c("nnmiss", "mean", "sd")
+(is.null(statistics))
+(all(is.na(match(statToCompute, availableStatistics))))
+statToCompute <- statistics
+(all(is.na(match(statToCompute, availableStatistics))))
+statToCompute <- availableStatistics[na.omit(match(statToCompute, availableStatistics))]
+summaryTable <- NULL
+outputLabel <- NULL
+(!is.na(match("n", statToCompute)))
+(!is.na(match("nnmiss", statToCompute)))
+a <- NULL
+for (i in (1:ncol(tempVar))) {
+newData <- na.omit(cbind(tempVar[i], tempGrp))
+a <- rbind(a, as.data.frame.table(tapply(newData[,1], newData[2:ncol(newData)], length)))
+}
+if (any(is.na(a$Freq))) { a$Freq <- replace(a$Freq, attr(na.omit(a$Freq), "na.action"), 0) }
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "N_NonMissObs"
+outputLabel <- c(outputLabel, "No. of Non-Missing Obs.")
+# --- compute for the number of missing observations
+if(!is.na(match("nmiss", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) {
+newData <- cbind(tempVar[i], tempGrp)
+newData <- newData[!complete.cases(newData),]
+if (!is.null(grp)) a <- rbind(a, as.data.frame.table(tapply(newData[,1], newData[2:ncol(newData)], length)))
+else a <- rbind(a, data.frame(tempGrp = 1, Freq = nrow(newData)))
+}
+a$Freq <- replace(a$Freq, is.na(a[,"Freq"]), 0)
+#if (any(is.na(a$Freq))) { a$Freq <- replace(a$Freq, attr(na.omit(a$Freq), "na.action"), 0) }
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "N_MissObs"
+outputLabel <- c(outputLabel, "No. of Missing Obs.")
+}
+# --- compute the minimun observation
+if(!is.na(match("min", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, min, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Min"
+outputLabel <- c(outputLabel, "Minimum")
+}
+# --- compute the maximum observation
+if(!is.na(match("max", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, max, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Max"
+outputLabel <- c(outputLabel,"Maximum")
+}
+# --- compute the sum of the variable
+if(!is.na(match("sum", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, sum, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Sum"
+outputLabel <- c(outputLabel,"Sum")
+}
+# --- compute the mean of the variable
+if(!is.na(match("mean", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, mean, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Mean"
+outputLabel <- c(outputLabel,"Mean")
+}
+# --- compute the median of the variable
+if(!is.na(match("median", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, median, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Median"
+outputLabel <- c(outputLabel,"Median")
+}
+# --- determine the modal value of the variable
+if(!is.na(match("mode", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, data.frame(Var = i, Freq = paste(tapply(tempVar[[i]], tempGrp, modalValue, na.rm = TRUE)[[1]], collapse = ", ", sep = "")))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Mode"
+outputLabel <- c(outputLabel,"Mode")
+}
+if(!is.na(match("q1", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, quantile, probs = 0.25, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Q1"
+outputLabel <- c(outputLabel,"1st Quartile")
+}
+if(!is.na(match("q3", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, quantile, probs = 0.75, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Q3"
+outputLabel <- c(outputLabel,"3rd Quartile")
+}
+if(!is.na(match("range", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, max, na.rm = TRUE) - tapply(tempVar[[i]], tempGrp, min, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Range"
+outputLabel <- c(outputLabel,"Range")
+}
+if(!is.na(match("iqr", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, quantile,probs = 0.75, na.rm = TRUE) - tapply(tempVar[[i]], tempGrp, quantile, probs = 0.25, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "IQR"
+outputLabel <- c(outputLabel,"Inter Quartile Range")
+}
+if(!is.na(match("var", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, var, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Variance"
+outputLabel <- c(outputLabel,"Variance")
+}
+if(!is.na(match("sd", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, sd, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "StdDev"
+outputLabel <- c(outputLabel,"Standard Deviation")
+}
+if(!is.na(match("se.mean", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, stdmean, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "SE_Mean"
+outputLabel <- c(outputLabel,"Std. Error of the Mean")
+}
+if(!is.na(match("cv", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, cv, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "CV"
+outputLabel <- c(outputLabel,"Coefficient of Variation")
+}
+if(!is.na(match("css", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, css, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "CSS"
+outputLabel <- c(outputLabel,"Corrected Sum of Squares")
+}
+if(!is.na(match("ucss", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, ucss, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "UCSS"
+outputLabel <- c(outputLabel,"Uncorrected Sum of Squares")
+}
+if(!is.na(match("skew", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, skewness, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Skewness"
+outputLabel <- c(outputLabel,"Skewness")
+}
+if(!is.na(match("se.skew", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, stdskewness, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "SE_Skew"
+outputLabel <- c(outputLabel,"Std. Error of Skewness")
+}
+if(!is.na(match("kurtosis", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, kurtosis, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "Kurtosis"
+outputLabel <- c(outputLabel,"Kurtosis")
+}
+if(!is.na(match("se.kurtosis", statToCompute))) {
+a <- NULL
+for (i in (1:ncol(tempVar))) a <- rbind(a, as.data.frame.table(tapply(tempVar[[i]], tempGrp, stdkurtosis, na.rm = TRUE)))
+ifelse(is.null(summaryTable), summaryTable <- a, summaryTable <- cbind(summaryTable, a[ncol(a)]))
+colnames(summaryTable)[ncol(summaryTable)] <- "SE_Kurtosis"
+outputLabel <- c(outputLabel,"Std. Error of Kurtosis")
+}
+if (is.null(ncol(tempGrp))) { summaryTable[,1] <- names(tempVar)
+} else {
+variable <- c(rep(names(tempVar), each = nrow(as.data.frame.table(table(tempGrp)))))
+summaryTable <- data.frame(variable,summaryTable)
+}
+colnames(summaryTable)[1] <- "Variable"
+options(width = 5000)
+cat("DESCRIPTIVE STATISTICS\n")
+printDataFrame(summaryTable)
+summaryTable
+printDataFrame(summaryTable)
+summaryTable
+rstudio::viewData(summaryTable)
+printDataFrame(summaryTable)
+summaryTable
+class(summaryTable)
+printDataFrame(summaryTable)
+library(pkrtest)
+library(pbkrtest)
+library(PBTools)
+dataMeaOneStage <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/GY.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+meaOne1 <- try(GEOneStage.test("RCB",dataMeaOneStage,c("Yield"),"Genotype","Rep",column = NULL, rep = NULL,"Env", is.genoRandom = FALSE), silent=TRUE)
+meaOne1
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/GEOneStage_FXN.R')
+meaOne1 <- try(GEOneStage.test("RCB",dataMeaOneStage,c("Yield"),"Genotype","Rep",column = NULL, rep = NULL,"Env", is.genoRandom = FALSE), silent=TRUE)
+meaOne1
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/GEOneStage_FXN.R')
+meaOne1 <- try(GEOneStage.test("RCB",dataMeaOneStage,c("Yield"),"Genotype","Rep",column = NULL, rep = NULL,"Env", is.genoRandom = FALSE), silent=TRUE)
+meaOne1
+dataMeaTwoStage <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/summaryStats2_b.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+setwd("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/")
+meaTwo1 <- try(GETwoStage.test(dataMeaTwoStage, c("Y3_Mean","Plot.Yield_Mean"),stderr = NULL,c("Y3_sigma2","Plot.Yield_sigma2"),c("Y3_No.rep","Plot.Yield_No.rep"),"EntryNo","Set", weight = "none", is.genoRandom = FALSE), silent=TRUE)
+funcStability1 <- try(stability.analysis(dataMeaTwoStage, c("Y3_Mean","Plot.Yield_Mean"), "EntryNo", "Set", method = "regression"), silent=TRUE)
+funcStability1
+data<-dataMeaTwoStage; respvar<-c("Y3_Mean","Plot.Yield_Mean"); geno<-"EntryNo"; env<-"Set"; method = "regression"
+(!is.na(match("RCropStatEnv", search())))
+match("RCropStatEnv", search()
+)
+(is.na(match(respvar, names(data))) ||
+is.na(match(geno, names(data))) ||
+is.na(match(env, names(data))))
+data[,match(geno, names(data))] <- factor(data[,match(geno, names(data))])
+data[,match(env, names(data))] <- factor(data[,match(env, names(data))])
+(method == "regression")
+result <- list()
+i=1
+result[[i]] <- list()
+site.means <- data.frame(levels(data[, match(env, names(data))]), as.data.frame(tapply(data[, match(respvar[i], names(data))], data[, match(env, names(data))], mean, na.rm = TRUE)))
+colnames(site.means) <- c(env, "site.index")
+rownames(site.means) <- NULL
+temp.data <- subset(data, select = c(geno, env, respvar[i]))
+temp.data <- subset(temp.data, subset = (is.na(temp.data[,match(respvar[i], names(temp.data))]) == F))
+trt.nlevels <- nlevels(temp.data[,match(geno, names(temp.data))])
+ge.means.wide <- reshape(temp.data, v.names = respvar[i], idvar = env, timevar = geno, direction = "wide")
+colnames(ge.means.wide) <- gsub(paste(respvar[i], ".", sep = ""), "", colnames(ge.means.wide))
+data.all <- merge(site.means, ge.means.wide, by = env)
+slope <- as.matrix(c(1:(6*trt.nlevels)), nrow = trt.nlevels, ncol = 6)
+dim(slope) <- c(trt.nlevels, 6)
+(var(data.all$site.index) != 0)
+data.all
+i=2
+result[[i]] <- list()
+site.means <- data.frame(levels(data[, match(env, names(data))]), as.data.frame(tapply(data[, match(respvar[i], names(data))], data[, match(env, names(data))], mean, na.rm = TRUE)))
+colnames(site.means) <- c(env, "site.index")
+rownames(site.means) <- NULL
+temp.data <- subset(data, select = c(geno, env, respvar[i]))
+temp.data <- subset(temp.data, subset = (is.na(temp.data[,match(respvar[i], names(temp.data))]) == F))
+trt.nlevels <- nlevels(temp.data[,match(geno, names(temp.data))])
+ge.means.wide <- reshape(temp.data, v.names = respvar[i], idvar = env, timevar = geno, direction = "wide")
+colnames(ge.means.wide) <- gsub(paste(respvar[i], ".", sep = ""), "", colnames(ge.means.wide))
+data.all <- merge(site.means, ge.means.wide, by = env)
+slope <- as.matrix(c(1:(6*trt.nlevels)), nrow = trt.nlevels, ncol = 6)
+dim(slope) <- c(trt.nlevels, 6)
+(var(data.all$site.index) != 0)
+i=1
+result[[i]] <- list()
+site.means <- data.frame(levels(data[, match(env, names(data))]), as.data.frame(tapply(data[, match(respvar[i], names(data))], data[, match(env, names(data))], mean, na.rm = TRUE)))
+site.means
+colnames(site.means) <- c(env, "site.index")
+rownames(site.means) <- NULL
+site.means
+i=2
+result[[i]] <- list()
+site.means <- data.frame(levels(data[, match(env, names(data))]), as.data.frame(tapply(data[, match(respvar[i], names(data))], data[, match(env, names(data))], mean, na.rm = TRUE)))
+colnames(site.means) <- c(env, "site.index")
+rownames(site.means) <- NULL
+site.means
+class(funcStability1)
+msg <- trim.strings(strsplit(funcStability1, \":\")[[1]])
+msg <- trim.strings(strsplit(funcStability1, ":")[[1]])
+data <- tryCatch(read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/QTL_pheno.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ","), error=function(err) "notRun")
+data<-tryCatch(data[which(data[match("ENV", names(data))] == "2"),], error=function(err) "notRun")
+rstudio::viewData(data)
+data <- tryCatch(read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/QTL_pheno.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ","), error=function(err) "notRun")
+ssa1 <- try(ssa.test("RCB",data,c("HEIGHT","FTIME"),"GENOTYPE","REP",column=NULL, rep=NULL, env = "ENV", is.random = FALSE), silent = TRUE)
+ssa1
+data <- tryCatch(read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/QTL_pheno.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ","), error=function(err) "notRun")
+ssa1 <- try(ssa.test("RCB",data,c("HEIGHT","FTIME"),"GENOTYPE","REP",column=NULL, rep=NULL, env = "ENV", is.random = FALSE), silent = TRUE)
+class(ssa1)
+ssa1
+data <- tryCatch(read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/QTL_pheno.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ","), error=function(err) "notRun")
+data<-tryCatch(data[which(data[match("ENV", names(data))] == "1"),], error=function(err) "notRun")
+ssa1 <- try(ssa.test("RCB",data,c("HEIGHT","FTIME"),"GENOTYPE","REP",column=NULL, rep=NULL, env = "ENV", is.random = FALSE), silent = TRUE)
+ssa1

@@ -1,0 +1,413 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel_M2.csv
+
+DIALLEL ANALYSIS: GRIFFING METHOD II IN RCB (CROSS)
+
+------------------------------
+RESPONSE VARIABLE: Plant_height
+------------------------------
+------------------------------
+ANALYSIS FOR: Env  =  Normal 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors   No of Levels   Levels             
+ P1        7              1  2  3  4  5  6  7
+ P2        7              1  2  3  4  5  6  7
+ Block     3              1  2  3            
+ Env       1              Normal             
+
+Number of observations read:  84 
+Number of observations used:  84 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+          Df     Sum Sq   Mean Sq F value Pr(>F)
+Block      2   852.4474  426.2237    9.65 0.0003
+P1:P2     27 36854.8400 1364.9940   30.92 0.0000
+Residuals 54  2383.9790   44.1478               
+-------
+REMARK: Raw dataset is balanced. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = P1:P2)
+
+Model: Plant_height ~ Crosses + (1|Block) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+Crosses 27 36854.84 1364.994 30.9188 53.9992 0.0000
+
+
+MATRIX OF MEANS:
+
+  1        2        3        4        5        6        7       
+1 142.9000 148.3333 163.9000 152.9000 142.3667 160.6667 191.3333
+2          129.6667 142.9000 143.9000 131.5667 143.5333 186.6667
+3                   131.5667 163.5667 136.9000 166.4333 189.7667
+4                            159.3333 149.8000 164.8000 200.2333
+5                                     122.4333 138.9000 175.7667
+6                                              146.1333 195.5667
+7                                                       157.5333
+-------
+REMARK: Raw dataset is balanced. 
+
+
+ANALYSIS OF VARIANCE:
+
+      Df    Sum Sq   Mean Sq F value Pr(>F)
+GCA    6 7784.3680 1297.3950    6.05 0.0008
+SCA   21 4500.5790  214.3133   14.56 0.0000
+Error 54  794.6640   14.7160               
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal) AND RECIPROCAL EFFECTS (below diagonal):
+
+  1        2        3        4        5        6        7       
+1  -0.6608   3.1454  10.8935  -7.5806   1.1861   3.7083  13.0157
+2          -10.5571  -0.2102  -6.6843   0.2824  -3.5287  18.2454
+3                    -2.7386   5.1639  -2.2028  11.5528  13.5269
+4                              4.7354   3.2231   2.4454  16.5194
+5                                     -14.5646  -4.1546  11.3528
+6                                                1.2132  15.3750
+7                                                        22.5725
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+      Estimate Std. Error
+GCA   120.3424   217.0737
+SCA   199.5973    66.1426
+Error  14.7160     2.8321
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                          
+                  Estimate
+VA              481.369471
+VD              798.389175
+h2-narrow sense   0.371865
+H2-broad sense    0.988632
+Dominance Ratio   1.821307
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error     LSD
+Gi          1.1839        
+Sii         2.9299        
+Sij         3.4430        
+Gi-Gj       1.8084  3.6256
+Sii-Sjj     4.0437  8.1070
+Sij-Sik     5.1149 10.2547
+Sij-Skl     4.7845  9.5924
+
+
+------------------------------
+ANALYSIS FOR: Env  =  Saline 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors   No of Levels   Levels             
+ P1        7              1  2  3  4  5  6  7
+ P2        7              1  2  3  4  5  6  7
+ Block     3              1  2  3            
+ Env       1              Saline             
+
+Number of observations read:  84 
+Number of observations used:  84 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+          Df     Sum Sq   Mean Sq F value Pr(>F)
+Block      2  1576.8450  788.4225   19.71 0.0000
+P1:P2     27 45734.2000 1693.8590   42.35 0.0000
+Residuals 54  2159.8750   39.9977               
+-------
+REMARK: Raw dataset is balanced. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = P1:P2)
+
+Model: Plant_height ~ Crosses + (1|Block) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df  Sum Sq  Mean Sq F value   Denom Pr(>F)
+Crosses 27 45734.2 1693.859 42.3489 53.9991 0.0000
+
+
+MATRIX OF MEANS:
+
+  1        2        3        4        5        6        7       
+1 119.1000 119.3333 143.2000 128.5667 115.4333 148.2000 173.2333
+2          104.0000 118.2000 123.8000 113.8667 114.5667 165.1333
+3                   112.4333 145.4333 125.5333 140.0000 165.8000
+4                            115.3333 127.3333 146.7667 190.2333
+5                                     101.3333 126.2333 156.9000
+6                                              139.9000 181.6667
+7                                                       152.6667
+-------
+REMARK: Raw dataset is balanced. 
+
+
+ANALYSIS OF VARIANCE:
+
+      Df     Sum Sq   Mean Sq F value Pr(>F)
+GCA    6 10692.5700 1782.0950    8.22 0.0001
+SCA   21  4552.1640  216.7697   16.26 0.0000
+Error 54   719.9640   13.3327               
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal) AND RECIPROCAL EFFECTS (below diagonal):
+
+  1        2        3        4        5        6        7       
+1  -2.6228  -0.1685  12.5722  -5.3685  -4.6315   9.3278  12.0204
+2          -14.0968  -0.9537   1.3389   5.2759 -12.8315  15.3944
+3                    -2.9709  11.8463   5.8167   1.4759   4.9352
+4                              0.3365   4.3093   4.9352  26.0611
+5                                     -13.5339  -1.7278   6.5981
+6                                                5.2735  12.5574
+7                                                        27.6143
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+      Estimate Std. Error
+GCA   173.9250   297.6430
+SCA   203.4371    66.9003
+Error  13.3327     2.5659
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                          
+                  Estimate
+VA              695.700082
+VD              813.748252
+h2-narrow sense   0.456862
+H2-broad sense    0.991245
+Dominance Ratio   1.529498
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error    LSD
+Gi          1.1268       
+Sii         2.7888       
+Sij         3.2772       
+Gi-Gj       1.7213 3.4510
+Sii-Sjj     3.8489 7.7166
+Sij-Sik     4.8685 9.7608
+Sij-Skl     4.5541 9.1304
+
+
+------------------------------
+RESPONSE VARIABLE: Grain_yield
+------------------------------
+------------------------------
+ANALYSIS FOR: Env  =  Normal 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors   No of Levels   Levels             
+ P1        7              1  2  3  4  5  6  7
+ P2        7              1  2  3  4  5  6  7
+ Block     3              1  2  3            
+ Env       1              Normal             
+
+Number of observations read:  84 
+Number of observations used:  84 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+          Df     Sum Sq  Mean Sq F value Pr(>F)
+Block      2   925.5460 462.7730    8.07 0.0009
+P1:P2     27 11907.8100 441.0302    7.69 0.0000
+Residuals 54  3095.8980  57.3314               
+-------
+REMARK: Raw dataset is balanced. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = P1:P2)
+
+Model: Grain_yield ~ Crosses + (1|Block) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+Crosses 27 11907.81 441.0302  7.6926 53.9993 0.0000
+
+
+MATRIX OF MEANS:
+
+  1       2       3       4       5       6       7      
+1 18.0100 44.5267 31.3000 27.6533 43.2133 22.0267 26.5267
+2         26.0100 47.1833 31.1933 33.9333 49.0867 30.8733
+3                 18.4500 22.0500 42.2267 27.5700 39.9900
+4                         18.8100 40.7200 27.6000 40.9567
+5                                 22.3567 32.7200 25.9567
+6                                         10.2400 58.6000
+7                                                  5.9333
+-------
+REMARK: Raw dataset is balanced. 
+
+
+ANALYSIS OF VARIANCE:
+
+      Df    Sum Sq  Mean Sq F value Pr(>F)
+GCA    6  318.3389  53.0565    0.31 0.9272
+SCA   21 3650.9330 173.8539    9.10 0.0000
+Error 54 1031.9580  19.1103               
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal) AND RECIPROCAL EFFECTS (below diagonal):
+
+  1       2       3       4       5       6       7      
+1 -1.7868 10.7873  2.1825  0.6944 12.2888 -6.0756 -1.2075
+2          4.6077 11.6714 -2.1601 -3.3856 14.5899 -3.2553
+3                 -0.0142 -6.6816  9.5295 -2.3049 10.4832
+4                         -2.1727 10.1814 -0.1164 13.6084
+5                                  1.7929  1.0381 -5.3571
+6                                         -1.0294 30.1084
+7                                                 -1.3975
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+      Estimate Std. Error
+GCA     0.0000    17.8347
+SCA   154.7436    53.6591
+Error  19.1103     3.6778
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                          
+                  Estimate
+VA                0.000000
+VD              618.974388
+h2-narrow sense   0.000000
+H2-broad sense    0.970050
+Dominance Ratio        Inf
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error     LSD
+Gi          1.3491        
+Sii         3.3388        
+Sij         3.9236        
+Gi-Gj       2.0608  4.1316
+Sii-Sjj     4.6080  9.2385
+Sij-Sik     5.8287 11.6859
+Sij-Skl     5.4523 10.9311
+
+
+------------------------------
+ANALYSIS FOR: Env  =  Saline 
+------------------------------
+
+DATA SUMMARY:
+
+ Factors   No of Levels   Levels             
+ P1        7              1  2  3  4  5  6  7
+ P2        7              1  2  3  4  5  6  7
+ Block     3              1  2  3            
+ Env       1              Saline             
+
+Number of observations read:  84 
+Number of observations used:  84 
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+          Df    Sum Sq  Mean Sq F value Pr(>F)
+Block      2 1083.4360 541.7179    9.27 0.0003
+P1:P2     27 6697.7930 248.0664    4.24 0.0000
+Residuals 54 3156.0610  58.4456               
+-------
+REMARK: Raw dataset is balanced. 
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = P1:P2)
+
+Model: Grain_yield ~ Crosses + (1|Block) 
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+        Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+Crosses 27 6697.792 248.0664  4.2444 53.9993 0.0000
+
+
+MATRIX OF MEANS:
+
+  1       2       3       4       5       6       7      
+1 11.8633 26.5033 30.7367 12.9033 32.4333 10.9233 18.2533
+2         11.2500 25.7567 16.5833 23.4200 16.0767 31.3333
+3                 13.1267 20.0333 16.4600 18.7067 30.5567
+4                          4.0700 31.0733 18.2600 23.8200
+5                                 10.6933 22.3900 32.4267
+6                                          2.0700 35.9567
+7                                                 12.8033
+-------
+REMARK: Raw dataset is balanced. 
+
+
+ANALYSIS OF VARIANCE:
+
+      Df    Sum Sq Mean Sq F value Pr(>F)
+GCA    6  433.1990 72.1998    0.84 0.5514
+SCA   21 1799.3990 85.6856    4.40 0.0000
+Error 54 1052.0280 19.4820               
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal) AND RECIPROCAL EFFECTS (below diagonal):
+
+  1       2       3       4       5       6       7      
+1 -0.5176  6.7775 10.3075 -3.3381 10.7723 -4.8336 -5.4481
+2          0.2261  4.5838 -0.4018  1.0153 -0.4240  6.8882
+3                  0.9295  2.3449 -6.6481  1.5027  5.4082
+4                         -3.2583 12.1531  5.2438  2.8594
+5                                  2.1613  3.9542  6.0464
+6                                         -3.7428 15.4805
+7                                                  4.2017
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+      Estimate Std. Error
+GCA     0.0000    14.2503
+SCA    66.2036    26.4568
+Error  19.4820     3.7493
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                          
+                  Estimate
+VA                0.000000
+VD              264.814575
+h2-narrow sense   0.000000
+H2-broad sense    0.931473
+Dominance Ratio        Inf
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error     LSD
+Gi          1.3621        
+Sii         3.3711        
+Sij         3.9615        
+Gi-Gj       2.0807  4.1716
+Sii-Sjj     4.6526  9.3279
+Sij-Sik     5.8851 11.7990
+Sij-Skl     5.5050 11.0369
+
+
+
+==============================

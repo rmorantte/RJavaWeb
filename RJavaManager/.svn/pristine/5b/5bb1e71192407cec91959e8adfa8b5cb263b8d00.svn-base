@@ -1,0 +1,109 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel2RowCol_missing.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DIALLEL ANALYSIS: GRIFFING METHOD II IN ROW-COLUMN (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels            
+ p1        5              P1  P2  P3  P4  P5
+ p2        5              P1  P2  P3  P4  P5
+ Trial     2              1  2              
+ rep       3              1  2  3           
+ row       15             1  10  11 ... 9   
+ col       3              1  2  3           
+
+ Number of observations read: 88
+ Number of missing observations: 2
+
+
+ANOVA TABLE:
+
+               Df        SS       MS F_value p_value
+Trial           1  10947.22 10947.22    1.05  0.3634
+Trial:rep       4  41717.60 10429.40    3.82  0.0183
+Trial:rep:row  24 246852.41 10285.52    3.76  0.0019
+Trial:rep:col  12 135785.90 11315.49    4.14  0.0025
+Hybrid         14 225314.75 16093.91   10.28  0.0000
+Hybrid x Trial 14  21910.22  1565.02    0.57  0.8577
+Error          20  54649.84  2732.49                
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+ANOVA TABLE:
+
+      DF        SS       MS F_value p_value
+GCA    4  74398.64 18599.66    7.25  0.0405
+SCA   10 150916.11 15091.61   12.95  0.0002
+GCAxE  4  10258.23  2564.56    0.94  0.4612
+SCAxE 10  11651.99  1165.20    0.43  0.9146
+Error 20  54649.84  2732.49                
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+MATRIX OF MEANS:
+
+   P1       P2       P3       P4       P5      
+P1 149.0744 110.0985 128.1170  63.9792  46.1829
+P2          124.7053 162.0888 223.4715 199.1086
+P3                    52.5059 126.6382  86.2032
+P4                            106.2356 134.2992
+P5                                      57.3947
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+GENERAL COMBINING ABILITY EFFECTS, SPECIFIC COMBINING ABILITY EFFECTS (above diagonal)
+                                                
+          P1       P2       P3       P4       P5
+P1           -32.8543  33.1811 -52.7853 -44.8279
+P2                     24.6313  64.1854  65.5762
+P3                              15.3691   0.6878
+P4                                       26.9552
+P5                                              
+GCA  -8.7878  33.7338 -14.2832   7.5455 -18.2083
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+         Std. Error     LSD
+ Gi          7.2144        
+ Sii        18.6275        
+ Sij        14.7263        
+ Gi-Gj      11.4070 23.7945
+ Sii-Sjj    19.7574 41.2133
+ Sij-Sik    27.9412 58.2844
+ Sij-Skl    25.5067 53.2061
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+        Estimate
+ GCA     25.1035
+ SCA   2321.0686
+ GCAxE   66.6361
+ SCAxE -522.4308
+ Error 2732.4918
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                            
+                    Estimate
+ VA               100.413933
+ VAxE             266.544255
+ VD              9284.274267
+ VDxE               0.000000
+ h2-narrow sense    0.008109
+ H2-broad sense     0.757824
+ Dominance Ratio   13.598531
+
+
+==============================================================

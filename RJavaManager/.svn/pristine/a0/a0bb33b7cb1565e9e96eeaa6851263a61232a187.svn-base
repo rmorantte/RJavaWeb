@@ -1,0 +1,68 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NCIII_ME_missing.csv
+
+DESIGN: NORTH CAROLINA EXPERIMENT III IN CRD
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels         
+ Male      16             1  10  11 ... 9
+ Female    2              1  2           
+
+Number of observations read: 127
+Number of observations used: 126
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+            Df  Sum Sq Mean Sq F value Pr(>F)
+Female       1  0.1342  0.1342    0.21 0.6482
+Male        15 21.1717  1.4114    2.20 0.0112
+Female:Male 15  7.7653  0.5177    0.81 0.6655
+Residuals   94 60.1800  0.6402               
+-------
+REMARK: Raw dataset is unbalanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  Y ~ 1 + Female + (1|Male) + (1|Female:Male) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 323.7085 337.8899 -156.8543 308.9563 313.7085
+
+ Fixed Effects:
+             Estimate Std. Error t value
+ (Intercept)   4.4086     0.1279 34.4812
+ Female2       0.0680     0.1408  0.4828
+
+ Random Effects:                                    
+ Groups      Variance Std. Deviation
+ Female:Male   0.0000         0.0000
+ Male          0.1001         0.3163
+ Residual      0.6228         0.7892
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                         
+                 Estimate
+ VA              0.400240
+ VD              0.000000
+ h2-narrow sense 0.391241
+ H2-broad sense  0.391241
+ h2-family       0.383938
+ Dominance Ratio 0.000000
+
+
+==============================================================

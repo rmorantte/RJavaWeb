@@ -1,0 +1,512 @@
+envgca <- paste(environment, ":GCA",sep="")
+GCAxE.effect <- subset(out.gca, substr(rownames(out.gca),1,(nchar(environment)+4))==envgca)
+GCAxE.df <- sum(GCAxE.effect$Df)
+GCAxE.SS <- sum(GCAxE.effect$"Sum Sq")*r
+GCAxE.MS <- GCAxE.SS/GCAxE.df
+#SCA
+SCA.effect <- subset(out.gca, substr(rownames(out.gca),1,3)=="SCA")
+SCA.df <- sum(SCA.effect$Df)
+SCA.SS <- sum(SCA.effect$"Sum Sq")*r
+SCA.MS <- SCA.SS/SCA.df
+envsca <- paste(environment, ":SCA",sep="")
+SCAxE.effect <- subset(out.gca, substr(rownames(out.gca),1,(nchar(environment)+4))==envsca)
+SCAxE.df <- sum(SCAxE.effect$Df)
+SCAxE.SS <- sum(SCAxE.effect$"Sum Sq")*r
+SCAxE.MS <- SCAxE.SS/SCAxE.df
+#REC
+REC.effect <- subset(out.gca, substr(rownames(out.gca),1,3)=="REC")
+REC.df <- sum(REC.effect$Df)
+#REC.SS <- sum(REC.effect$"Sum Sq")*r
+REC.SS <- AOV[row.names="Crosses",col.names="SS"]-GCA.SS-SCA.SS
+REC.MS <- REC.SS/REC.df
+envrec <- paste(environment, ":REC",sep="")
+RECxE.effect <- subset(out.gca, substr(rownames(out.gca),1,(nchar(environment)+4))==envrec)
+RECxE.df <- sum(RECxE.effect$Df)
+#RECxE.SS <- sum(RECxE.effect$"Sum Sq")*r
+RECxE.SS <-AOV[row.names=paste("Crosses x ",environment,sep=""),col.names="SS"]-GCAxE.SS-SCAxE.SS
+RECxE.MS <- RECxE.SS/RECxE.df
+# MAT
+data.all.gca <- merge(meanData, as.data.frame(cbind(M1,GCA,SCA,MAT,NONM)), by.x=c(p1,p2), by.y=c("IDparent1","IDparent2"))
+data.all.gca <- data.all.gca[,-c(match("i", names(data.all.gca)),match("j", names(data.all.gca)))]
+out.mat <- anova(aov(formula(myformula4), data = data.all.gca))
+MAT.effect <- subset(out.mat, substr(rownames(out.mat),1,3)=="MAT")
+MAT.df <- sum(MAT.effect$Df)
+MAT.SS <- sum(MAT.effect$"Sum Sq")*r
+MAT.MS <- MAT.SS/MAT.df
+envmat <- paste(environment, ":MAT",sep="")
+MATxE.effect <- subset(out.mat, substr(rownames(out.mat),1,(nchar(environment)+4))==envmat)
+MATxE.df <- sum(MATxE.effect$Df)
+MATxE.SS <- sum(MATxE.effect$"Sum Sq")*r
+MATxE.MS <- MATxE.SS/MATxE.df
+#NONM
+NONM.effect <- subset(out.mat, substr(rownames(out.mat),1,4)=="NONM")
+NONM.df <- sum(NONM.effect$Df)
+#NONM.SS <- sum(NONM.effect$"Sum Sq")*r
+NONM.SS <- REC.SS-MAT.SS
+NONM.MS <- NONM.SS/NONM.df
+envnonm <- paste(environment, ":NONM",sep="")
+NONMxE.effect <- subset(out.mat, substr(rownames(out.mat),1,(nchar(environment)+5))==envnonm)
+NONMxE.df <- sum(NONMxE.effect$Df)
+#NONMxE.SS <- sum(NONMxE.effect$"Sum Sq")*r
+NONMxE.SS <- RECxE.SS-MATxE.SS
+NONMxE.MS <- NONMxE.SS/NONMxE.df
+# --- construct ANOVA table --- #
+DF=c(GCA.df,SCA.df,REC.df,MAT.df,NONM.df,GCAxE.df,SCAxE.df,RECxE.df,MATxE.df,NONMxE.df,EDF)
+SS=round(c(GCA.SS,SCA.SS,REC.SS,MAT.SS,NONM.SS,GCAxE.SS,SCAxE.SS,RECxE.SS,MATxE.SS,NONMxE.SS,ESS),digits=2)
+MS<-round(SS/DF,digits=2)
+F_value<-round(c(MS[1]/MS[6],MS[2]/MS[7],MS[3]/MS[8],MS[4]/MS[9],MS[5]/MS[10],MS[6]/MS[11],MS[7]/MS[11],MS[8]/MS[11],MS[9]/MS[11],MS[10]/MS[11],MS[11]/MS[11]),digits=2)
+p_value<-round(pf(F_value,DF,c(DF[6],DF[7],DF[8],DF[9],DF[10],DF[11],DF[11],DF[11],DF[11],DF[11],DF[11]),lower.tail = F),digits=4)
+AOV2<-cbind(DF,SS, MS,F_value,p_value)
+row.names(AOV2)<-c("GCA", "SCA", "REC", "  MAT", "  NONM", "GCAxE", "SCAxE", "RECxE", "  MATxE", "  NONMxE", "Residuals")
+AOV2[11,4:5]<-NA
+REC.SS <- AOV[row.names="Crosses",col.names="Sum Sq"]-GCA.SS-SCA.SS
+AOV
+rownames(AOV)
+AOV[row.names="Crosses",col.names="SS"]
+AOV["Crosses","SS"]
+REC.SS <- AOV["Crosses","SS"]-GCA.SS-SCA.SS
+REC.MS <- REC.SS/REC.df
+envrec <- paste(environment, ":REC",sep="")
+RECxE.effect <- subset(out.gca, substr(rownames(out.gca),1,(nchar(environment)+4))==envrec)
+RECxE.df <- sum(RECxE.effect$Df)
+#RECxE.SS <- sum(RECxE.effect$"Sum Sq")*r
+RECxE.SS <-AOV[paste("Crosses x ",environment,sep=""),"SS"]-GCAxE.SS-SCAxE.SS
+RECxE.MS <- RECxE.SS/RECxE.df
+# MAT
+data.all.gca <- merge(meanData, as.data.frame(cbind(M1,GCA,SCA,MAT,NONM)), by.x=c(p1,p2), by.y=c("IDparent1","IDparent2"))
+data.all.gca <- data.all.gca[,-c(match("i", names(data.all.gca)),match("j", names(data.all.gca)))]
+out.mat <- anova(aov(formula(myformula4), data = data.all.gca))
+MAT.effect <- subset(out.mat, substr(rownames(out.mat),1,3)=="MAT")
+MAT.df <- sum(MAT.effect$Df)
+MAT.SS <- sum(MAT.effect$"Sum Sq")*r
+MAT.MS <- MAT.SS/MAT.df
+envmat <- paste(environment, ":MAT",sep="")
+MATxE.effect <- subset(out.mat, substr(rownames(out.mat),1,(nchar(environment)+4))==envmat)
+MATxE.df <- sum(MATxE.effect$Df)
+MATxE.SS <- sum(MATxE.effect$"Sum Sq")*r
+MATxE.MS <- MATxE.SS/MATxE.df
+#NONM
+NONM.effect <- subset(out.mat, substr(rownames(out.mat),1,4)=="NONM")
+NONM.df <- sum(NONM.effect$Df)
+#NONM.SS <- sum(NONM.effect$"Sum Sq")*r
+NONM.SS <- REC.SS-MAT.SS
+NONM.MS <- NONM.SS/NONM.df
+envnonm <- paste(environment, ":NONM",sep="")
+NONMxE.effect <- subset(out.mat, substr(rownames(out.mat),1,(nchar(environment)+5))==envnonm)
+NONMxE.df <- sum(NONMxE.effect$Df)
+#NONMxE.SS <- sum(NONMxE.effect$"Sum Sq")*r
+NONMxE.SS <- RECxE.SS-MATxE.SS
+NONMxE.MS <- NONMxE.SS/NONMxE.df
+# --- construct ANOVA table --- #
+DF=c(GCA.df,SCA.df,REC.df,MAT.df,NONM.df,GCAxE.df,SCAxE.df,RECxE.df,MATxE.df,NONMxE.df,EDF)
+SS=c(GCA.SS,SCA.SS,REC.SS,MAT.SS,NONM.SS,GCAxE.SS,SCAxE.SS,RECxE.SS,MATxE.SS,NONMxE.SS,ESS)
+MS<-SS/DF
+F_value<-c(MS[1]/MS[6],MS[2]/MS[7],MS[3]/MS[8],MS[4]/MS[9],MS[5]/MS[10],MS[6]/MS[11],MS[7]/MS[11],MS[8]/MS[11],MS[9]/MS[11],MS[10]/MS[11],MS[11]/MS[11])
+p_value<-pf(F_value,DF,c(DF[6],DF[7],DF[8],DF[9],DF[10],DF[11],DF[11],DF[11],DF[11],DF[11],DF[11]),lower.tail = F)
+AOV2<-cbind(DF,SS, MS,F_value,p_value)
+row.names(AOV2)<-c("GCA", "SCA", "REC", "  MAT", "  NONM", "GCAxE", "SCAxE", "RECxE", "  MATxE", "  NONMxE", "Residuals")
+AOV2[11,4:5]<-NA
+class(AOV2)
+AOV2
+AOV2<-as.data.frame(AOV2)
+AOV2
+cat("\n\nANOVA TABLE:\n\n")
+AOV2_print<-formatAnovaTable(AOV2)
+AOV2_print
+print(AOV2_print)
+cat("-------\n")
+cat(anovaRemark)
+cat("\n")
+result[[z]]$anova2.table <- AOV2_print
+myformula4<- paste(respvar[z], " ~ ", p1," + ",p2, sep = "")
+meandata <- summaryBy(formula(myformula4), FUN=mean, data=temp.data)
+meandata
+respvardotmean<-paste(respvar[z],".mean", sep = "")
+mdata <- reshape(meandata, v.names=respvardotmean, idvar=p1, timevar=p2, direction="wide", sep=".")
+mdata
+respvardotmeandot<-paste(respvardotmean,".", sep="")
+p2equals<-paste(p2,"=", sep="")
+colnames(mdata) <- gsub(respvardotmeandot, p2equals, colnames(mdata))
+mdata
+rownames(mdata) <- paste(p1, "=", mdata[,1], sep="")
+mdata
+mdata_print<-format(mdata[,2:ncol(mdata)], digits=4, nsmall=4, scientific=FALSE)
+mdata_print
+print(mdata_print)
+cat("-------\n")
+cat(anovaRemark)
+cat("\n")
+result[[z]]$means.matrix <-mdata_print
+XI <- rowSums(mdata)    # row sums across env
+mdata[,match(p1, names(mdata))] <- NULL
+XI <- rowSums(mdata)    # row sums across env
+XI
+XJ <- colSums(mdata)    # col sums across env
+SUMX <- sum(XI)
+#----- Estimates of GCA Effects -----#
+GCA.effect <- as.matrix(rep(0,p),nrow=1, ncol=p)
+dim(GCA.effect) <- c(1,p)
+for (I in 1:p)  {GCA.effect[I] <- ((1/(2*p)) * (XI[I] + XJ[I])) - (1/(p^2)) * SUMX }
+GCA.effect
+colnames(GCA.effect) <- mdata[,1]
+GCA.effect
+mdata <- reshape(meandata, v.names=respvardotmean, idvar=p1, timevar=p2, direction="wide", sep=".")
+respvardotmeandot<-paste(respvardotmean,".", sep="")
+p2equals<-paste(p2,"=", sep="")
+colnames(mdata) <- gsub(respvardotmeandot, p2equals, colnames(mdata))
+rownames(mdata) <- paste(p1, "=", mdata[,1], sep="")
+mdataP1List<-as.vector(mdata[,1])
+mdataP1List
+mdata_print<-format(mdata[,2:ncol(mdata)], digits=4, nsmall=4, scientific=FALSE)
+cat("\n\nMATRIX OF MEANS:\n\n")
+print(mdata_print)
+cat("-------\n")
+cat(anovaRemark)
+cat("\n")
+result[[z]]$means.matrix <-mdata_print
+mdata[,match(p1, names(mdata))] <- NULL
+XI <- rowSums(mdata)    # row sums across env
+XJ <- colSums(mdata)    # col sums across env
+SUMX <- sum(XI)
+#----- Estimates of GCA Effects -----#
+GCA.effect <- as.matrix(rep(0,p),nrow=1, ncol=p)
+dim(GCA.effect) <- c(1,p)
+for (I in 1:p)  {GCA.effect[I] <- ((1/(2*p)) * (XI[I] + XJ[I])) - (1/(p^2)) * SUMX }
+colnames(GCA.effect) <- mdataP1List
+GCA.effect
+rownames(GCA.effect) <- "GCA"
+GCA.effect2 <-format(GCA.effect, digits=4, nsmall=4, scientific=FALSE)
+GCA.effect2
+SCA.REC.effect <- as.matrix(rep(0,p*p),nrow=p, ncol=p)
+dim(SCA.REC.effect) <- c(p,p)
+for (I in 1:p)  {
+for (J in 1:p)  {
+#if (I<=J)   SCA.REC.effect[I,J] <- ((1/2)* (mdata[I,J]+mdata[J,I]))-
+#  		((1/(2*p))*(XI[I]+XJ[I]+XI[J]+XJ[J]))+(1/(p^2)) * SUMX
+if (I<J)   SCA.REC.effect[I,J] <- ((1/2)* (mdata[I,J]+mdata[J,I]))-
+((1/(2*p))*(XI[I]+XJ[I]+XI[J]+XJ[J]))+(1/(p^2)) * SUMX
+}
+}
+SCA.REC.effect
+for (I in 1:p)  {
+for (J in 1:p)  {
+if (I<=J)   SCA.REC.effect[I,J] <- ((1/2)* (mdata[I,J]+mdata[J,I]))-
+((1/(2*p))*(XI[I]+XJ[I]+XI[J]+XJ[J]))+(1/(p^2)) * SUMX
+#if (I<J)   SCA.REC.effect[I,J] <- ((1/2)* (mdata[I,J]+mdata[J,I]))-
+#  ((1/(2*p))*(XI[I]+XJ[I]+XI[J]+XJ[J]))+(1/(p^2)) * SUMX
+}
+}
+SCA.REC.effect
+#----- Estimates of Reciprocal Effects -----#
+for (I in 1:p)
+for (J in 1:p)
+if (I>J)     SCA.REC.effect[I,J] <- (1/2)*(mdata[J,I] - mdata[I,J])
+SCA.REC.effect
+SCA.REC.effect2 <-format(SCA.REC.effect, digits=4, nsmall=4, scientific=FALSE)
+SCA.REC.effect2 <- gsub(" 0.0000", "", SCA.REC.effect2)
+rownames(SCA.REC.effect2) <- rownames(mdata)
+colnames(SCA.REC.effect2) <- colnames(mdata)
+SCA.REc.effect2
+SCA.REC.effect2
+all.effect <- noquote(format(rbind(levels(temp.data[,match(p1, names(temp.data))]),SCA.REC.effect2, GCA.effect2),justify="right"))
+all.effect
+all.effect <- noquote(format(rbind(SCA.REC.effect2, GCA.effect2),justify="right"))
+all.effect
+all.effect <- as.data.frame(rbind(SCA.REC.effect2, GCA.effect2))
+all.effect
+library(PBTools)
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/12DS_MET2_Complete_Data.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+setwd("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/")
+ssa1 <- try(ssa.test("RowCol",data,c("Plot.Yield"),"EntryNo","ROW","COL","Rep","Set", is.random = FALSE), silent = TRUE)
+resid_f <- try(ssa.resid(data, ssa1, c("Plot.Yield"), env = "Set", is.genoRandom = FALSE), silent=TRUE)
+resid_f$residuals
+str(resid_f$residuals)
+R<-resid_f$residuals
+row<-"ROW"
+column<-"COL"
+R[,match(row, names(R))] <- as.numeric(trim.strings(R[,match(row, names(R))]))
+R[,match(column, names(R))] <- as.numeric(trim.strings(R[,match(column, names(R))]))
+str(R)
+R[,match("METNo", names(R))] <- as.numeric(trim.strings(R[,match("METNo", names(R))]))
+rstudio::viewData(R)
+R<-resid_f$residuals
+rstudio::viewData(R)
+source('E:/NSALES/creatingRPackage/PBTools Package/In package format/PBTools/R/Heatmap.r')
+as.numeric(trim.strings(R[,match(row, names(R))]))
+all(is.na(as.numeric(trim.strings(R[,match(row, names(R))]))))
+rstudio::viewData(R)
+all(is.na(as.numeric(trim.strings(R[,match("METNo", names(R))]))))
+any(is.na(as.numeric(trim.strings(R[,match(row, names(R))]))))
+any(is.na(as.numeric(trim.strings(R[,match("METNo", names(R))]))))
+data <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/12DS_MET2_Module1.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+setwd("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/")
+ssa1 <- try(ssa.test("RowCol",data,c("Plot.Yield"),"EntryNo","ROW","COL","Rep","Set", is.random = FALSE), silent = TRUE)
+resid_f <- try(ssa.resid(data, ssa1, c("Plot.Yield"), env = "Set", is.genoRandom = FALSE), silent=TRUE)
+R<-resid_f$residuals
+genAs="fixed"
+row<-"ROW"
+column<-"COL"
+respvar<-c("Plot.Yield")
+model<-"Row-Column"
+env<-"Set"
+if (is.null(env)) {
+origEnv<-NULL
+env = "EnvLevel"
+R <- cbind(R, EnvLevel=1)
+} else {
+origEnv<-"not NULL"
+}
+R[,match(env, names(R))] <- factor(trim.strings(R[,match(env, names(R))]))
+if (any(is.na(as.numeric(trim.strings(R[,match(row, names(R))]))))) {
+stop("The specified row variable is not numeric.")
+} else {
+R[,match(row, names(R))] <- as.numeric(trim.strings(R[,match(row, names(R))]))
+}
+if (any(is.na(as.numeric(trim.strings(R[,match(column, names(R))]))))) {
+stop("The specified column variable is not numeric.")
+} else {
+R[,match(column, names(R))] <- as.numeric(trim.strings(R[,match(column, names(R))]))
+}
+str(R)
+envLevels <- levels(R[,match(env, names(R))])
+warningList<-list()
+i=1
+warningList[[i]]<-list()
+j=1
+warningList[[i]]$site[[j]]<-list()
+resid = paste(respvar[i],"_","resid_",genAs,sep = "")
+(resid %in% names(R))
+envlevel = levels(R[,match(env, names(R))])[j]
+Rdata1 = subset(R, R[match(env,names(R))] == envlevel)
+#check first if each row-column combination contains one residual
+lengthPerCross<-tapply(Rdata1[,respvar[i]], Rdata1[,c(row,column)], length)
+(all(lengthPerCross==1))
+warningList[[i]]$site[[j]]<-"unique"
+(is.null(origEnv))
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")\n", env, "=", envlevel, sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+png(paste(getwd(), "/heatmap_", resid, "_", envlevel,".png", sep=""))
+print(lp)
+dev.off()
+j=2
+warningList[[i]]$site[[j]]<-list()
+resid = paste(respvar[i],"_","resid_",genAs,sep = "")
+resid
+(resid %in% names(R))
+envlevel = levels(R[,match(env, names(R))])[j]
+Rdata1 = subset(R, R[match(env,names(R))] == envlevel)
+envlevel
+#check first if each row-column combination contains one residual
+lengthPerCross<-tapply(Rdata1[,respvar[i]], Rdata1[,c(row,column)], length)
+if (all(lengthPerCross==1)) {
+warningList[[i]]$site[[j]]<-"unique"
+if (is.null(origEnv)) {
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")", sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+} else {
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")\n", env, "=", envlevel, sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+}
+png(paste(getwd(), "/heatmap_", resid, "_", envlevel,".png", sep=""))
+print(lp)
+dev.off()
+} else {
+if (is.null(origEnv)) {
+warningList[[i]]$site[[j]]<-paste("Heatmap of residuals (", genAs, ") for response variable = ", respvar[i], " is not done.\n       Each residual should have a corresponding unique row-column label.", sep="")
+} else {
+warningList[[i]]$site[[j]]<-paste("Heatmap of residuals (", genAs, ") for response response variable = ", respvar[i], " and ", env, " = ", envlevel, " is not done.\n       Each residual should have a corresponding unique row-column label.", sep="")
+}
+}
+} else {
+warningList[[i]]$site[[j]]<- "empty"
+}
+#check first if each row-column combination contains one residual
+lengthPerCross<-tapply(Rdata1[,respvar[i]], Rdata1[,c(row,column)], length)
+if (all(lengthPerCross==1)) {
+warningList[[i]]$site[[j]]<-"unique"
+if (is.null(origEnv)) {
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")", sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+} else {
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")\n", env, "=", envlevel, sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+}
+png(paste(getwd(), "/heatmap_", resid, "_", envlevel,".png", sep=""))
+print(lp)
+dev.off()
+} else {
+if (is.null(origEnv)) {
+warningList[[i]]$site[[j]]<-paste("Heatmap of residuals (", genAs, ") for response variable = ", respvar[i], " is not done.\n       Each residual should have a corresponding unique row-column label.", sep="")
+} else {
+warningList[[i]]$site[[j]]<-paste("Heatmap of residuals (", genAs, ") for response response variable = ", respvar[i], " and ", env, " = ", envlevel, " is not done.\n       Each residual should have a corresponding unique row-column label.", sep="")
+}
+}
+j=4
+warningList[[i]]$site[[j]]<-list()
+resid = paste(respvar[i],"_","resid_",genAs,sep = "")
+(resid %in% names(R))
+envlevel = levels(R[,match(env, names(R))])[j]
+Rdata1 = subset(R, R[match(env,names(R))] == envlevel)
+lengthPerCross<-tapply(Rdata1[,respvar[i]], Rdata1[,c(row,column)], length)
+(all(lengthPerCross==1))
+lengthPerCross
+warningList[[i]]$site[[j]]<-"unique"
+lp = levelplot(Rdata1[[match(resid,names(Rdata1))]] ~ Rdata1[[match(row,names(Rdata1))]] * Rdata1[[match(column,names(Rdata1))]],
+xlab = row, ylab = column,
+main = paste("Heatmap of Residuals (", resid, ")\n", env, "=", envlevel, sep = ""),
+col.regions = colorRampPalette(c("yellow","red"))(50))
+png(paste(getwd(), "/heatmap_", resid, "_", envlevel,".png", sep=""))
+print(lp)
+dev.off()
+(all(lengthPerCross==1, na.rm=TRUE))
+dataRead <- read.csv("E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel2Alpha_missing2.csv", header = TRUE, na.strings = c("NA","."," ",""), blank.lines.skip=TRUE, sep = ",")
+design<-"CRD"
+data<-"dataRead"
+respvar<-c("Y2")
+p1<-"p1"
+p2<-"p2"
+rep = NULL
+block = NULL
+row = NULL
+column = NULL
+cross = TRUE
+individual = NULL
+environment = "Trial"
+alpha = 0.80
+options(show.signif.stars=FALSE)
+data <- eval(parse(text = data))
+# --- trim the strings --- #
+respvar <- trim.strings(respvar)
+p1 <- trim.strings(p1)
+p2 <- trim.strings(p2)
+if (!is.null(block)) {block <- trim.strings(block) }
+if (!is.null(rep)) {rep <- trim.strings(rep) }
+if (!is.null(row)) {row <- trim.strings(row) }
+if (!is.null(column)) {column <- trim.strings(column) }
+if (!is.null(individual)) {individual <- trim.strings(individual) }
+if (!is.null(environment)) {environment <-trim.strings(environment) }
+alpha <- trim.strings(alpha)
+if (design == "CRD") { designName<-"CRD"}
+if (design == "RCB") { designName<-"RCB"}
+if (design == "Alpha") { designName<-"ALPHA-LATTICE"}
+if (design == "RowColumn") { designName<-"ROW-COLUMN"}
+if (cross) {parentsType<-"CROSS"
+} else {parentsType<-"SELF"}
+cat("\nDIALLEL ANALYSIS: GRIFFING METHOD II IN ",designName, " (", parentsType, ")\n", sep="")
+# --- get number of environment levels --- #
+if (!is.null(environment)) {
+data[,match(environment, names(data))] <- factor(trim.strings(data[,match(environment, names(data))]))
+envNumLevels<-nlevels(data[,match(environment, names(data))])
+} else {envNumLevels<-1}
+result <- list()
+i=1
+result[[i]] <- list()
+cat("\n-----------------------------")
+cat("\nRESPONSE VARIABLE: ", respvar[i], "\n", sep="")
+cat("-----------------------------\n")
+j=1
+result[[i]]$site[[j]] <- list()
+if (!is.null(environment)) {
+crdVars<-c(respvar[i], p1, p2, environment)
+rcbVars<-c(respvar[i], p1, p2, block, environment)
+alphaVars<-c(respvar[i], p1, p2, rep, block, environment)
+rowcolVars<-c(respvar[i], p1, p2, rep, row, column, environment)
+} else {
+crdVars<-c(respvar[i], p1, p2)
+rcbVars<-c(respvar[i], p1, p2, block)
+alphaVars<-c(respvar[i], p1, p2, rep, block)
+rowcolVars<-c(respvar[i], p1, p2, rep, row, column)
+}
+if (design == "CRD") {temp.data <- data[,match(crdVars, names(data))]}
+if (design == "RCB") {temp.data <- data[,match(rcbVars, names(data))]}
+if (design == "Alpha") {temp.data <- data[,match(alphaVars, names(data))]}
+if (design == "RowColumn") {temp.data <- data[,match(rowcolVars, names(data))]}
+if (!is.null(environment)) {
+cat("-----------------------------")
+cat("\nANALYSIS FOR: ",environment, " = " ,levels(temp.data[,match(environment, names(temp.data))])[j],"\n", sep="")
+cat("-----------------------------\n")
+temp.data <- temp.data[temp.data[,match(environment, names(temp.data))] == levels(temp.data[,match(environment, names(temp.data))])[j],]
+temp.data[,match(environment, names(temp.data))] <- factor(trim.strings(temp.data[,match(environment, names(temp.data))]))
+}
+# --- define factors and number of levels --- #
+obsread<-nrow(temp.data)
+temp.data[,match(p1, names(temp.data))] <- factor(trim.strings(temp.data[,match(p1, names(temp.data))]))
+temp.data[,match(p2, names(temp.data))] <- factor(trim.strings(temp.data[,match(p2, names(temp.data))]))
+p <- length(unique(c(levels(temp.data[,match(p1, names(temp.data))]), levels(temp.data[,match(p2, names(temp.data))]))))
+# --- create new column containing treatment combinations --- #
+temp.data$cross<-factor(paste(temp.data[,p1], ":", temp.data[,p2], sep=""))
+temp.data<-temp.data[order(temp.data$cross),]
+# --- compute harmonic mean that will be used later in the estimation of genetic variances --- #
+lengthPerCross<-tapply(temp.data[,respvar[i]], temp.data$cross, length)
+repHarmonicMean<-1/mean((1/lengthPerCross), na.rm=TRUE)
+if (design == "CRD") {
+# --- add column Rep --- #
+temp.data<-data.frame(temp.data, Rep=sequence(lengthPerCross))
+nlevelsRep<-max(lengthPerCross, na.rm=TRUE)
+}
+if (design == "RCB") {
+temp.data[,match(block, names(temp.data))] <- factor(trim.strings(temp.data[,match(block, names(temp.data))]))
+nlevelsRep <- nlevels(temp.data[,match(block, names(temp.data))])
+}
+if (design == "Alpha") {
+temp.data[,match(rep, names(temp.data))] <- factor(trim.strings(temp.data[,match(rep, names(temp.data))]))
+temp.data[,match(block, names(temp.data))] <- factor(trim.strings(temp.data[,match(block, names(temp.data))]))
+nlevelsRep <- nlevels(temp.data[,match(rep, names(temp.data))])
+if (!is.null(environment)) {
+blockSizeFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(environment, rep, block)], length))
+} else {
+blockSizeFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(rep, block)], length))
+}
+blockSize<-max(blockSizeFrame$Freq, na.rm=TRUE)
+nBlocksWithinRep<-(ncol(combn(p,2))+p)/blockSize
+}
+if (design == "RowColumn") {
+temp.data[,match(rep, names(temp.data))] <- factor(trim.strings(temp.data[,match(rep, names(temp.data))]))
+temp.data[,match(row, names(temp.data))] <- factor(trim.strings(temp.data[,match(row, names(temp.data))]))
+temp.data[,match(column, names(temp.data))] <- factor(trim.strings(temp.data[,match(column, names(temp.data))]))
+nlevelsRep <- nlevels(temp.data[,match(rep, names(temp.data))])
+if (!is.null(environment)) {
+rowWithinRepFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(environment, rep, row)], length))
+} else {
+rowWithinRepFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(rep, row)], length))
+}
+rowWithinRep<-max(rowWithinRepFrame$Freq, na.rm=TRUE)
+if (!is.null(environment)) {
+columnWithinRepFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(environment, rep, column)], length))
+} else {
+columnWithinRepFrame<-as.data.frame.table(tapply(temp.data[,respvar[i]], temp.data[,c(rep, column)], length))
+}
+columnWithinRep<-max(columnWithinRepFrame$Freq, na.rm=TRUE)
+}
+temp.data<-temp.data[-c(match("cross", names(temp.data)))]
+# --- call recodeDiallelData to recode p1 and p2 to standard notation
+if (design == "CRD") {
+outRecode<-recodeDiallelData(design="diallel2", data=temp.data, p1=p1, p2=p2, rep="Rep", respvar=respvar[i])
+balancedData<-outRecode$tempData
+codingGuide<-outRecode$newCoding
+}
+if (design == "RCB") {
+outRecode<-recodeDiallelData(design="diallel2", data=temp.data, p1=p1, p2=p2, rep=block, respvar=respvar[i])
+balancedData<-outRecode$tempData
+codingGuide<-outRecode$newCoding
+}
+if (design == "Alpha" || design == "RowColumn") {
+outRecode<-recodeDiallelData(design="diallel2", data=temp.data, p1=p1, p2=p2, rep=rep, respvar=respvar[i])
+balancedData<-outRecode$tempData
+codingGuide<-outRecode$newCoding
+}
+balancedData
+codingGuide
+# --- data summary --- #
+temp.data <- temp.data[(is.na(temp.data[,match(respvar[i], names(temp.data))]) == FALSE),]
+obsused <- nrow(temp.data)

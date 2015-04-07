@@ -1,0 +1,37 @@
+Statistical Tool for Agricultural Research (STAR)
+Fri Mar 22 16:41:03 2013
+
+DISTRIBUTION FITTING
+METHOD: maximum likelihood estimation
+
+
+DISTRIBUTION: Normal
+
+Fitting of the distribution ' norm ' by maximum likelihood 
+Parameters:
+     estimate Std. Error
+mean 3209.306   173.8595
+sd   1043.313   122.9504
+
+Goodness-of-fit
+                   Statistic Decision    
+Cramer-von Mises   0.08652   NULL        
+Anderson-Darling   0.47061   NULL        
+Kolmogorov-Smirnov 0.12627   not rejected
+
+DISTRIBUTION: Gamma
+
+Fitting of the distribution ' gamma ' by maximum likelihood 
+Parameters:
+         estimate   Std. Error
+shape 8.674893417 0.8978669326
+rate  0.002703114 0.0002393382
+
+Goodness-of-fit
+                   Statistic Decision    
+Cramer-von Mises   0.1106    not rejected
+Anderson-Darling   0.5703    not rejected
+Kolmogorov-Smirnov 0.1450    not rejected
+
+----------------------------------------
+

@@ -1,0 +1,193 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Two_stage.csv
+
+MULTI-ENVIRONMENT ANALYSIS (TWO-STAGE)
+
+WEIGHT OPTION: 1/(sem^2)
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Yield_Mean
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  120 
+Number of observations used:  120 
+
+ Factors   Number of Levels   Levels             
+ Geno      12                 G1  G10  G11 ... G9
+ Env       10                 E1  E10  E2 ... E9 
+
+
+DESCRIPTIVE STATISTICS:
+
+    Variable N_NonMissObs    Mean    StdDev
+1 Yield_Mean          120 1.29527 0.6884791
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups    Variance   Std.Dev.
+1      Env 0.004436795 0.06660927
+2 Residual 0.111631159 0.33411249
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df Sum Sq Mean Sq F value   Denom Pr(>F)
+Geno 11 1.6299  0.1482  0.5011 98.9818 0.8984
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+   Geno   LSMean StdErrMean
+1    G1 1.332264 0.02602017
+2   G10 1.286289 0.02611309
+3   G11 1.504172 0.02602017
+4   G12 1.327194 0.02606561
+5    G2 1.116617 0.02609686
+6    G3 1.376780 0.02602017
+7    G4 1.137603 0.02611896
+8    G5 1.171773 0.02606350
+9    G6 1.324719 0.02610059
+10   G7 1.284561 0.02602017
+11   G8 1.215050 0.02611885
+12   G9 1.374118 0.02602017
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   0.0203  
+ Average   0.0204  
+ Maximum   0.0205  
+
+
+SIGNIFICANT PAIRWISE COMPARISONS (IF ANY): 
+
+   Trmt[i] Trmt[j]  Difference         lwr          upr
+1      G11      G1  0.17190732  0.10560905  0.238205602
+2       G2      G1 -0.21564674 -0.28221482 -0.149078666
+3       G4      G1 -0.19466167 -0.26137727 -0.127946067
+4       G5      G1 -0.16049074 -0.22690432 -0.094077157
+5       G8      G1 -0.11721432 -0.18388882 -0.050539815
+6      G11     G10  0.21788233  0.15129366  0.284471004
+7       G2     G10 -0.16967174 -0.23652967 -0.102813807
+8       G3     G10  0.09049064  0.02390196  0.157079308
+9       G4     G10 -0.14868666 -0.21569198 -0.081681344
+10      G5     G10 -0.11451573 -0.18121939 -0.047812072
+11      G8     G10 -0.07123931 -0.13820352 -0.004275102
+12      G9     G10  0.08782916  0.02124049  0.154417832
+13     G12     G11 -0.17697726 -0.24341689 -0.110537625
+14      G2     G11 -0.38755407 -0.45412215 -0.320985990
+15      G3     G11 -0.12739170 -0.19368997 -0.061093418
+16      G4     G11 -0.36656899 -0.43328460 -0.299853392
+17      G5     G11 -0.33239806 -0.39881164 -0.265984482
+18      G6     G11 -0.17945212 -0.24599053 -0.112913708
+19      G7     G11 -0.21961093 -0.28590921 -0.153312654
+20      G8     G11 -0.28912164 -0.35579615 -0.222447139
+21      G9     G11 -0.13005317 -0.19635145 -0.063754895
+22      G2     G12 -0.21057681 -0.27728599 -0.143867640
+23      G4     G12 -0.18959174 -0.25644837 -0.122735103
+24      G5     G12 -0.15542081 -0.22197559 -0.088866025
+25      G8     G12 -0.11214439 -0.17895992 -0.045328857
+26      G3      G2  0.26016237  0.19359429  0.326730452
+27      G6      G2  0.20810195  0.14129421  0.274909692
+28      G7      G2  0.16794314  0.10137506  0.234511216
+29      G8      G2  0.09843243  0.03148875  0.165376103
+30      G9      G2  0.25750090  0.19093282  0.324068975
+31      G4      G3 -0.23917730 -0.30589290 -0.172461696
+32      G5      G3 -0.20500637 -0.27141995 -0.138592786
+33      G7      G3 -0.09221924 -0.15851751 -0.025920958
+34      G8      G3 -0.16172995 -0.22840445 -0.095055443
+35      G6      G4  0.18711687  0.12016172  0.254072031
+36      G7      G4  0.14695806  0.08024246  0.213673663
+37      G8      G4  0.07744735  0.01035638  0.144538317
+38      G9      G4  0.23651582  0.16980022  0.303231423
+39      G6      G5  0.15294594  0.08629251  0.219599376
+40      G7      G5  0.11278713  0.04637355  0.179200709
+41      G9      G5  0.20234489  0.13593131  0.268758469
+42      G8      G6 -0.10966952 -0.17658357 -0.042755478
+43      G8      G7 -0.06951071 -0.13618521 -0.002836207
+44      G9      G7  0.08955776  0.02325948  0.155856038
+45      G9      G8  0.15906847  0.09239397  0.225742974
+
+
+
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Yield_Mean
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  120 
+Number of observations used:  120 
+
+ Factors   Number of Levels   Levels             
+ Geno      12                 G1  G10  G11 ... G9
+ Env       10                 E1  E10  E2 ... E9 
+
+
+DESCRIPTIVE STATISTICS:
+
+    Variable N_NonMissObs    Mean    StdDev
+1 Yield_Mean          120 1.29527 0.6884791
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance    Std.Dev.
+1     Geno 2.522125e-05 0.005022076
+2      Env 4.448484e-03 0.066696959
+3 Residual 1.116072e-01 0.334076648
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield_Mean ~ 1 + (1|Geno) + (1|Env) 
+Formula for Model2:  Yield_Mean ~ 1 + (1|Env) 
+
+            AIC      BIC    logLik Chisq Df Pr(>Chisq)
+Model2 590.2897 598.6521 -292.1448                    
+Model1 592.2226 603.3726 -292.1113 0.067  1     0.7957
+
+
+TESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield_Mean ~ 1 + (1|Geno) + (1|Env) 
+Formula for Model2:  Yield_Mean ~ 1 + (1|Geno) 
+
+            AIC      BIC    logLik    Chisq Df Pr(>Chisq)
+Model2 723.1747 731.5372 -358.5874                       
+Model1 592.2226 603.3726 -292.1113 132.9521  1     0.0000
+
+
+PREDICTED GENOTYPE MEANS:
+
+   Geno     Mean
+1    G1 1.293384
+2   G10 1.288367
+3   G11 1.312143
+4   G12 1.292798
+5    G2 1.270120
+6    G3 1.298242
+7    G4 1.272503
+8    G5 1.275949
+9    G6 1.292509
+10   G7 1.288179
+11   G8 1.280751
+12   G9 1.297952
+
+
+
+==============================

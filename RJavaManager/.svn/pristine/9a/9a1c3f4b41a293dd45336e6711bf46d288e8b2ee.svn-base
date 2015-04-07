@@ -1,0 +1,50 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Reza_M1_test2.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DIALLEL ANALYSIS: GRIFFING METHOD I IN CRD (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Th_grain_weight
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels                                      
+ P1        7              black  blue  gray  pink  red  violet  yellow
+ P2        7              black  blue  gray  pink  red  violet  yellow
+ Env       2              Normal  Saline                              
+
+ Number of observations read: 294
+ Number of observations used: 291
+
+
+ANOVA TABLE: (Crosses = P1:P2)
+
+  ERROR: Too many missing values. Cannot perform the analysis.
+
+
+
+-----------------------------
+RESPONSE VARIABLE: Yield
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels                                      
+ P1        7              black  blue  gray  pink  red  violet  yellow
+ P2        7              black  blue  gray  pink  red  violet  yellow
+ Env       2              Normal  Saline                              
+
+ Number of observations read: 294
+ Number of observations used: 291
+
+
+ANOVA TABLE: (Crosses = P1:P2)
+
+  ERROR: Too many missing values. Cannot perform the analysis.
+
+
+
+==============================================================

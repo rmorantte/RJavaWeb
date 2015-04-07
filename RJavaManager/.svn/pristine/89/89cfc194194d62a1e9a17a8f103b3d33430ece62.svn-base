@@ -1,0 +1,150 @@
+ANOVA                   ANOVA
+Adjcovs                 Adjcovs
+AggregateData           Aggregate Data
+AppendData              Append Data
+CombineFactorLevels     Combine Factor Levels
+CovMol                  CovMol
+DataAttribute           Dataset Attribute
+DataTransformation      title1
+DescriptiveStatistics   Descriptive Statistics
+Diallel_M1              Diallel_M1
+Diallel_M2              Diallel_M2
+Diallel_M3              Diallel_M3
+Diallel_M4              Diallel_M4
+ESIMIndex_2             ESIMIndex_2
+FactorList              title1
+GEOneStage.test         GEOneStage.test
+GEOneStage_resid        GEOneStage_resid
+GETwoStage.test         GETwoStage.test
+GETwoStage_resid        GETwoStage_resid
+GenMean_raw             GenMean_raw
+GenMean_summaryStats    GenMean_summaryStats
+GenerateFactor          title1
+HWETest                 HWETest
+Heatmap                 Heatmap
+KNIndex_2               KNIndex_2
+LTIndex_2               LTIndex_2
+MESIMIndex_2            MESIMIndex_2
+MQ.marker.diag          MQ.marker.diag
+Means                   Means
+MergeData               Merge Dataset
+NCIII_ME                NCIII_ME
+NCII_ME                 NCII_ME
+NCI_ME                  NCI_ME
+PBTools-package         Plant Breeding Tools
+QTL.analysis            QTL.analysis
+QTL.dataprep            QTL.dataprep
+QTL_pheno               QTL_pheno
+QTL_pred_height         QTL_pred_height
+RCB_Multi               RCB_Multi
+RESIMIndex_2            RESIMIndex_2
+Read                    Read
+ReadMarkers             ReadMarkers
+ReadQTL                 ReadQTL
+Readrest                Readrest
+Readsgn                 Readsgn
+Readwgt                 Readwgt
+SI_markers              SI_markers
+SI_traits               SI_traits
+SmithIndex_2            SmithIndex_2
+SortCases               SortCases
+Stan                    Stan
+TTC_ME                  TTC_ME
+ToLong                  title1
+ToWide                  title1
+TraitsSelect            TraitsSelect
+Two_stage               Two_stage
+adjmeans                adjmeans
+adjustAnovaDf           adjusts the error df of Anova Table
+ammi.analysis           ammi.analysis
+ammi.analysis2          ammi.analysis2
+bcPower                 Box-Cox and Yeo-Johnson Power Transformations
+class.information       class.information
+class.information2      class.information v.2
+coef                    title1
+css                     Corrected Sum of Squares
+cv                      Coefficient of Variation
+data1_merge             data1_merge
+data2_merge             data2_merge
+designAlphaLattice      Alpha Lattice
+designAugmented         Randomization for Augmented Design
+designAugmentedLSD      Augmented Design for Latin Square
+designAugmentedRCB      Augmented Design for Randomized Complete Block
+designCRD               Randomization of Completely Randomized Design
+designLSD               title1
+designLattice           Randomization for Lattice Design
+designRCBD              Randomization for Randomized Complete Block
+                        Design
+designRowColumn         design Row-Column
+diallel1Test            diallel1Test
+diallel1TestME          diallel1TestME
+diallel2Test            diallel2Test
+diallel2TestME          diallel2TestME
+diallel3Test            diallel3Test
+diallel3TestME          diallel3TestME
+diallel4Test            diallel4Test
+diallel4TestME          diallel4TestME
+estimateMissingData     estimateMissingData
+estimateNA              estimateNA
+estimateTransform       Finding Univariate or Multivariate Power
+                        Transformations
+fCovariances            fCovariances
+fac.gen                 fac.gen
+factor.list             factor.list
+formatAnovaTable        format Anova Table
+formatNumericValue      format Numeric Value
+gCovariances            gCovariances
+generateBalancedData    generateBalancedData
+generationMean.test     generationMean.test
+generationMeanSummaryStats.test
+                        generationMeanSummaryStats.test
+genoNpheno.corr         genoNpheno.corr
+getVarInfo              title1
+graph.mea1s.boxhist     graph.mea1s.boxhist
+graph.mea1s.diagplots   graph.mea1s.diagplots
+graph.mea1s.predint     graph.mea1s.predint
+graph.mea2s.boxhist     graph.mea2s.boxhist
+graph.mea2s.diagplots   graph.mea2s.diagplots
+graph.mea2s.predint     graph.mea2s.predint
+graph.sea.boxhist       graph.sea.boxhist
+graph.sea.diagplots     graph.sea.diagplots
+graph.sea.predint       graph.sea.predint
+importGenFile           imports a genetic file
+is.valid.name           valid names
+is.wholenumber          Wholenumber
+kurtosis                Coefficient of Kurtosis
+load.cross.data         load.cross.data
+modalValue              Modal Value
+modelComparisonTable    Model Comparison Table
+nc1Test                 nc1Test
+nc1TestME               nc1TestME
+nc2Test                 nc2Test
+nc2TestME               nc2TestME
+nc3Test                 nc3Test
+nc3TestME               nc3TestME
+plot.powerTransform     plot Method for powerTransform Objects
+powerTransform          Finding Univariate or Multivariate Power
+                        Transformations
+print.powerTransform    print
+printDataFrame          Print Data Frames
+printLayout             print layout
+randomizeLattice        title1
+recodeDiallelData       recode diallel data
+runBackwardRegression   runBackwardRegression
+skewness                Coefficient of Skewness
+ssa.pairwise            ssa.pairwise
+ssa.resid               ssa.resid
+ssa.test                ssa.test
+stability.analysis      stability.analysis
+stdkurtosis             Standard Error of Kurtosis
+stdmean                 Standard Error of the Mean
+stdskewness             Standard Error of Skewness
+summary.powerTransform
+                        title1
+testTransform           Likelihood-Ratio Tests for Univariate or
+                        Multivariate Power Transformations to Normality
+trimStrings             title1
+ttcTest                 ttcTest
+ttcTestME               ttcTestME
+ucss                    Uncorrected Sum of Squares
+vcov.powerTransform     title1

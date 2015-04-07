@@ -1,0 +1,313 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/RCB_ME.csv
+
+MULTI-ENVIRONMENT ANALYSIS (ONE-STAGE)
+
+DESIGN: Randomized Complete Block (RCB)
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Yield
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  495 
+Number of observations used:  495 
+
+ Factors   Number of Levels   Levels                     
+ Env       11                 E1  E10  E11 ... E9        
+ Genotype  15                 GEN1  GEN10  GEN11 ... GEN9
+ Block     3                  1  2  3                    
+
+
+DESCRIPTIVE STATISTICS:
+
+  Variable N_NonMissObs     Mean   StdDev
+1    Yield          495 1718.596 1117.791
+
+
+VARIANCE COMPONENTS TABLE:
+
+        Groups   Variance  Std.Dev.
+1 Genotype:Env 664747.696 815.32061
+2    Block:Env   6497.161  80.60497
+3          Env 530979.863 728.68365
+4     Residual  94709.288 307.74874
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+         Df  Sum Sq Mean Sq F value    Denom Pr(>F)
+Genotype 14 1386210   99015  1.0455 139.9947 0.4127
+
+
+TESTING FOR THE SIGNIFICANCE OF ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + Genotype + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+Formula for Model2:  Yield ~ 1 + Genotype + (1|Block:Env) + (1|Genotype:Env) 
+
+            AIC      BIC    logLik   Chisq Df Pr(>Chisq)
+Model2 7513.743 7589.425 -3738.871                      
+Model1 7457.593 7537.480 -3709.797 58.1496  1     0.0000
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPE X ENVIRONMENT EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Yield ~ 1 + Genotype + (1|Env) + (1|Block:Env) + (1|Genotype:Env) 
+Formula for Model2:  Yield ~ 1 + Genotype + (1|Env) + (1|Block:Env) 
+
+            AIC      BIC    logLik    Chisq Df Pr(>Chisq)
+Model2 7942.529 8018.211 -3953.264                       
+Model1 7457.593 7537.480 -3709.797 486.9356  1     0.0000
+
+
+GENOTYPE X ENVIRONMENT MEANS:
+
+    Genotype Env Yield_means
+1       GEN1  E1   2958.1639
+2       GEN1  E5    352.6978
+3       GEN1  E4   1294.7984
+4       GEN1 E11   2072.8784
+5       GEN1  E7    514.8013
+6       GEN1  E3   1373.9847
+7       GEN1  E6   1800.7020
+8       GEN1 E10   1026.3886
+9       GEN1  E2    782.0394
+10      GEN1  E9   4034.1663
+11      GEN1  E8    299.9992
+12     GEN10 E10   3441.1438
+13     GEN10  E2    885.8446
+14     GEN10  E7   1512.5837
+15     GEN10  E4   1856.5550
+16     GEN10  E8    717.7737
+17     GEN10  E6   2429.6668
+18     GEN10 E11   2351.7368
+19     GEN10  E1   2199.1140
+20     GEN10  E9   1386.9862
+21     GEN10  E5   1012.1162
+22     GEN10  E3   2060.5792
+23     GEN11  E1   2777.5788
+24     GEN11 E11   3161.8980
+25     GEN11  E3   1038.8398
+26     GEN11  E2    658.7658
+27     GEN11  E8    302.4992
+28     GEN11  E6   4258.5795
+29     GEN11  E4   1359.3068
+30     GEN11  E7    412.4348
+31     GEN11  E9   3671.1453
+32     GEN11 E10   2161.2320
+33     GEN11  E5   1125.8198
+34     GEN12 E11   3042.9571
+35     GEN12  E6   3977.7915
+36     GEN12  E8    358.8341
+37     GEN12  E2    602.5780
+38     GEN12 E10   3282.7150
+39     GEN12  E5    954.9771
+40     GEN12  E4   1964.7951
+41     GEN12  E9   3768.9126
+42     GEN12  E3   1039.1998
+43     GEN12  E7    602.1042
+44     GEN12  E1   2663.6021
+45     GEN13  E2    565.6117
+46     GEN13  E3   1699.2003
+47     GEN13  E1   2726.8118
+48     GEN13  E4   2150.6469
+49     GEN13  E8    581.7587
+50     GEN13 E10   2889.4054
+51     GEN13  E6   3147.1195
+52     GEN13  E7   1026.3988
+53     GEN13  E5   1655.7099
+54     GEN13  E9   1507.3297
+55     GEN13 E11   3539.0740
+56     GEN14  E5   1256.6844
+57     GEN14 E10   1781.6707
+58     GEN14  E3    849.1289
+59     GEN14  E2    539.3498
+60     GEN14  E1   2397.2220
+61     GEN14  E4   1706.2431
+62     GEN14  E7   1430.1165
+63     GEN14 E11   6681.1756
+64     GEN14  E6   2997.5471
+65     GEN14  E9   3469.1511
+66     GEN14  E8    694.8774
+67     GEN15  E5   1785.8101
+68     GEN15  E6   4096.1604
+69     GEN15 E11   1542.3468
+70     GEN15  E8    309.5644
+71     GEN15  E3   1644.3826
+72     GEN15  E2    577.8749
+73     GEN15  E9   2422.6393
+74     GEN15  E4   2090.6104
+75     GEN15 E10   3161.8724
+76     GEN15  E1   1955.5521
+77     GEN15  E7    538.5146
+78      GEN2  E9   2401.1623
+79      GEN2  E2   2059.4811
+80      GEN2  E5   1391.8241
+81      GEN2  E7    555.3832
+82      GEN2  E6   3936.9257
+83      GEN2  E3   1251.1921
+84      GEN2  E8    314.3661
+85      GEN2 E10   2324.5147
+86      GEN2  E1   2981.9119
+87      GEN2 E11   1558.7381
+88      GEN2  E4   1311.9274
+89      GEN3  E2   2696.2920
+90      GEN3  E6   2336.2320
+91      GEN3  E9   4227.1000
+92      GEN3  E4   1609.7697
+93      GEN3 E10   1198.9772
+94      GEN3  E8    534.5689
+95      GEN3  E7   1169.4413
+96      GEN3  E3   1096.5565
+97      GEN3 E11    519.7356
+98      GEN3  E5    280.0127
+99      GEN3  E1   2099.5695
+100     GEN4  E7   1579.0447
+101     GEN4  E9   1747.4512
+102     GEN4  E6    477.3362
+103     GEN4  E4   2225.2937
+104     GEN4  E5    426.4795
+105     GEN4 E10   1865.5546
+106     GEN4  E1   2325.4323
+107     GEN4  E8    698.1242
+108     GEN4  E2   2156.1978
+109     GEN4  E3   1852.9249
+110     GEN4 E11   1778.8608
+111     GEN5  E2   1139.5710
+112     GEN5  E9   2048.0667
+113     GEN5 E11   2145.3480
+114     GEN5  E3   1323.3983
+115     GEN5  E4   1470.8488
+116     GEN5  E7    644.3278
+117     GEN5  E8    313.7380
+118     GEN5 E10    958.7275
+119     GEN5  E6   1417.8934
+120     GEN5  E1   1764.6565
+121     GEN5  E5    484.0382
+122     GEN6  E9   2942.6634
+123     GEN6  E7   1392.1930
+124     GEN6  E8    722.2527
+125     GEN6 E11   1677.6422
+126     GEN6  E5    368.6027
+127     GEN6  E3   2027.1581
+128     GEN6  E4   2626.0682
+129     GEN6  E1   1962.7955
+130     GEN6  E2   1136.2764
+131     GEN6 E10   1059.1592
+132     GEN6  E6   1752.4218
+133     GEN7  E3   1384.7896
+134     GEN7  E8    521.3835
+135     GEN7  E2   2145.1864
+136     GEN7 E10   1054.7911
+137     GEN7 E11   2424.5930
+138     GEN7  E4   1934.0254
+139     GEN7  E6   1483.4852
+140     GEN7  E7   1146.9001
+141     GEN7  E5    496.6144
+142     GEN7  E1   2731.8945
+143     GEN7  E9   1438.2034
+144     GEN8  E3   1390.8023
+145     GEN8  E5    858.3659
+146     GEN8  E8    244.3071
+147     GEN8  E4   2006.6098
+148     GEN8  E9   2531.1623
+149     GEN8 E10   2326.5900
+150     GEN8  E6   2347.8661
+151     GEN8  E1   2247.5929
+152     GEN8 E11   2280.9466
+153     GEN8  E2   3851.5155
+154     GEN8  E7    505.1748
+155     GEN9 E10    790.5511
+156     GEN9  E1   2192.0436
+157     GEN9  E6   3162.3002
+158     GEN9  E8    274.4865
+159     GEN9  E2   1226.4939
+160     GEN9  E5    542.0348
+161     GEN9 E11   1071.0839
+162     GEN9  E7    993.4964
+163     GEN9  E4   1291.4211
+164     GEN9  E3   1819.2984
+165     GEN9  E9   1517.3235
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+   Genotype   LSMean StdErrMean
+1      GEN1 1500.965   334.2864
+2     GEN10 1804.918   334.2864
+3     GEN11 1902.555   334.2864
+4     GEN12 2023.497   334.2864
+5     GEN13 1953.552   334.2864
+6     GEN14 2163.924   334.2864
+7     GEN15 1829.575   334.2864
+8      GEN2 1826.130   334.2864
+9      GEN3 1615.296   334.2864
+10     GEN4 1557.518   334.2864
+11     GEN5 1246.419   334.2864
+12     GEN6 1606.112   334.2864
+13     GEN7 1523.806   334.2864
+14     GEN8 1871.903   334.2864
+15     GEN9 1352.776   334.2864
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   355.8134
+ Average   355.8134
+ Maximum   355.8134
+
+
+SIGNIFICANT PAIRWISE COMPARISONS (IF ANY): 
+Compared with control(s)
+
+                                       
+(No significant pairwise comparisons.) 
+
+
+
+AMMI ANALYSIS:
+Percentage of Total Variation Accounted for by the Principal Components: 
+
+     percent  acum Df      Sum.Sq    Mean.Sq F.value   Pr.F
+PC1     38.2  38.2 23 101890340.4 4430014.80   46.77 0.0000
+PC2     23.9  62.1 21  63620736.9 3029558.90   31.99 0.0000
+PC3     19.2  81.3 19  51267271.5 2698277.45   28.49 0.0000
+PC4      8.7  90.0 17  23217503.0 1365735.47   14.42 0.0000
+PC5      5.4  95.4 15  14268487.9  951232.52   10.04 0.0000
+PC6      2.4  97.8 13   6282476.7  483267.44    5.10 0.0000
+PC7      1.2  99.0 11   3123773.8  283979.43    3.00 0.0008
+PC8      0.6  99.6  9   1635022.9  181669.21    1.92 0.0487
+PC9      0.4 100.0  7   1129431.9  161347.42    1.70 0.1084
+PC10     0.0 100.0  5    100764.4   20152.87    0.21 0.9582
+PC11     0.0 100.0  3         0.0       0.00    0.00 1.0000
+
+
+
+
+GGE ANALYSIS:
+Percentage of Total Variation Accounted for by the Principal Components: 
+
+     percent  acum Df       Sum.Sq   Mean.Sq F.value   Pr.F
+PC1     40.3  40.3 23 119732240.55 5205749.6   54.97 0.0000
+PC2     21.6  61.9 21  64035522.84 3049310.6   32.20 0.0000
+PC3     17.3  79.2 19  51327149.79 2701428.9   28.52 0.0000
+PC4      9.7  88.9 17  28759322.01 1691724.8   17.86 0.0000
+PC5      5.9  94.8 15  17410285.76 1160685.7   12.26 0.0000
+PC6      2.2  97.0 13   6599117.81  507624.4    5.36 0.0000
+PC7      1.4  98.4 11   4035297.92  366845.3    3.87 0.0000
+PC8      1.0  99.4  9   2960324.00  328924.9    3.47 0.0004
+PC9      0.4  99.8  7   1300028.20  185718.3    1.96 0.0602
+PC10     0.3 100.1  5    908378.63  181675.7    1.92 0.0907
+PC11     0.0 100.1  3     43038.59   14346.2    0.15 0.9296
+
+
+
+
+==============================

@@ -1,0 +1,33 @@
+package org.irri.breedingtool.rjava.staranalysis;
+
+import org.irri.breedingtool.rjava.manager.RJavaManager;
+
+public class TestPrincipalComponentAnalysis {
+
+	private static String BSLASH = "\\";
+	private static String FSLASH = "/";
+	private static String PATH1 = System.getProperty("user.dir")+ System.getProperty("file.separator") + "sample_datasets" + System.getProperty("file.separator");
+	public static String DATA_PATH = PATH1.replace(BSLASH, FSLASH);
+	
+	public static void main(String[] args) {
+		//supply path and name of active data
+		String dataFileName = DATA_PATH + "PCAex.csv"; 
+		//supply path where the output will be placed
+		String outputPath = DATA_PATH; 
+
+		//specify parameters
+		String[] var = {"SPKLT", "SPKWD", "SLLT", "SLWD", "AWLT"};
+		String idVar = "CODE_ACCNO1";
+		String matx = "corr";
+		String transform = "zerocenter";
+		boolean saveScore = true;
+		boolean scree = true;
+		boolean biplot = true;
+		boolean pcaplot = true;
+
+		RJavaManager rJavaManager= new RJavaManager();
+		rJavaManager.initStar();
+		rJavaManager.getSTARAnalysisManager().doPCA(dataFileName, outputPath,
+				var, idVar, matx, transform, saveScore, scree, biplot, pcaplot);
+	}
+}

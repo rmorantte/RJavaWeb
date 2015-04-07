@@ -1,0 +1,60 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2Alpha_missing.csv
+
+DESIGN: NORTH CAROLINA EXPERIMENT I IN ALPHA-LATTICE (INBRED)
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels       
+ replication 2              1  2         
+ block       8              1  2  3 ... 8
+ male        4              1  2  3  4   
+ fem         3              1  2  3      
+
+Number of observations read: 44
+Number of observations used: 44
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  Y ~ 1 + (1|replication) + (1|block:replication) + (1|male/fem) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 597.8283 608.5335 -292.9142 594.7308 585.8283
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 299.8757    34.4006  8.7172
+
+ Random Effects:                                            
+ Groups              Variance Std. Deviation
+ fem:male              0.0000         0.0007
+ block:replication     0.0000         0.0000
+ male                754.9900        27.4770
+ replication           0.0000         0.0000
+ Residual          43736.0000       209.1300
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                            
+                    Estimate
+ VA              1509.980000
+ VD                 0.000000
+ h2-narrow sense    0.033373
+ H2-broad sense     0.033373
+ Dominance Ratio    0.000000
+
+
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+==============================================================

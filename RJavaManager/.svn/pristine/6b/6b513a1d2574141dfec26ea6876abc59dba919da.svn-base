@@ -1,0 +1,10 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/popgenTestData.csv
+
+HARDY-WEINBERG EQUILIBRIUM TEST
+
+MATRIX OF P-VALUES:
+
+     loc1   loc2   loc3   loc4
+P1 0.4652 0.3227 0.5944 0.0575
+P2 0.4783 0.0802 0.8911 0.0031

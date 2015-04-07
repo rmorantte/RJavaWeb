@@ -1,0 +1,79 @@
+package org.irri.breedingtool.rjava.pbtoolsanalysis;
+
+import org.irri.breedingtool.rjava.manager.RJavaManager;
+
+public class TestQTL_new {
+
+	private static String BSLASH = "\\";
+	private static String FSLASH = "/";
+	private static String PATH1 = System.getProperty("user.dir")+ System.getProperty("file.separator") + "sample_datasets" + System.getProperty("file.separator");
+	public static String DATA_PATH = PATH1.replace(BSLASH, FSLASH);
+	
+	public static void main(String[] args) {
+		
+		//supply path and name of text file where text output is going to be saved
+		String outFileName = DATA_PATH + "QTL_output.txt";
+		//supply path where the graphs will be saved
+		String resultFolderPath = DATA_PATH;  // outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
+		//supply data format used - "default", "R", Map Maker", "Map Manager", "QTL Cartographer" 
+		String dataFormat = "default";
+		//supply format of the first input file, whether "csv", "ctxt", "stxt", "ttxt", or "sctxt" 
+		String format1 = "csv";
+		//supply type of cross used, whether "f2", "bc", "risib", "riself", "bcsft"
+		String crossType = "f2"; 
+		//supply path and name of first input file
+		String file1 = DATA_PATH + "listeria1_pheno.csv";
+		//supply format of the second input file, whether "csv", "ctxt", "stxt", "ttxt", or "sctxt" 
+		String format2 = "csv";
+		//supply path and name of second input file
+		String file2 = DATA_PATH + "listeria1_geno.csv";
+		//supply format of the third input file, whether "csv", "ctxt", "stxt", "ttxt", or "sctxt" 
+		String format3 = "csv";
+		//supply path and name of third input file
+		String file3 = DATA_PATH + "listeria1_map.csv";
+		//supply name of genotype variable
+		String P_geno = "Geno";
+		//supply bc generation, if crosstype is "bcsft" 
+		int bcNum = 0;
+		//supply filial generation, if crosstype is "bcsft"
+		int fNum = 0;
+
+//		QTLdata <- createQTLdata(outputPath, dataFormat, format1, crossType, file1, format2, file2, format3, file3, 
+//		              P_geno, bcNum, fNum)
+
+		//specify parameters
+		Boolean doMissing = true;
+		Boolean deleteMiss = true;
+		double cutOff= 0.15;
+		Boolean doDistortionTest = true;
+		double pvalCutOff = 0.01;
+		Boolean doCompareGeno = true;
+		double cutoffP = 0.70;
+		boolean doCheckMarkerOrder = true;
+		double lodThreshold = 3;
+		boolean doCheckGenoErrors = true;
+		double lodCutOff = 5;
+		double errorProb = 0.01; 
+	              
+
+		
+		System.out.println("TestQTL_new here");
+		RJavaManager rJavaManager= new RJavaManager();
+		rJavaManager.initPBtool();
+		System.out.println("TestQTL_new here 2");
+//		rJavaManager.initStar();
+		System.out.println("TestQTL_new here 3");
+
+		rJavaManager.getWebToolManager().doQtl(outFileName, resultFolderPath, dataFormat, format1, crossType, file1, 
+				format2, file2, format3, file3, P_geno, bcNum, fNum, doMissing, deleteMiss, cutOff, doDistortionTest, pvalCutOff, doCompareGeno, cutoffP,
+				doCheckMarkerOrder, lodThreshold, doCheckGenoErrors, lodCutOff, errorProb);
+
+		System.out.println("TestQTL_new here too");
+
+//		(String outFileName, String resultFolderPath, String dataFormat, String format1, String crossType, String file1, 
+//		String format2, String file2, String format3, String file3, String P_geno, int bcNum, int fNum)
+
+
+	}
+
+}

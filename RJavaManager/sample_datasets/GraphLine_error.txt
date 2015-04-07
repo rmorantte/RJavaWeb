@@ -1,0 +1,5 @@
+
+*** 
+ERROR in GraphLine function:
+  object 'lineVar' not found
+***

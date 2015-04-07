@@ -1,0 +1,68 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2Alpha_missing.csv
+
+DESIGN: NORTH CAROLINA EXPERIMENT II IN RCB (INBRED)
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels    
+ replication 2              1  2      
+ male        4              1  2  3  4
+ fem         3              1  2  3   
+
+Number of observations read: 44
+Number of observations used: 44
+
+
+ANOVA TABLE FOR THE EXPERIMENT:
+
+***
+ERROR: The number of observations read in the data exceeds the size of a balanced data.
+       Please check if the column for block is properly labeled.
+***
+
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  Y ~ 1 + (1|replication) + (1|male) + (1|fem) + (1|male:fem) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 597.8283 608.5335 -292.9142 594.7308 585.8283
+
+ Fixed Effects:
+            Estimate Std. Error t value
+(Intercept) 299.8757    34.4006  8.7172
+
+ Random Effects:                                      
+ Groups        Variance Std. Deviation
+ male:fem        0.0000         0.0000
+ male          754.9900        27.4770
+ fem             0.0000         0.0000
+ replication     0.0000         0.0000
+ Residual    43736.0000       209.1300
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                                                      
+                                              Estimate
+ VA                                         754.990000
+ VD                                           0.000000
+ Narrow sense heritability(plot-mean based)   0.016970
+ Broad sense heritability(plot-mean based)    0.016970
+ Dominance Ratio                              0.000000
+
+
+
+==============================================================

@@ -1,0 +1,169 @@
+package org.irri.breedingtool.rjava.manager.api;
+
+import java.util.ArrayList;
+
+public interface IRJavaDataManipulationManager {
+	
+	/**
+	 * calls the R statements for sorting data
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where sorted data is going to be placed
+	 * @param varString - string representing R vector of variables to be used as basis for sorting, e.g. c("Site","Gen")
+	 * @param sortByString - string representing R vector of sorting order, e.g. c("ascending","descending")
+	 */
+	public void sortCases(String dataFileName, String newFileName, String[] varToSort, String[] varToSortOrder);
+		
+	/**
+	 * calls the R statements for creating a data subset
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param inputSubset - condition for creating the subset
+	 */
+	public void subSet(String dataFileName, String newFileName, ArrayList<String> subsetConditions);
+	
+	/**
+	 * calls the R statements for reading data and getting the names and type of the variables 
+	 * in the data
+	 * 
+	 * @param fileName - path and name of active data file
+	 * @param tempFileName - path and name of the temp file that will be created
+	 * @param fileFormat - 1 if .csv file; 2 if .txt file; 3 if .rda file
+	 * @param separator - data file separator
+	 */
+	public ArrayList<String> getVariableInfo(String fileName, String tempFileName, int fileFormat, String separator);
+	
+	/**
+	 * calls the R statements for listing the available dataset in R package 
+	 * 
+	 * @param pkgName - name of the package
+	 */
+	
+	public String[] getDataInPackage(String pkgName);
+	
+	/**
+	 * calls the R statements for reading data in R package and saving  
+	 * as csv file
+	 * 
+	 * @param pkgName - name of the package
+	 * @param dataset - name of the dataset to be save 
+	 * @param outputPath - path where the csv and varinfo.tmp file will be
+	 *                     save
+	 */
+
+	public void loadDataInPackage(String pkgName, String dataset, String outputPath);
+	
+	/**
+	 * Transform data
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param newVariableName - name defined for new variable
+	 * @param inputVariable - variable input
+	 * @param formula - formula used for transformation
+	 * @return New file transformed
+	 */
+	
+	public void dataTransformation(String dataFileName, String newFileName,String newVariableName,String inputVariable,String formula);
+
+	
+	/**
+	 * Combined Factor Levels
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param newVariableName - name defined for new variable
+	 * @param inputVariables - variable input
+	 * @param targetName - new variable name
+	 * @return New file combined
+	 */
+	public void combineFactorLevels(String dataFileName, String newFileName,String[] inputVariables, String targetName);
+	
+	/**
+	 * Aggregate Data
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param inputNumVariables - name defined for new variable
+	 * @param inputFactorVariables - variable input
+	 * @param function - new variable name
+	 * @param toAppend - new variable name
+	 * @return New file combined
+	 */
+	public void aggregateData(String dataFileName, String newFileName,String[] inputNumVariables, String[] inputFactorVariables, String[] function, boolean toAppend);
+	
+	/**
+	 * Reshape data from Long to Wide format
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param reshapeVariables - name defined for new variable
+	 * @param retainVariables - variable input
+	 * @param indexFactor - new variable name
+	 * @return New file combined
+	 */
+	public void toWide(String dataFileName, String newFileName,String[] reshapeVariables, String[] retainVariables, String[] indexFactor);
+	
+	
+	/**
+	 * Reshape data from Wide to Long format
+	 * @param dataFileName - path and name of active data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param reshapeVariables - name defined for new variable
+	 * @param retainVariables - variable input
+	 * @param indexFactor - new variable name
+	 * @param targetVariables - new variable name
+	 * @param newVarCategory - new variable name
+	 * @return New file combined
+	 */
+	public void toLong(String dataFileName, String newFileName, ArrayList<String[]> reshapeVariables, String[] retainVariables, String[] indexFactor, String[] targetVariables, String[] newVarCategory);
+
+	
+	/**
+	 * Merge two data frames
+	 * @param dataFileName - path and name of active data file
+	 * @param transactionFile - path and name of transaction data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param keyVariablesMaster - key variables in the active data file
+	 * @param keyVariablesTransact - key variables in the transaction file
+	 * @param retainVariablesMaster - other variables in the active data that will also be included 
+	 * @param retainVariablesTransact - other variables in the active data that will also be included
+	 * @param includeOption - 0 if include common observations; 1 if include all observations in the active data; 2 if include all observations in the transaction data; 3 if include all observations
+	 * @return New file 
+	 */
+	
+	public void mergeData(String dataFileName, String transactionFile, String newFileName, String[] keyVariablesMaster, String[] keyVariablesTransact, String[] retainVariablesMaster, String[] retainVariablesTransact, int includeOption);
+	
+	
+	/**
+	 * Append two data frames
+	 * @param MName - filename of the master data
+	 * @param TName - filename of the transaction data
+	 * @param dataFileName - path and name of active data file
+	 * @param transactionFile - path and name of transaction data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @param keyVariablesMaster - key variables in the active data file
+	 * @param keyVariablesTransact - key variables in the transaction file
+	 * @param retainVariablesMaster - other variables in the active data that will also be included 
+	 * @param retainVariablesTransact - other variables in the active data that will also be included
+	 * @return New file 
+	 */
+	
+	public void appendData(String MName, String TName, String dataFileName, String transactionFile, String newFileName, String[] keyVariablesMasterInput, String[] keyVariablesTransactInput, String[] retainVariablesMasterInput, String[] retainVariablesTransactInput);
+	
+	
+	/**
+	 * Convert rda files to csv files
+	 * @param dataFileName - path and name of .rda data file
+	 * @param newFileName - path and name of .csv file where created data is going to be placed
+	 * @return New file 
+	 */
+	
+	public void convertRdaToCsv (String rdaFilename, String newFileName);
+	
+	/**
+	 * Convert rda files to csv files
+	 * @param dataFileName - path and name of .csv data file
+	 * @param columnName - column to be tested
+	 * @return String (TRUE or FALSE)  
+	 */
+	
+	public String isColumnNumeric (String dataFileName, String columnName);
+}

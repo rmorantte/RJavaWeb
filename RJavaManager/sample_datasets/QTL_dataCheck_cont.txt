@@ -1,0 +1,144 @@
+QTL ANALYSIS
+
+DATA QUALITY CHECK
+
+CHECKING MISSING DATA
+
+The following rows have too many missing genotypes:
+
+---- 
+ Row
+---- 
+  91
+  92
+  93
+  94
+  95
+  96
+  97
+  98
+  99
+ 100
+ 101
+ 102
+ 103
+ 104
+ 105
+ 106
+ 107
+ 108
+ 109
+ 110
+ 111
+ 112
+ 113
+ 114
+ 115
+ 116
+ 117
+ 118
+ 119
+ 120
+---- 
+
+The following markers have too many missing genotypes:
+
+-------- 
+Markers 
+-------- 
+D10M44  
+D1M75   
+D2M493  
+D3M51   
+D3M106  
+D3M19   
+D4M2    
+D4M178  
+D4M187  
+D5M398  
+D5M29   
+D6M188  
+D6M194  
+D6M290  
+D6M59_  
+D7M246  
+D7M126  
+D7M259  
+D8M242  
+D8M156  
+D9M269  
+D9M346  
+D9M55   
+D9M18   
+D10M294 
+D11M78  
+D11M356 
+D12M105 
+D12M46  
+D12M99  
+D13M39  
+D13M167 
+D13M226 
+D14M14  
+D14M266 
+D15M100 
+D15M144 
+D15M34  
+D16M154 
+D16M139 
+D16M86  
+D17M260 
+D17M66  
+D18M94  
+D18M106 
+D19M68  
+D19M117 
+D19M65  
+D19M10  
+-------- 
+
+
+
+
+CHECKING SEGREGATION DISTORTION
+
+Genotype frequencies at each marker:
+
+-------------------------------------------------- 
+chr   missing  AA  AB  BB  not.BB  not.AA  P.value
+-------------------------------------------------- 
+6           0  27  76  17  0.0000  0.0000   0.0061
+6           0  18  77  25  0.0000  0.0000   0.0054
+12         33  34  33  20  0.0000  0.0000   0.0083
+13          0  48  49  23  0.0000  0.0000   0.0007
+13         14  41  43  22  0.0000  0.0000   0.0050
+13          0  45  55  20  0.0000  0.0000   0.0036
+13          0  45  55  20  0.0000  0.0000   0.0036
+-------------------------------------------------- 
+
+
+
+CHECKING FOR SIMILAR GENOTYPES
+
+Pairs of individuals with similar genotypes:
+
+--------- 
+ row  col
+--------- 
+  98   49
+ 118   79
+--------- 
+
+
+
+CHECKING MARKER ORDER
+
+ No apparent problems.
+
+
+
+CHECKING GENOTYPING ERRORS
+
+	No errorlods above cutoff.
+
+

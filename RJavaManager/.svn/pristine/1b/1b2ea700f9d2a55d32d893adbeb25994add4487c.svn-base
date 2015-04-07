@@ -1,0 +1,159 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel2Alpha_missing2.csv
+
+DIALLEL ANALYSIS: GRIFFING METHOD II IN RCB (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+-----------------------------
+ANALYSIS FOR: Trial = 1
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+-----------------------------
+ANALYSIS FOR: Trial = 2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+-----------------------------
+ANALYSIS FOR: Trial = 1
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels            
+ p1          5              P1  P2  P3  P4  P5
+ p2          5              P1  P2  P3  P4  P5
+ replication 2              1  2              
+ Trial       1              1                 
+
+Number of observations read: 30
+Number of observations used: 26
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = p1:p2)
+
+Formula for Model 1: Y ~ Crosses + (1|replication)
+Formula for Model 2: Y ~ (1|replication)
+
+            AIC      BIC     logLik    Chisq Df Pr(>Chisq)
+Model2 308.3073 312.0816 -151.15367                       
+Model1 189.7771 208.6486  -79.88857 142.5302  1     0.0000
+
+
+MATRIX OF MEANS:
+
+   P1       P2       P3       P4       P5      
+P1  94.9950 244.0818  60.2325  42.4385 268.8353
+P2          192.7219  84.0267 153.1182  44.5024
+P3                   200.7318       NA       NA
+P4                            196.1548  92.8405
+P5                                      76.6497
+-------
+REMARK: Raw dataset is unbalanced. 
+
+
+ANALYSIS OF VARIANCE:
+
+ ERROR: Too many missing values. Cannot perform test for significance of GCA and SCA effects
+        and estimation of genetic variance components.
+
+
+-----------------------------
+ANALYSIS FOR: Trial = 2
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels            
+ p1          5              P1  P2  P3  P4  P5
+ p2          5              P1  P2  P3  P4  P5
+ replication 2              1  2              
+ Trial       1              2                 
+
+Number of observations read: 30
+Number of observations used: 27
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = p1:p2)
+
+Formula for Model 1: Y ~ Crosses + (1|replication)
+Formula for Model 2: Y ~ (1|replication)
+
+            AIC      BIC     logLik    Chisq Df Pr(>Chisq)
+Model2 321.5219 325.4094 -157.76096                       
+Model1 188.6235 210.6527  -77.31175 160.8984  1     0.0000
+
+
+MATRIX OF MEANS:
+
+   P1       P2       P3       P4       P5      
+P1 144.9950 244.0818 260.2325 142.4385 268.8353
+P2          218.2610 134.0267 153.1182  94.5024
+P3                   200.7318 246.0605 274.8037
+P4                            196.1548  21.3114
+P5                                     126.6583
+-------
+REMARK: Raw dataset is unbalanced. 
+
+
+ANALYSIS OF VARIANCE:
+                                         
+ SV    Df   Sum Sq Mean Sq F value Pr(>F)
+ GCA    4 16434.31 4108.58    0.71 0.6063
+ SCA   10 58271.36 5827.14    1.05 0.4521
+ Error 14 77429.80 5530.70               
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+        Estimate Std. Error
+ GCA      0.0000  1204.4089
+ SCA    296.4358  2606.1259
+ Error 5530.7000  2090.4081
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                            
+                    Estimate
+ VA                 0.000000
+ VD              1185.743024
+ h2-narrow sense    0.000000
+ H2-broad sense     0.176543
+ Dominance Ratio         Inf
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal):
+
+   P1        P2        P3        P4        P5       
+P1   16.4419   49.9258   29.7428  -36.4299   96.0338
+P2             -4.0334  -75.9877   -5.2749  -57.8237
+P3                       32.3003   51.3337   86.1438
+P4                                -19.3209 -115.7272
+P5                                          -25.3879
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error      LSD
+Gi         25.1412         
+Sii        51.3193         
+Sij        64.9143         
+Gi-Gj      39.7517  85.2590
+Sii-Sjj    68.8520 147.6729
+Sij-Sik    97.3715 208.8410
+Sij-Skl    88.8876 190.6449
+
+
+
+==============================================================

@@ -1,0 +1,693 @@
+package org.irri.breedingtool.rjava.manager.api;
+
+
+public interface IRJavaPBToolsAnalysisManager {
+	
+	/**
+	 * calls the R statements for performing NCI
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param female - variable name of female factor
+	 * @param male - variable name of male factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param inbred - use TRUE if parents are inbred, FALSE otherwise
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC1Test(String dataFileName, String outFileName, String design, String[] respvar, String female, String male, 
+			String rep, String block, String row, String column, String inbred, String individual, String environment);
+	
+	
+	/**
+	 * calls the R statements for performing NCI Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param female - variable name of female factor
+	 * @param male - variable name of male factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param inbred - use TRUE if parents are inbred, FALSE otherwise
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC1METest(String dataFileName, String outFileName, String design, String[] respvar, String female, String male, 
+			String rep, String block, String row, String column, String inbred, String individual, String environment);
+	
+	/**
+	 * calls the R statements for performing NCII
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param female - variable name of female factor
+	 * @param male - variable name of male factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param inbred - use TRUE if parents are inbred, FALSE otherwise
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC2Test(String dataFileName, String outFileName, String design, String[] respvar, String female, String male, 
+			String rep, String block, String row, String column, String inbred, String individual, String environment);
+	
+	
+	/**
+	 * calls the R statements for performing NCII Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param female - variable name of female factor
+	 * @param male - variable name of male factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param inbred - use TRUE if parents are inbred, FALSE otherwise
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC2METest(String dataFileName, String outFileName, String design, String[] respvar, String female, String male, 
+			String rep, String block, String row, String column, String inbred, String individual, String environment);
+	
+	/**
+	 * calls the R statements for performing NCIII
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param tester - a string; variable name of tester (female) factor
+	 * @param f2lines - a string; variable name of F2 lines (male) factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC3Test(String dataFileName, String outFileName, String design, String[] respvar, String tester, String f2lines, 
+			String rep, String block, String row, String column, String inbred, String individual, String environment);
+	
+	
+	/**
+	 * calls the R statements for performing NCIII Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param tester - a string; variable name of tester (female) factor
+	 * @param f2lines - a string; variable name of F2 lines (male) factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 */
+	
+	public void doNC3METest(String dataFileName, String outFileName, String design, String[] respvar, String tester, String f2lines, 
+			String rep, String block, String row, String column, String individual, String environment);
+	
+	/**
+	 * calls the R statements for performing Triple Test Cross
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param tester - a string; variable name of tester (female) factor
+	 * @param f2lines - a string; variable name of F2 lines (male) factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param codeP1 - a string; name of tester level for P1
+	 * @param codeP2 - a string; name of tester level for P2
+	 * @param codeF1 - a string; name of tester level for F1
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doTTCTest(String dataFileName, String outFileName, String design, String[] respvar, String tester, String f2lines, 
+			String rep, String block, String row, String column, String individual, String environment, String codeP1, String codeP2, String codeF1, String alpha);
+	
+	
+	/**
+	 * calls the R statements for performing Triple Test Cross Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param tester - a string; variable name of tester (female) factor
+	 * @param f2lines - a string; variable name of F2 lines (male) factor
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param codeP1 - a string; name of tester level for P1
+	 * @param codeP2 - a string; name of tester level for P2
+	 * @param codeF1 - a string; name of tester level for F1
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doTTCMETest(String dataFileName, String outFileName, String design, String[] respvar, String tester, String f2lines, 
+			String rep, String block, String row, String column, String individual, String environment, String codeP1, String codeP2, String codeF1, String alpha);
+
+	
+	/**
+	 * calls the R statements for performing Diallel 1
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel1Test(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 1 Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel1METest(String dataFileName, String outFileName,  String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 2
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder 
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel2Test(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 2 Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel2METest(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 3
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel3Test(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 3 Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel3METest(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 4
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel4Test(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Diallel 4 Multi-Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path of the results folder
+	 * @param design - experimental design used: "CRD" or "RCBD"
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param p1 - a string; variable name of Parent1
+	 * @param p2 - a string; variable name of Parent2
+	 * @param rep - variable name of replicate factor
+	 * @param block - variable name of blocking factor
+	 * @param row - variable name of row factor
+	 * @param column - variable name of column factor
+	 * @param cross - use TRUE if parents are crosses
+	 * @param individual - variable name of the individual variable, NULL if input data are plot means
+	 * @param environment - variable name of the environment variable
+	 * @param alpha - level of significance; values can be from 0 to 1; default is 0.05
+	 */
+	
+	public void doDiallel4METest(String dataFileName, String outFileName, String resultFolderPath, String design, String[] respvar, String p1, String p2, 
+			String rep, String block, String row, String column, String cross, String individual, String environment, String alpha);
+	
+	/**
+	 * calls the R statements for performing Single Environment Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param designIndex - experimental design used: 0 if RCB; 1 if AugRCB; 2 if AugLatinSquare; 3 if AlphaLattice; 4 if Row-Column; 5 if LatinizedAlphaLattice; 6 if LatinizedRow-Column 
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param environment - variable name of the environment variable
+	 * @param environmentLevels - levels of the environment variable
+	 * @param genotype - name of the genotype factor
+	 * @param block - name of the blocking factor
+	 * @param rep - name of the replicate factor
+	 * @param row - name of the row factor
+	 * @param column - name of the column factor
+	 * @param descriptiveStat - true if selected 
+	 * @param varianceComponents - true if selected
+	 * @param boxplotRawData - true if selected
+	 * @param histogramRawData - true if selected
+	 * @param heatmapResiduals - true if selected
+	 * @param heatmapRow - name of the variable assigned as row in the heatmap
+	 * @param heatmapColumn - name of the variable assigned as column in the heatmap
+	 * @param diagnosticPlot - true if selected
+	 * @param genotypeFixed - true if selected
+	 * @param performPairwise - true if selected
+	 * @param pairwiseAlpha - string, value of level of significance
+	 * @param genotypeLevels - levels of genotype factor
+	 * @param controlLevels - genotype levels that are set as controls
+	 * @param compareControl - true if selected
+	 * @param performAllPairwise - true if selected
+	 * @param genotypeRandom - true if selected
+	 * @param excludeControls - true if selected
+	 * @param genoPhenoCorrelation - true if selected
+	 */
+	
+	public void doSingleEnvironmentAnalysis(String dataFileName, String outFileName, String resultFolderPath, int designIndex, String[] respvar, String environment, String[] environmentLevels,
+			String genotype, String block, String rep, String row, String column, boolean descriptiveStat, boolean varianceComponents, 
+			boolean boxplotRawData, boolean histogramRawData, boolean heatmapResiduals, String heatmapRow, String heatmapColumn, boolean diagnosticPlot, 
+			boolean genotypeFixed, boolean performPairwise, String pairwiseAlpha, String[] genotypeLevels, String[] controlLevels, boolean compareControl, boolean performAllPairwise,
+			boolean genotypeRandom, boolean excludeControls, boolean genoPhenoCorrelation);
+	
+	
+	/**
+	 * calls the R statements for performing Multi-Environment Analysis (One Stage)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param designIndex - experimental design used: 0 if RCB; 1 if AugRCB; 2 if AugLatinSquare; 3 if AlphaLattice; 4 if Row-Column; 5 if LatinizedAlphaLattice; 6 if LatinizedRow-Column 
+	 * @param respvar - string representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param environment - variable name of the environment variable
+	 * @param environmentLevels - levels of the environment variable
+	 * @param genotype - name of the genotype factor
+	 * @param block - name of the blocking factor
+	 * @param rep - name of the replicate factor
+	 * @param row - name of the row factor
+	 * @param column - name of the column factor
+	 * @param descriptiveStat - true if selected 
+	 * @param varianceComponents - true if selected
+	 * @param stabilityFinlay - true if selected
+	 * @param stabilityShukla - true if selected
+	 * @param ammi - true if selected
+	 * @param gge - true if selected
+	 * @param boxplotRawData - true if selected
+	 * @param histogramRawData - true if selected
+	 * @param diagnosticPlot - true if selected
+	 * @param genotypeFixed - true if selected
+	 * @param performPairwise - true if selected
+	 * @param pairwiseAlpha - string, value of level of significance
+	 * @param genotypeLevels - levels of genotype factor
+	 * @param controlLevels - genotype levels that are set as controls
+	 * @param compareControl - true if selected
+	 * @param performAllPairwise - true if selected
+	 * @param genotypeRandom - true if selected
+	 */
+	
+	public void doMultiEnvironmentOneStage(String dataFileName, String outFileName, String resultFolderPath, int designIndex, String[] respvar, String environment, String[] environmentLevels,
+			String genotype, String block, String rep, String row, String column, boolean descriptiveStat, boolean varianceComponents, boolean boxplotRawData, boolean histogramRawData, boolean diagnosticPlot, boolean genotypeFixed, boolean performPairwise, String pairwiseAlpha, String[] genotypeLevels, 
+			String[] controlLevels, boolean compareControl, boolean performAllPairwise, boolean genotypeRandom);
+	
+	/**
+	 * calls the R statements for performing Multi-Environment Analysis (Second Stage)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param weightOption - "none" if no weight is selected; "stderr" otherwise 
+	 * @param respvar - string array representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param standardErrors - string array of standard errors
+	 * @param residualVariances - string array of residual variances
+	 * @param numberOfReps - string array of number of reps
+	 * @param environment - variable name of the environment variable
+	 * @param environmentLevels - levels of the environment variable
+	 * @param genotype - name of the genotype factor
+	 * @param descriptiveStat - true if selected 
+	 * @param varianceComponents - true if selected
+	 * @param stabilityFinlay - true if selected
+	 * @param stabilityShukla - true if selected
+	 * @param ammi - true if selected
+	 * @param gge - true if selected
+	 * @param boxplotRawData - true if selected
+	 * @param histogramRawData - true if selected
+	 * @param diagnosticPlot - true if selected
+	 * @param genotypeFixed - true if selected
+	 * @param performPairwise - true if selected
+	 * @param pairwiseAlpha - string, value of level of significance
+	 * @param genotypeLevels - levels of genotype factor
+	 * @param controlLevels - genotype levels that are set as controls
+	 * @param compareControl - true if selected
+	 * @param performAllPairwise - true if selected
+	 * @param genotypeRandom - true if selected
+	 */
+	public void doMultiEnvironmentSecondStage(String dataFileName, String outFileName, String resultFolderPath, String weightOption, String[] respvar, String[] standardErrors, String[] residualVariances, String[] numberOfReps, 
+			String environment, String[] environmentLevels, String genotype, boolean descriptiveStat, boolean varianceComponents, boolean boxplotRawData, 
+			boolean histogramRawData, boolean diagnosticPlot, boolean genotypeFixed, boolean performPairwise, String pairwiseAlpha, String[] genotypeLevels, 
+			String[] controlLevels, boolean compareControl, boolean performAllPairwise, boolean genotypeRandom);
+	
+	
+	/**
+	 * calls the R statements for performing Multi-Environment Analysis (Second Stage)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param respvar - string array representing R vector of response variables
+	 * @param environment - variable name of the environment variable
+	 * @param environmentLevels - levels of the environment variable
+	 * @param genotype - name of the genotype factor
+	 * @param mseValues - string array of MSE values
+	 * @param repValues - string array of number of replicates
+	 * @param stabilityFinlay - true if selected
+	 * @param stabilityShukla - true if selected
+	 * @param ammi - true if selected
+	 * @param gge - true if selected
+	 */
+	
+	public void doMultiEnvironmentSecondStageVersion2(String dataFileName, String outFileName, String resultFolderPath, String[] respvar, String environment, String[] environmentLevels, String genotype, String[] mseValue, String[] repValue, boolean stabilityFinlay, boolean stabilityShukla, boolean ammi, boolean gge);
+	
+	/**
+	 * calls the R statements for Stability Analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param respvar - string array representing R vector of response variables
+	 * @param environment - variable name of the environment variable
+	 * @param genotype - name of the genotype factor
+	 * @param stabilityFinlay - true if selected
+	 * @param stabilityShukla - true if selected
+	 */
+	
+	public void doStabilityModels (String dataFileName, String outFileName, String[] respvar, String environment, String genotype, boolean stabilityFinlay, boolean stabilityShukla);
+	
+	/**
+	 * calls the R statements for performing Multi-Environment Analysis (Second Stage)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param respvar - string array representing R vector of response variables
+	 * @param environment - column name that corresponds to the environment variable
+	 * @param genotype - column name that corresponds to the genotype factor
+	 * @param numberOfReps - column name that corresponds to the number of replicates
+	 * @param residualVariances - column name that corresponds to the residual variances
+	 * @param responsePlot - true if response plots are requested
+	 * @param doAMMI - true if AMMI analysis is requested
+	 * @param biplotPC12 - true if AMMI biplot (PC1 vs PC2) is requested
+	 * @param biplotPC13 - true if AMMI biplot (PC1 vs PC3) is requested
+	 * @param biplotPC23 - true if AMMI biplot (PC2 vs PC3) is requested
+	 * @param ammi1Biplot - true if AMMI1 biplot is requested
+	 * @param adaptationMap - true if adaptation map is requested
+	 * @param doGGE - true if GGE analysis is requested
+	 * @param graphSymmetricView - true if Symmetric View biplot is requested
+	 * @param graphEnvironmentView - true if Environment View biplot is requested
+	 * @param graphGenotypicView - true if Genotypic View biplot is requested
+	 */
+	
+	public void doMultiplicativeModels (String dataFileName, String outFileName, String resultFolderPath, String[] respvar, String environment, String genotype, String[] numberOfReps, 
+			String[] residualVariances, boolean responsePlot, boolean doAMMI, boolean biplotPC12, boolean biplotPC13, boolean biplotPC23, 
+            boolean ammi1Biplot, boolean adaptationMap, boolean doGGE, boolean graphSymmetricView, boolean graphEnvironmentView, boolean graphGenotypicView);
+	
+	/**
+	 * calls the R statements for performing Multi-Environment Analysis (Second Stage)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param respvar - string array representing R vector of response variables
+	 * @param environment - column name that corresponds to the environment variable
+	 * @param genotype - column name that corresponds to the genotype factor
+	 * @param numberOfReps - column name that corresponds to the number of replicates
+	 * @param residualVariances - column name that corresponds to the residual variances
+	 * @param responsePlot - true if response plots are requested
+	 * @param doAMMI - true if AMMI analysis is requested
+	 * @param biplotPC12 - true if AMMI biplot (PC1 vs PC2) is requested
+	 * @param biplotPC13 - true if AMMI biplot (PC1 vs PC3) is requested
+	 * @param biplotPC23 - true if AMMI biplot (PC2 vs PC3) is requested
+	 * @param ammi1Biplot - true if AMMI1 biplot is requested
+	 * @param adaptationMap - true if adaptation map is requested
+	 * @param doGGE - true if GGE analysis is requested
+	 * @param graphSymmetricView - true if Symmetric View biplot is requested
+	 * @param graphEnvironmentView - true if Environment View biplot is requested
+	 * @param graphGenotypicView - true if Genotypic View biplot is requested
+	 */
+	
+	public void doMultiplicativeModelsVersion2 (String dataFileName, String outFileName, String resultFolderPath, String[] respvar, String environment, String genotype, 
+			String[] numberOfReps, String[] residualVariances, boolean responsePlot, boolean doAMMI, boolean biplotPC12, boolean biplotPC13, boolean biplotPC23, 
+            boolean ammi1Biplot, boolean adaptationMap, boolean doGGE, boolean graphSymmetricView, boolean graphEnvironmentView, boolean graphGenotypicView);
+	
+	public void doPlsRegression (String dataFileName, String outFileName, String resultFolderPath, String[] respvar, String environment, String genotype, String covariateData, String covariateEnvironment, String covariateGenotype);
+	
+	public void doFactorialRegression (String dataFileName, String outFileName, String resultFolderPath, String[] respvar, String environment, String genotype, String covariateData, String covariateEnvironment, String covariateGenotype);
+	
+	/**
+	 * calls the R statements for performing Selection Index
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param selectionIndex - 0 if "Smith Selection Index", 1 if "Eigen Selection Index Method (ESIM)", 2 if "Restrictive Kempthorne and Nordskog Selection Index", 3 if "Restrictive Eigen Selection Index Method", 4 if "Lande and Thompson Selection Index", 5 if "Molecular Eigen Selection Index Method"
+	 * @param designIndex - 0 if lattice; 1 if RCB
+	 * @param basisCorrelation - true if selected 
+	 * @param weightsFileName - path and name of weights file
+	 * @param markersFileName - path and name of markers file
+	 * @param qtlFileName - path and name of qtl file
+	 * @param percentSelected - percent of genotypes to select
+	 */
+	
+	public void doSelectionIndex(String dataFileName, String outFileName, String resultFolderPath, int selectionIndex, int designIndex, boolean basisCorrelation, String weightsFileName, String markersFileName,
+			String qtlFileName, int percentSelected);
+	
+	
+	/**
+	 * calls the R statements for performing QTL analysis
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param isInputRawData - true if input is raw data
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param resultFolderPath - path where the generated .csv file and graphs will be saved
+	 * @param genotypicDataFileName - path and name of genotypic file
+	 * @param mapFileName - path and name of map file
+	 * @param designIndex - experimental design used: 0 if RCB; 1 if AugRCB; 2 if AugLatinSquare; 3 if AlphaLattice; 4 if Row-Column
+	 * @param respvar - string array representing R vector of response variables, e.g. c("Y1","Y2")
+	 * @param block - name of the blocking factor; "NULL" if input is NOT raw data
+	 * @param rep - name of the replicate factor; "NULL" if input is NOT raw data 
+	 * @param row - name of the row factor; "NULL" if input is NOT raw data
+	 * @param column - name of the column factor; "NULL" if input is NOT raw data
+	 * @param genotype - name of the genotype factor
+	 * @param environment - variable name of the environment variable
+	 * @param environmentLevels - levels of the environment variable
+	 * @param selectedEnvironmentLevel - [ALL] if all levels are selected; or the actual environment level otherwise
+	 * @param heterozygousPresent - true if selected 
+	 * @param crossType - value is what is selected in GUI
+	 * @param step - value is what is selected in GUI
+	 * @param windowSize - value is what is selected in GUI
+	 * @param minDistance - value is what is selected in GUI
+	 * @param qtlMethod - "SIM" or "CIM"
+	 * @param thresholdLiJi - true if selected
+	 * @param thresholdNumericValue - "NULL" if Li&Ji is selected
+	 * @param estimatePlotMarkerMap - true if selected
+	 * @param allelicDiffThreshold - value is what is selected in GUI
+	 * @param cutOffMissingData - value is what is selected in GUI
+	 * @param significanceLevelChiSquare - value is what is selected in GUI
+	 */
+	
+	public void doQtl(String dataFileName, boolean isInputRawData, String outFileName, String resultFolderPath, String genotypicDataFileName, String mapFileName, int designIndex, String[] respvar, 
+			String block, String rep, String row, String column, String genotype, String environment, String[] environmentLevels, String selectedEnvironmentLevel, 
+			boolean heterozygousPresent, String crossType, String step, String windowSize, String minDistance, String qtlMethod, boolean thresholdLiJi, String thresholdNumericValue, 
+			boolean estimatePlotMarkerMap, double allelicDiffThreshold, double cutOffMissingData, double significanceLevelChiSquare);
+	
+	
+	/**
+	 * calls the R statements for performing Generation Mean Analysis (Raw data as input)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param usersNotation - string array containing all selected generations expressed in user's notation
+	 * @param generalNotation - string array containing all selected generations expressed in general notation
+	 * @param alpha - level of significance
+
+	 */
+	
+	public void doGenerationMeanRawData(String dataFileName, String outFileName, String[] usersNotation, String[] generalNotation, String alpha);
+	
+	
+	/**
+	 * calls the R statements for performing Generation Mean Analysis (Summary statistics as input)
+	 * 
+	 * @param dataFileName - path and name of active data file
+	 * @param outFileName - path and name of text file where text output is going to be saved
+	 * @param generationMean - variable name of the generation mean
+	 * @param weights - variable name of weights; "NULL" if not available
+	 * @param generationStandardDeviation - variable name of generation standard deviation; "NULL" if not available
+	 * @param numberObservations - variable name of number of observations; "NULL" if not available
+	 * @param generation - variable name of generation
+	 * @param usersNotation - string array containing all selected generations expressed in user's notation
+	 * @param generalNotation - string array containing all selected generations expressed in general notation
+	 * @param alpha - level of significance
+
+	 */
+	
+	public void doGenerationMeanSummaryStats(String dataFileName, String outFileName, String generationMean, String weights, String generationStandardDeviation, String numberObservations, String generation, 
+			String[] usersNotation, String[] generalNotation, String alpha);
+
+	/**
+	 * calls the R statements for testing Hardy-Weinberg Equilibrium
+	 * 
+	 * @param rDataFilename - path and name of RData file
+	 * @param outFilename - path and name of text file where text output is going to be saved
+	 * @param display - value is "full" if list of complete tests will be displayed; value is "matrix" is matrix of p-values will be displayed
+	 */
+	
+	public void doHWETest(String rDataFilename, String outFilename, String display);
+	
+	/**
+	 * calls the R statements for generating genetic distace matrix
+	 * 
+	 * @param rDataFilename - path and name of RData file
+	 * @param outFilename - path and name of text file where text output is going to be saved
+	 * @param method - 1 if Nei’s Distance, 2 if Angular Distance or Edwards’ Distance, 3 if Coancestrality Coefficient or Reynolds’ Distance, 4 if Classical Euclidean Distance or Rogers’ Distance, 5 if Absolute Genetics Distance or Provesti’s Distance
+	 * @param displayDiag - true if the user wants to display the diagonal
+	 * @param displayUpper - true if the user wants to display the upper triangular matrix
+	 */
+	
+	public void dogenDistance(String rDataFilename, String outFilename, String resultFolderPath, int method, Boolean displayDiag, Boolean displayUpper);
+	
+	public void dopopStructure(String rDataFilename, String outFilename, Boolean pairwiseFst);
+}

@@ -1,0 +1,105 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel_M4.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DIALLEL ANALYSIS: GRIFFING METHOD IV IN CRD (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Grain_yield
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels          
+ P1        6              1  2  3  4  5  6
+ P2        6              2  3  4  5  6  7
+ Env       2              Normal  Saline  
+
+ Number of observations read: 126
+ Number of observations used: 126
+
+
+ANOVA TABLE: (Crosses = P1:P2)
+
+              Df    Sum Sq   Mean Sq F value Pr(>F)
+Env            1 4510.8350 4510.8350   51.04 0.0000
+Crosses       20 6381.2220  319.0611    2.52 0.0223
+Crosses x Env 20 2530.7660  126.5383    1.43 0.1307
+Residuals     84 7424.0200   88.3812               
+-------
+REMARK: Raw dataset is balanced.
+
+
+ANOVA TABLE:
+
+          Df    Sum Sq  Mean Sq F value Pr(>F)
+GCA        6 1606.7730 267.7955    2.86 0.1132
+SCA       14 4774.4490 341.0321    2.42 0.0545
+GCAxE      6  561.5766  93.5961    1.06 0.3937
+SCAxE     14 1969.1900 140.6564    1.59 0.0985
+Residuals 84 7424.0200  88.3812               
+-------
+REMARK: Raw dataset is balanced.
+
+
+MATRIX OF MEANS:
+
+  1       2       3       4       5       6       7      
+1         35.5150 31.0183 20.2783 37.8233 16.4750 22.3900
+2                 36.4700 23.8883 28.6767 32.5817 31.1033
+3                         21.0417 29.3433 23.1383 35.2733
+4                                 35.8967 22.9300 32.3883
+5                                         27.5550 29.1917
+6                                                 47.2783
+7                                                        
+-------
+REMARK: Raw dataset is balanced.
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal):
+
+  1       2       3       4       5       6       7      
+1 -2.7432  6.5184  4.4118 -2.3559  8.7764 -8.8662 -8.4846
+2          2.2038  4.9164 -3.6929 -5.3172  2.2934 -4.7182
+3                 -0.1862 -4.1496 -2.2606 -4.7599  1.8418
+4                         -4.1586  8.2651 -0.9959  2.9291
+5                                  2.2541 -2.7836 -6.6802
+6                                         -1.4516 15.1121
+7                                                  4.0818
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error    LSD
+Gi          1.5891       
+Sij         3.1337       
+Gi-Gj       2.4274 4.8271
+Sij-Sik     4.8547 9.6541
+Sij-Skl     4.2043 8.3607
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+          Estimate
+GCA        -0.8725
+SCA        33.3959
+GCAxE      -3.1374
+SCAxE      17.4251
+Residuals  88.3812
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                          
+                  Estimate
+VA                0.000000
+VAxE              0.000000
+VD              133.583775
+VDxE             69.700286
+h2-narrow sense   0.000000
+H2-broad sense    0.458004
+Dominance Ratio        Inf
+
+
+==============================================================

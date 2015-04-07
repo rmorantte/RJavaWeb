@@ -1,0 +1,53 @@
+package org.irri.breedingtool.rjava.datamanipulation;
+
+import java.util.ArrayList;
+
+import org.irri.breedingtool.rjava.manager.RJavaManager;
+
+public class TestToLong {
+
+	private static String BSLASH = "\\";
+	private static String FSLASH = "/";
+	private static String PATH1 = System.getProperty("user.dir")+ System.getProperty("file.separator") + "sample_datasets" + System.getProperty("file.separator");
+	public static String DATA_PATH = PATH1.replace(BSLASH, FSLASH);
+	
+	public static void main(String[] args) {
+		
+		
+		//supply path and name of active data
+		String dataFileName = DATA_PATH + "data1_towide.csv";
+		//supply path and name of file where created data is going to be saved
+		String newFileName = DATA_PATH + "wide_tolong2.csv"; 
+
+		/**
+		 * Reshape data from Wide to Long format
+		 * @param dataFileName - path and name of active data file
+		 * @param newFileName - path and name of .csv file where created data is going to be placed
+		 * @param reshapeVariables - name defined for new variable
+		 * @param retainVariables - variable input
+		 * @param indexFactor - new variable name
+		 * @param targetVariables - new variable name
+		 * @param newVarCategory - new variable name
+		 * @return New file combined
+		 */
+		
+		ArrayList<String[]> reshapeVariables= new ArrayList<String[]>();
+		
+		String[] input1={"Y1.1","Y1.2"};
+		String[] input2= {"Y2.1","Y2.2"};
+		
+		reshapeVariables.add(input1);
+		reshapeVariables.add(input2);
+		
+		String[] retainVariables={"Site"};
+		String[] indexFactor={"Year"};
+		String[] targetVariables={"targetVar1","dfd"};
+		String[] newVarCategory={"Year1","Year2"};
+		
+		RJavaManager rJavaManager= new RJavaManager();
+		rJavaManager.initStar();
+		rJavaManager.getRJavaDataManipulationManager().toLong(dataFileName, newFileName, reshapeVariables, retainVariables, indexFactor, targetVariables, newVarCategory);
+		
+	}
+
+}

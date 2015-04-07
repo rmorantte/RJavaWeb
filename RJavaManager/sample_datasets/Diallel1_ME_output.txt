@@ -1,0 +1,128 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel_M1_missing.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DIALLEL ANALYSIS: GRIFFING METHOD I IN RCB (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Plant_height
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels             
+ P1        7              1  2  3  4  5  6  7
+ P2        7              1  2  3  4  5  6  7
+ Env       2              Normal  Saline     
+ Rep       3              1  2  3            
+
+ Number of observations read: 294
+ Number of observations used: 291
+
+
+ANOVA TABLE: (Crosses = P1:P2)
+
+               Df      Sum Sq    Mean Sq F value Pr(>F)
+Env             1  33980.9800 33980.9800   26.85 0.0066
+Rep(Env)        4   5061.6550  1265.4140   20.13 0.0000
+Crosses        48 154145.5000  3211.3650   38.79 0.0000
+Crosses x Env  48   3973.8770    82.7891    1.32 0.1003
+Residuals     189  11879.0000    62.8519               
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+ANOVA TABLE:
+
+           Df      Sum Sq    Mean Sq F value Pr(>F)
+GCA         6 114593.3000 19098.8900  114.52 0.0000
+SCA        21  36150.2500  1721.4400   22.53 0.0000
+REC        21   3401.9560   161.9979    2.49 0.0213
+  MAT       6   1480.1310   246.6886    6.00 0.0233
+  NONM     15   1921.8250   128.1217    1.71 0.1541
+GCAxE       6   1000.6420   166.7737    2.65 0.0171
+SCAxE      21   1604.5800    76.4086    1.22 0.2418
+RECxE      21   1368.6540    65.1740    1.04 0.4213
+  MATxE     6    246.7894    41.1316    0.65 0.6865
+  NONMxE   15   1121.8650    74.7910    1.19 0.2824
+Residuals 189  11879.0000    62.8519               
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+MATRIX OF MEANS:
+
+     P2=1     P2=2     P2=3     P2=4     P2=5     P2=6     P2=7    
+P1=1 129.6584 133.3850 153.5500 140.7333 128.9000 154.4333 182.2833
+P1=2 135.0667 116.8333 130.5500 133.8500 122.7167 129.0500 175.9000
+P1=3 154.1833 133.1333 122.0000 154.5000 131.2167 153.2167 177.7833
+P1=4 139.8833 141.7667 139.7833 137.3333 138.5667 155.7833 195.2333
+P1=5 131.6667 122.6167 130.6667 135.7833 111.8833 132.5667 166.3333
+P1=6 159.6000 138.3833 153.7667 169.9500 147.2000 143.0167 188.6167
+P1=7 188.9333 180.9500 183.3333 197.7333 164.0000 202.3000 155.1000
+-------
+REMARK: Raw data and estimates of the missing values are used.
+
+
+GENERAL COMBINING ABILITY EFFECTS, SPECIFIC COMBINING ABILITY EFFECTS
+(above diagonal) AND RECIPROCAL EFFECTS (below diagonal):
+         P2=1     P2=2     P2=3     P2=4     P2=5     P2=6     P2=7
+P1=1            0.3544  10.8060  -8.3630  -1.0856   4.5834   8.6965
+P1=2  -0.8408           -0.4404  -0.0844   2.0763  -7.9380  12.2918
+P1=3  -0.3167  -1.2917            0.0597   1.1621   2.6478   5.2359
+P1=4   0.4250  -3.9583   7.3583            1.7847   6.4121  15.5502
+P1=5  -1.3833   0.0500   0.2750   1.3917            0.7312   1.5359
+P1=6  -2.5833  -4.6667  -0.2750  -7.0833  -7.3167           10.7633
+P1=7  -3.3250  -2.5250  -2.7750  -1.2500   1.1667  -6.8417         
+GCA   -2.6310 -13.4096  -4.2204   1.3903 -15.9121   5.1522  29.6307
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+        Std. Error    LSD
+Gi          0.8008       
+Sii         2.7742       
+Sij         1.9887       
+Rij         2.2886       
+Gi-Gj       1.2233 2.4131
+Sii-Sjj     3.8684 7.6308
+Sii-Sij     3.7705 7.4376
+Sii-Sjk     3.3502 6.6085
+Sij-Sik     2.9965 5.9108
+Sij-Skl     2.7354 5.3958
+Rij-Rkl     3.2366 6.3844
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+          Estimate 
+GCA        206.2540
+SCA       1806.3982
+REC          8.0687
+GCAxE        2.1591
+SCAxE        2.5747
+RECxE        0.3870
+Residuals   62.8519
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                           
+                   Estimate
+VA               825.016113
+VAxE               8.636230
+VD              7225.592660
+VDxE              10.298911
+h2-narrow sense    0.101448
+H2-broad sense     0.989943
+Dominance Ratio    4.185241
+
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+==============================================================

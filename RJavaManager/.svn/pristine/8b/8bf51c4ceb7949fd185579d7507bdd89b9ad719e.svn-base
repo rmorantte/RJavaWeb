@@ -1,0 +1,60 @@
+package org.irri.breedingtool.rjava.staranalysis;
+
+import org.irri.breedingtool.rjava.manager.RJavaManager;
+
+public class TestClusterAgglomerative {
+
+	private static String BSLASH = "\\";
+	private static String FSLASH = "/";
+	private static String PATH1 = System.getProperty("user.dir")+ System.getProperty("file.separator") + "sample_datasets" + System.getProperty("file.separator");
+	public static String DATA_PATH = PATH1.replace(BSLASH, FSLASH);
+	
+	public static void main(String[] args) {
+		//supply path and name of active data
+		String dataFileName = DATA_PATH + "Ratio_agro.csv"; 
+		//supply path where the output will be placed
+		String outputPath = DATA_PATH; 
+
+		//specify parameters
+		String[] var = {"GWT", "GrainL", "GrainW", "Flower", "PlantH"};
+		String idVar = "Entry";
+		String[] sbinVar = null;
+		String[] abinVar = null;
+		String[] ofactorVar = null;
+		String[] factorVar = null;
+		boolean stand = true;
+		String distance = "Euclidean";
+		String clusmethod = "Complete";
+		boolean distMatrix = false;
+		boolean clusterMem = true;
+		boolean descriptiveStat = true;
+		Integer clusterNum = 2;
+		boolean dendrogram = true;
+		boolean clusterBox = false;
+		boolean saveMem = true;
+		
+//		String[] var = {"N", "P", "K", "WH"};
+//		String idVar ="SITE";
+//		String[] binVar = null;
+//		String[] factorVar = null;
+//		boolean stand = true;
+//		String distance = "Gower";
+//		String clusmethod = "Complete";
+//		boolean distMatrix = false;
+//		boolean clusterMem = true;
+//		boolean descriptiveStat = true;
+//		Integer clusterNum = 2;
+//		boolean dendrogram = true;
+//		boolean clusterBox = false;
+//		boolean saveMem = true;
+		
+		
+		
+		RJavaManager rJavaManager= new RJavaManager();
+		rJavaManager.initStar();
+		rJavaManager.getSTARAnalysisManager().doClusterAgglo(dataFileName, outputPath,
+				var, idVar,sbinVar, abinVar, ofactorVar, factorVar, stand, distance, clusmethod, distMatrix, clusterMem, descriptiveStat, 
+				clusterNum, dendrogram, clusterBox, saveMem);
+	}
+
+}

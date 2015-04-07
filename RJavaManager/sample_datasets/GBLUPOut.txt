@@ -1,0 +1,110 @@
+
+GENOMIC SELECTION
+
+Genome-based Best Linear Unbiased Prediction
+
+Cross Validation
+
+Trait:  Trait.1 
+
+Object of class 'cvData' 
+
+ 5 -fold cross validation with 2 replication(s) 
+     Sampling:                 random 
+     Variance components:      committed 
+     Number of random effects: 1250 
+     Number of individuals:    1250 -- 1250  
+     Size of the TS:           250 -- 250  
+
+Results: 
+                      Min 	  Mean +- pooled SE 	  Max 
+ Predictive ability:  0.4388  	  0.5291 +- 0.00446  	  0.6243 
+ Rank correlation:    0.4190  	  0.5093 +- 0.00182  	  0.5811 
+ Mean squared error:  52.968  	  59.181 +- 0.4752  	  68.891 
+ Bias (reg. slope)    0.8347  	  1.0256 +- 0.009458  	  1.3332 
+ 10% best predicted:  157.52  	  157.65 +- 0.1266  	  157.77 
+
+Seed start:  
+Seed replications: 
+[1] 31181 87021
+
+Spearman's Rank Correlation
+        rep1   rep2
+fold1 0.5303 0.4449
+fold2 0.5460 0.5460
+fold3 0.4838 0.5811
+fold4 0.4909 0.4190
+fold5 0.5047 0.5465
+
+Predictive Ability
+        rep1   rep2
+fold1 0.5445 0.4791
+fold2 0.5606 0.5536
+fold3 0.5147 0.6243
+fold4 0.5184 0.4388
+fold5 0.5297 0.5275
+
+Mean squared error
+          rep1     rep2
+fold1 55.84517 57.61564
+fold2 60.10256 58.14383
+fold3 61.48604 60.66072
+fold4 57.30217 68.89143
+fold5 58.79127 52.96785
+
+Mean of observed values for the 10% best predicted
+          m10
+rep1 157.7720
+rep2 157.5187
+
+Trait:  Trait2 
+
+Object of class 'cvData' 
+
+ 5 -fold cross validation with 2 replication(s) 
+     Sampling:                 random 
+     Variance components:      committed 
+     Number of random effects: 1250 
+     Number of individuals:    1250 -- 1250  
+     Size of the TS:           250 -- 250  
+
+Results: 
+                      Min 	  Mean +- pooled SE 	  Max 
+ Predictive ability:  0.4479  	  0.5240 +- 0.00117  	  0.5984 
+ Rank correlation:    0.4541  	  0.5052 +- 0.00167  	  0.5649 
+ Mean squared error:  0.00517  	  0.00594 +- 1.098e-05  	  0.00655 
+ Bias (reg. slope)    0.8278  	  1.0099 +- 0.005717  	  1.1933 
+ 10% best predicted:  1.57  	  1.57 +- 0.0009036  	  1.58 
+
+Seed start:  
+Seed replications: 
+[1] 26527 97065
+
+Spearman's Rank Correlation
+        rep1   rep2
+fold1 0.4850 0.5437
+fold2 0.5580 0.5041
+fold3 0.5002 0.4541
+fold4 0.4874 0.5649
+fold5 0.4873 0.4678
+
+Predictive Ability
+        rep1   rep2
+fold1 0.4950 0.5378
+fold2 0.5984 0.5337
+fold3 0.5048 0.4479
+fold4 0.5034 0.5942
+fold5 0.5123 0.5120
+
+Mean squared error
+             rep1        rep2
+fold1 0.005862496 0.005166788
+fold2 0.005478659 0.005699125
+fold3 0.006554787 0.006488971
+fold4 0.006206860 0.006195470
+fold5 0.005634123 0.006076805
+
+Mean of observed values for the 10% best predicted
+          m10
+rep1 1.573433
+rep2 1.575240

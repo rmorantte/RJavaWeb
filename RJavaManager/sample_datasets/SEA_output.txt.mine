@@ -1,0 +1,390 @@
+
+DATA FILE: E:/App Files/workspace_Juno/RJavaManager/sample_datasets/RCB_Multi.csv
+
+SINGLE-ENVIRONMENT ANALYSIS
+
+DESIGN: Randomized Complete Block (RCB)
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y1
+------------------------------
+------------------------------
+ANALYSIS FOR: Site  =  Env1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  Gen LSMean StdErrMean
+1   1 41.900   2.026151
+2   2 43.800   2.026151
+3   3 37.300   2.026151
+4   4 41.150   2.026151
+5   5 32.500   2.026151
+6   6 52.625   2.026151
+7   7 43.900   2.026151
+8   8 46.750   2.026151
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   2.6042  
+ Average   2.6042  
+ Maximum   2.6042  
+
+
+------------------------------
+ANALYSIS FOR: Site  =  Env2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  Gen LSMean StdErrMean
+1   1 46.900   2.026151
+2   2 39.800   2.026151
+3   3 42.300   2.026151
+4   4 37.150   2.026151
+5   5 37.500   2.026151
+6   6 48.625   2.026151
+7   7 48.900   2.026151
+8   8 42.750   2.026151
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   2.6042  
+ Average   2.6042  
+ Maximum   2.6042  
+
+
+------------------------------
+RESPONSE VARIABLE: Y2
+------------------------------
+------------------------------
+ANALYSIS FOR: Site  =  Env1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  Gen LSMean StdErrMean
+1   1 20.300  0.2177058
+2   2 19.750  0.2177058
+3   3 18.725  0.2177058
+4   4 20.300  0.2177058
+5   5 20.250  0.2177058
+6   6 19.725  0.2177058
+7   7 20.225  0.2177058
+8   8 20.025  0.2177058
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   0.3066  
+ Average   0.3066  
+ Maximum   0.3066  
+
+
+------------------------------
+ANALYSIS FOR: Site  =  Env2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+  Gen LSMean StdErrMean
+1   1 25.300  0.2177058
+2   2 15.750  0.2177058
+3   3 23.725  0.2177058
+4   4 16.300  0.2177058
+5   5 25.250  0.2177058
+6   6 15.725  0.2177058
+7   7 25.225  0.2177058
+8   8 16.025  0.2177058
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   0.3066  
+ Average   0.3066  
+ Maximum   0.3066  
+
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y1
+------------------------------
+------------------------------
+ANALYSIS FOR: Site  =  Env1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y1 ~ 1 + (1|Blk) + (1|Gen) 
+Formula for Model2:  Y1 ~ 1 + (1|Blk) 
+
+            AIC      BIC     logLik   Chisq Chi Df   Pr(>Chisq)
+Model2 215.7320 220.1292 -104.86598      NA     NA           NA
+Model1 199.8093 205.6723  -95.90467 17.9226      1 2.300693e-05
+
+
+PREDICTED MEANS:
+
+  Gen    Means
+1   1 41.95531
+2   2 43.67738
+3   3 37.78611
+4   4 41.27555
+5   5 33.43563
+6   6 51.67591
+7   7 43.76801
+8   8 46.35111
+
+
+HERITABILITY:
+     
+0.91 
+
+
+------------------------------
+ANALYSIS FOR: Site  =  Env2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y1 ~ 1 + (1|Blk) + (1|Gen) 
+Formula for Model2:  Y1 ~ 1 + (1|Blk) 
+
+            AIC      BIC    logLik   Chisq Chi Df   Pr(>Chisq)
+Model2 205.7782 210.1754 -99.88910      NA     NA           NA
+Model1 196.4535 202.3165 -94.22677 11.3247      1 0.0007648461
+
+
+PREDICTED MEANS:
+
+  Gen    Means
+1   1 46.30869
+2   2 40.28260
+3   3 42.40446
+4   4 38.03343
+5   5 38.33049
+6   6 47.77277
+7   7 48.00617
+8   8 42.78640
+
+
+HERITABILITY:
+     
+0.85 
+
+
+------------------------------
+RESPONSE VARIABLE: Y2
+------------------------------
+------------------------------
+ANALYSIS FOR: Site  =  Env1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y2 ~ 1 + (1|Blk) + (1|Gen) 
+Formula for Model2:  Y2 ~ 1 + (1|Blk) 
+
+            AIC      BIC    logLik   Chisq Chi Df   Pr(>Chisq)
+Model2 69.37059 73.76780 -31.68529      NA     NA           NA
+Model1 60.44543 66.30837 -26.22271 10.9252      1 0.0009486701
+
+
+PREDICTED MEANS:
+
+  Gen    Means
+1   1 20.23614
+2   2 19.77678
+3   3 18.92069
+4   4 20.23614
+5   5 20.19438
+6   6 19.75590
+7   7 20.17350
+8   8 20.00646
+
+
+HERITABILITY:
+     
+0.84 
+
+
+------------------------------
+ANALYSIS FOR: Site  =  Env2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  32 
+Number of observations used:  32 
+
+ Factors   Number of Levels   Levels       
+ Gen       8                  1  2  3 ... 8
+ Blk       4                  1  2  3  4   
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y2 ~ 1 + (1|Blk) + (1|Gen) 
+Formula for Model2:  Y2 ~ 1 + (1|Blk) 
+
+             AIC       BIC    logLik    Chisq Chi Df   Pr(>Chisq)
+Model2 191.75982 196.15703 -92.87991       NA     NA           NA
+Model1  91.18923  97.05218 -41.59462 102.5706      1 4.162676e-24
+
+
+PREDICTED MEANS:
+
+  Gen    Means
+1   1 25.29003
+2   2 15.75951
+3   3 23.71824
+4   4 16.30839
+5   5 25.24013
+6   6 15.73456
+7   7 25.21519
+8   8 16.03395
+
+
+HERITABILITY:
+  
+1 
+
+
+==============================
+
+GENOTYPIC CORRELATIONS:
+
+Site =  Env1
+
+   Y1     Y2    
+Y1        0.0300
+Y2 0.0300       
+
+
+Site =  Env2
+
+   Y1     Y2    
+Y1        0.2184
+Y2 0.2184       
+
+
+PHENOTYPIC CORRELATIONS:
+
+Site =  Env1
+
+   Y1     Y2    
+Y1        0.0378
+Y2 0.0378       
+
+
+Site =  Env2
+
+   Y1     Y2    
+Y1        0.2026
+Y2 0.2026       
+
+
+==============================

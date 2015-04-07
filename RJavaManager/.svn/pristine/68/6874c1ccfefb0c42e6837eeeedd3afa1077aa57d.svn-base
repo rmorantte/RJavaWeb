@@ -1,0 +1,34 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel1Alpha_missing.csv
+
+DIALLEL ANALYSIS: GRIFFING METHOD I IN RCB (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels            
+ replication 2              1  2              
+ p1          4              A21  B11  D76  N34
+ p2          4              A21  B11  D76  N34
+
+Number of observations read: 64
+Number of observations used: 61
+
+***
+ERROR: The number of observations read in the data exceeds the size of a balanced data.
+       Please check if the column for block/replicate is properly labeled.
+***
+
+
+==============================================================

@@ -1,0 +1,85 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC3Alpha.csv
+
+MULTIPLE ENVIRONMENT ANALYSIS
+
+DESIGN: NORTH CAROLINA EXPERIMENT III IN RCB
+
+-----------------------------
+RESPONSE VARIABLE: Y2
+-----------------------------
+
+Too many missing observations. Cannot proceed with the analysis.
+
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors     No of Levels   Levels             
+ Trial       2              1  2               
+ replication 2              1  2               
+ Treatment   12             T1  T10  T11 ... T9
+ male        6              1  2  3  4  5  6   
+ fem         2              F1  F2             
+
+ Number of observations read: 48
+ Number of observations used: 48
+
+
+ANOVA TABLE:
+
+                  Df      Sum Sq     Mean Sq F value Pr(>F)
+Trial              1  37663.2400  37663.2400    1.60 0.3330
+Trial:replication  2  46985.3800  23492.6900    4.41 0.0245
+male               5 504403.4000 100880.7000   18.94 0.0000
+fem                1  13619.1800  13619.1800    2.56 0.1241
+male:fem           5  33039.9000   6607.9800    1.24 0.3241
+Trial:male         5   7342.3970   1468.4790    0.28 0.9215
+Trial:fem          1   3613.8150   3613.8150    0.68 0.4189
+Trial:male:fem     5  17167.3300   3433.4670    0.64 0.6683
+Residuals         22 117177.3000   5326.2390               
+-------
+REMARK: Raw dataset is balanced.
+
+
+LINEAR MIXED MODEL FIT BY RESTRICTED MAXIMUM LIKELIHOOD:
+
+ Formula:  Y ~ 1 + (fem) + (1|Trial) + (1|Trial:replication) + (1|male) + (1|fem:male) + (1|Trial:fem) + (1|Trial:male) + (1|Trial:fem:male) 
+
+      AIC      BIC    logLik deviance  REMLdev
+ 566.0242 584.7362 -273.0121 563.9037 546.0242
+
+ Fixed Effects:
+             Estimate Std. Error t value
+ (Intercept) 201.1929    54.1508  3.7154
+ femF2       -33.6887    23.4660 -1.4356
+
+ Random Effects:                                            
+ Groups              Variance Std. Deviation
+ Trial:fem:male        0.0000         0.0000
+ Trial:male            0.0000         0.0011
+ fem:male            551.2100        23.4780
+ male              11784.0000       108.5600
+ Trial:fem             0.0000         0.0000
+ Trial:replication  1591.0000        39.8870
+ Trial               590.4700        24.3000
+ Residual           4403.0000        66.3550
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                             
+                     Estimate
+ VA              47136.000000
+ VAxE                0.000005
+ VD               1102.420000
+ VDxE                0.000000
+ h2-narrow sense     0.895417
+ H2-broad sense      0.916359
+ h2-family           0.914570
+ Dominance Ratio     0.216278
+
+
+==============================================================

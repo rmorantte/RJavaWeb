@@ -1,0 +1,188 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/Diallel4RowCol_missing.csv
+
+DIALLEL ANALYSIS: GRIFFING METHOD IV IN ROW-COLUMN (CROSS)
+
+-----------------------------
+RESPONSE VARIABLE: Y
+-----------------------------
+-----------------------------
+ANALYSIS FOR: Trial = 1
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels            
+ Trial     1              1                 
+ row       15             1  10  11 ... 9   
+ col       3              1  2  3           
+ rep       3              1  2  3           
+ p1        5              P1  P2  P3  P4  P5
+ p2        5              P2  P3  P4  P5  P6
+
+Number of observations read: 44
+Number of missing observations: 1
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = p1:p2)
+
+ Formula for Model 1: Y ~ Crosses + (1|rep) + (1|row:rep) + (1|col:rep)
+ Formula for Model 2: Y ~ (1|rep) + (1|row:rep) + (1|col:rep)
+
+        Df    AIC    BIC  logLik Chisq Chi Df Pr(>Chisq)
+ model2  5 523.45 532.37 -256.73                        
+ model1 19 530.13 564.03 -246.06 21.33     14     0.0936
+
+
+MATRIX OF MEANS:
+
+   P1       P2       P3       P4       P5       P6      
+P1          147.0429 153.4083  91.9388 126.4202  36.8476
+P2                   140.0401 236.4963  41.2075 180.9715
+P3                             88.6358 132.0117  94.6828
+P4                                      75.0301 113.5904
+P5                                               45.1971
+P6                                                      
+-------
+REMARK: Raw data and estimates of the missing values are used. 
+
+
+ANALYSIS OF VARIANCE:
+                                         
+ SV    Df   Sum Sq Mean Sq F value Pr(>F)
+ GCA    5 16532.54 3306.51    1.16 0.3999
+ SCA    9 25763.90 2862.66    1.34 0.3252
+ Error 10 21326.33 2132.63               
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+       Variance Component Std. Error
+ GCA             110.9630   622.2070
+ SCA             730.0226  1652.4804
+ Error          2132.6333    20.6525
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                            
+                    Estimate
+ VA               443.851836
+ VD              2920.090389
+ h2-narrow sense    0.080751
+ H2-broad sense     0.612007
+ Dominance Ratio    3.627389
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal):
+
+   P1       P2       P3       P4       P5       P6      
+P1  -3.0456  -7.9590  32.6513 -28.0464  52.8912 -49.5371
+P2           44.4795 -28.2421  68.9860 -79.8467  47.0617
+P3                    10.2345 -44.6296  45.2025  -4.9821
+P4                              9.4628 -11.0073  14.6973
+P5                                     -36.9934  -7.2398
+P6                                              -24.1377
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+         Std. Error      LSD
+ Gi         21.0784         
+ Sii        35.7712         
+ Gi-Gj      32.6545  72.7588
+ Sij-Sik    56.5593 126.0219
+ Sij-Skl    46.1804 102.8964
+
+
+-----------------------------
+ANALYSIS FOR: Trial = 2
+-----------------------------
+
+DATA SUMMARY: 
+
+ Factors   No of Levels   Levels            
+ Trial     1              2                 
+ row       15             1  10  11 ... 9   
+ col       3              1  2  3           
+ rep       3              1  2  3           
+ p1        5              P1  P2  P3  P4  P5
+ p2        5              P2  P3  P4  P5  P6
+
+Number of observations read: 43
+Number of missing observations: 2
+
+
+TESTING FOR THE SIGNIFICANCE OF CROSS EFFECT: (Crosses = p1:p2)
+
+ Formula for Model 1: Y ~ Crosses + (1|rep) + (1|row:rep) + (1|col:rep)
+ Formula for Model 2: Y ~ (1|rep) + (1|row:rep) + (1|col:rep)
+
+        Df    AIC    BIC  logLik Chisq Chi Df Pr(>Chisq)
+ model2  5 511.23 520.03 -250.61                        
+ model1 19 531.28 564.74 -246.64  7.95     14     0.8920
+
+
+MATRIX OF MEANS:
+
+   P1       P2       P3       P4       P5       P6      
+P1          147.0429 153.4083  91.9388 106.5875 156.8321
+P2                   140.0401 236.4963 141.2075 180.9715
+P3                            155.3024 132.0117 161.3494
+P4                                     108.3635 113.5904
+P5                                              178.5305
+P6                                                      
+-------
+REMARK: Raw data and estimates of the missing values are used. 
+
+
+ANALYSIS OF VARIANCE:
+                                         
+ SV    Df   Sum Sq Mean Sq F value Pr(>F)
+ GCA    5  6819.62 1363.92    1.08 0.4307
+ SCA    9 11331.20 1259.02    0.53 0.8222
+ Error 10 23696.00 2369.60               
+
+
+ESTIMATES OF VARIANCE COMPONENTS:
+
+       Variance Component Std. Error
+ GCA              26.2255   261.7690
+ SCA               0.0000  1214.6001
+ Error          2369.6000    21.7697
+
+
+ESTIMATES OF GENETIC VARIANCE COMPONENTS:
+                           
+                   Estimate
+ VA              104.901870
+ VD                0.000000
+ h2-narrow sense   0.042393
+ H2-broad sense    0.042393
+ Dominance Ratio   0.000000
+
+
+GENERAL COMBINING ABILITY EFFECTS (diagonal), SPECIFIC COMBINING
+ABILITY EFFECTS (above diagonal):
+
+   P1       P2       P3       P4       P5       P6      
+P1 -19.6870  -7.9818  24.2952 -28.0692  -3.6727  15.4285
+P2           27.8002 -36.5602  69.0012 -16.5400  -7.9192
+P3                     1.8886  13.7189   0.1759  -1.6297
+P4                             -7.2165 -14.3672 -40.2836
+P5                                     -16.9643  34.4041
+P6                                               14.1791
+
+
+TABLE OF STANDARD ERRORS AND LSDs:
+
+         Std. Error      LSD
+ Gi         22.2186         
+ Sii        37.7062         
+ Gi-Gj      34.4209  76.6946
+ Sij-Sik    59.6188 132.8389
+ Sij-Skl    48.6785 108.4625
+
+
+
+==============================================================

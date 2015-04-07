@@ -1,0 +1,335 @@
+
+DATA FILE: E:/NSALES/juno workspace/workspace_1/RJavaManager/sample_datasets/NC2RowCol.csv
+
+SINGLE-ENVIRONMENT ANALYSIS
+
+DESIGN: Latinized Row-Column
+
+==============================
+GENOTYPE AS: Fixed
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DESCRIPTIVE STATISTICS:
+
+  Variable Trial N_NonMissObs     Mean   StdDev
+1        Y     1           63 132.2657 88.96984
+2        Y     2           63 214.3043 88.98778
+
+------------------------------
+ANALYSIS FOR: Trial  =  1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  63 
+Number of observations used:  63 
+
+ Factors   Number of Levels   Levels             
+ trmt      21                 T1  T10  T11 ... T9
+ rep       3                  1  2  3            
+ row       21                 1  10  11 ... 9    
+ col       3                  1  2  3            
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups     Variance     Std.Dev.
+1  rep:row 1.952741e-11 4.418983e-06
+2      row 0.000000e+00 0.000000e+00
+3  rep:col 0.000000e+00 0.000000e+00
+4      col 0.000000e+00 0.000000e+00
+5      rep 1.995636e+02 1.412670e+01
+6 Residual 5.988767e+03 7.738713e+01
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+trmt 20 230859.5 11542.98  1.9274 39.9999 0.0383
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+   trmt    LSMean StdErrMean
+1    T1 270.53639   45.41779
+2   T10  14.63280   45.41779
+3   T11  37.53917   45.41779
+4   T12 158.24850   45.41779
+5   T13  89.15875   45.41779
+6   T14 100.32204   45.41779
+7   T15  84.18855   45.41779
+8   T16 150.79559   45.41779
+9   T17 207.79212   45.41779
+10  T18  77.48606   45.41779
+11  T19 180.41048   45.41779
+12   T2 204.51422   45.41779
+13  T20  89.40148   45.41779
+14  T21 134.96299   45.41779
+15   T3 130.43835   45.41779
+16   T4 206.40871   45.41779
+17   T5 126.68759   45.41779
+18   T6 100.55642   45.41779
+19   T7 163.81395   45.41779
+20   T8  85.56632   45.41779
+21   T9 164.11863   45.41779
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   63.1863 
+ Average   63.1863 
+ Maximum   63.1863 
+
+
+------------------------------
+ANALYSIS FOR: Trial  =  2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  63 
+Number of observations used:  63 
+
+ Factors   Number of Levels   Levels             
+ trmt      21                 T1  T10  T11 ... T9
+ rep       3                  1  2  3            
+ row       21                 1  10  11 ... 9    
+ col       3                  1  2  3            
+
+
+VARIANCE COMPONENTS TABLE:
+
+    Groups    Variance  Std.Dev.
+1  rep:row 1072.304610 32.746063
+2      row 1072.304637 32.746063
+3  rep:col    2.099175  1.448853
+4      col  721.200864 26.855183
+5      rep    0.000000  0.000000
+6 Residual 5029.722374 70.920536
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+     Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+trmt 20 101128.5 5056.424  1.0053 10.6915 0.5179
+
+
+GENOTYPE LSMEANS AND STANDARD ERRORS:
+
+   trmt   LSMean StdErrMean
+1    T1 187.7387   51.30834
+2   T10 183.5922   51.30834
+3   T11 180.9605   51.30834
+4   T12 247.6181   51.30834
+5   T13 220.3790   51.30834
+6   T14 204.6778   51.30834
+7   T15 142.6237   51.30834
+8   T16 301.8421   51.30834
+9   T17 140.1047   51.30834
+10  T18 145.3601   51.30834
+11  T19 272.6924   51.30834
+12   T2 309.1137   51.30834
+13  T20 180.1969   51.30834
+14  T21 171.0213   51.30834
+15   T3 268.4719   51.30834
+16   T4 184.4069   51.30834
+17   T5 217.7924   51.30834
+18   T6 188.4706   51.30834
+19   T7 224.6555   51.30834
+20   T8 242.1740   51.30834
+21   T9 286.4980   51.30834
+
+
+STANDARD ERROR OF THE DIFFERENCE (SED):
+
+           Estimate
+ Minimum   57.9185 
+ Average   68.0405 
+ Maximum   69.1685 
+
+
+==============================
+GENOTYPE AS: Random
+==============================
+
+------------------------------
+RESPONSE VARIABLE: Y
+------------------------------
+
+DESCRIPTIVE STATISTICS:
+
+  Variable Trial N_NonMissObs     Mean   StdDev
+1        Y     1           63 132.2657 88.96984
+2        Y     2           63 214.3043 88.98778
+
+------------------------------
+ANALYSIS FOR: Trial  =  1 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  63 
+Number of observations used:  63 
+
+ Factors   Number of Levels   Levels             
+ trmt      21                 T1  T10  T11 ... T9
+ rep       3                  1  2  3            
+ row       21                 1  10  11 ... 9    
+ col       3                  1  2  3            
+
+
+VARIANCE COMPONENTS TABLE:
+
+      Groups     Variance     Std.Dev.
+1 Test:Check 1.987171e+03 4.457770e+01
+2    rep:row 0.000000e+00 0.000000e+00
+3        row 0.000000e+00 0.000000e+00
+4    rep:col 2.380089e-11 4.878615e-06
+5        col 0.000000e+00 0.000000e+00
+6        rep 2.858424e-12 1.690687e-06
+7   Residual 6.188347e+03 7.866605e+01
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + Check + (1|rep) + (1|col) + (1|rep:col) + (1|row) + (1|rep:row) + (1|Test:Check) 
+Formula for Model2:  Y ~ 1 + Check + (1|rep) + (1|col) + (1|rep:col) + (1|row) + (1|rep:row)  
+
+            AIC      BIC    logLik  Chisq Df Pr(>Chisq)
+Model2 742.1498 759.2948 -363.0749                     
+Model1 741.6776 760.9658 -361.8388 2.4721  1     0.1159
+
+
+TESTING FOR THE SIGNIFICANCE OF CHECK EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+      Df Sum Sq Mean Sq F value   Denom Pr(>F)
+Check  1 5.3577  5.3577   9e-04 18.9967 0.9768
+
+
+PREDICTED MEANS:
+
+   trmt     Means
+1    T1 200.15694
+2   T10  74.59376
+3   T11  85.83314
+4   T12 145.06110
+5   T13 111.16111
+6   T14 116.63855
+7   T15 108.72240
+8   T16 141.40421
+9   T17 169.37046
+10  T18 105.43371
+11  T19 155.93522
+12   T2 167.76211
+13  T20 111.28021
+14  T21 133.63569
+15   T4 168.69167
+16   T5 129.57523
+17   T6 116.75356
+18   T7 147.79187
+19   T8 109.39843
+20   T9 147.94137
+
+
+CHECK/CONTROL LSMEANS:
+
+  trmt   LSMean StdErrMean
+1   T3 130.4384   64.16012
+
+
+HERITABILITY:
+     
+0.49 
+
+
+------------------------------
+ANALYSIS FOR: Trial  =  2 
+------------------------------
+
+DATA SUMMARY:
+
+Number of observations read:  63 
+Number of observations used:  63 
+
+ Factors   Number of Levels   Levels             
+ trmt      21                 T1  T10  T11 ... T9
+ rep       3                  1  2  3            
+ row       21                 1  10  11 ... 9    
+ col       3                  1  2  3            
+
+
+VARIANCE COMPONENTS TABLE:
+
+      Groups  Variance Std.Dev.
+1 Test:Check    0.0000  0.00000
+2    rep:row 1684.0048 41.03663
+3        row 1678.1860 40.96567
+4    rep:col  174.8772 13.22411
+5        col  710.1469 26.64858
+6        rep    0.0000  0.00000
+7   Residual 4051.5038 63.65142
+
+
+TESTING FOR THE SIGNIFICANCE OF GENOTYPIC EFFECT USING -2 LOGLIKELIHOOD RATIO TEST:
+
+Formula for Model1:  Y ~ 1 + Check + (1|rep) + (1|col) + (1|rep:col) + (1|row) + (1|rep:row) + (1|Test:Check) 
+Formula for Model2:  Y ~ 1 + Check + (1|rep) + (1|col) + (1|rep:col) + (1|row) + (1|rep:row)  
+
+          AIC      BIC  logLik Chisq Df Pr(>Chisq)
+Model2 730.18 747.3251 -357.09                    
+Model1 732.18 751.4682 -357.09     0  1     0.9977
+
+
+TESTING FOR THE SIGNIFICANCE OF CHECK EFFECT:
+
+Analysis of Variance Table with Satterthwaite Denominator Df
+      Df   Sum Sq  Mean Sq F value   Denom Pr(>F)
+Check  1 16686.64 16686.64  4.1186 48.2168 0.0480
+
+
+PREDICTED MEANS:
+
+   trmt    Means
+1    T1 210.1375
+2   T10 210.1375
+3   T11 210.1375
+4   T12 210.1375
+5   T13 210.1375
+6   T14 210.1375
+7   T15 210.1375
+8   T16 210.1375
+9   T17 210.1375
+10  T18 210.1375
+11  T19 210.1375
+12   T2 210.1375
+13  T20 210.1375
+14  T21 210.1375
+15   T4 210.1375
+16   T5 210.1375
+17   T6 210.1375
+18   T7 210.1375
+19   T8 210.1375
+20   T9 210.1375
+
+
+CHECK/CONTROL LSMEANS:
+
+  trmt   LSMean StdErrMean
+1   T3 297.6403   46.54838
+
+
+HERITABILITY:
+  
+0 
+
+
+
+==============================
