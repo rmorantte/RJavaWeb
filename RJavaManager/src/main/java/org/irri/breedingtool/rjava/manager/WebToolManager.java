@@ -1156,7 +1156,19 @@ public class WebToolManager implements IRJavaWebToolManager {
 	public void doGSDataPrep(String resultFolderPath, String pheno_file, String geno_file,  String map_file, String rel_file, String pFormat, 
 			String gFormat, String mFormat, String rFormat) {
 				
-		
+		if (!geno_file.equals("NULL")) {
+			geno_file = "\"" + geno_file + "\"";
+			gFormat = "\"" + gFormat + "\"";
+		}
+		if (!map_file.equals("NULL")) {
+			map_file = "\"" + map_file + "\"";
+			mFormat = "\"" + mFormat + "\"";
+		}
+		if (!rel_file.equals("NULL")) {
+			rel_file = "\"" + rel_file + "\"";
+			rFormat = "\"" + rFormat + "\"";
+		}
+
 //		rJavaManager.getWebToolManager().doGSDataPrep(
 //				resultFolderPath, pheno_file, geno_file,  map_file, rel_file, pFormat, gFormat, mFormat, rFormat); 
 
@@ -1181,8 +1193,8 @@ public class WebToolManager implements IRJavaWebToolManager {
 			
 //			String source1 = "source(\"E:/StarPbtools/GS/script/GSDataPrep.R\")";
 //			String source2 = "source(\'E:/StarPbtools/GS/script/trimStrings.R\')";
-			String getGSDataPrepOut = "gsDataPrepOut <- GSDataPrep(\"" + resultFolderPath + "\", \"" + pheno_file + "\", \"" + geno_file + "\", \"" + map_file +
-					"\", \"" + rel_file + "\", \"" + pFormat + "\", \"" + gFormat + "\", \"" + mFormat + "\", \"" + rFormat + "\")";
+			String getGSDataPrepOut = "gsDataPrepOut <- GSDataPrep(\"" + resultFolderPath + "\", \"" + pheno_file + "\", " + geno_file + ", " + map_file +
+					", " + rel_file + ", \"" + pFormat + "\", " + gFormat + ", " + mFormat + ", " + rFormat + ")";
 
 			System.out.println(source1);
 			System.out.println(source2);
@@ -1357,16 +1369,16 @@ public class WebToolManager implements IRJavaWebToolManager {
 //		String [] respVarMean = new String[respvar.length];
 		
 		String genoFile = null;
-		if (geno_file == "NULL") genoFile = geno_file; else genoFile = "\"" + geno_file + "\"";
+		if (geno_file.equals("NULL")) genoFile = geno_file; else genoFile = "\"" + geno_file + "\"";
 		
 		String relFile = null;
-		if (rel_file == "NULL") relFile = rel_file; else relFile = "\"" + rel_file + "\"";
+		if (rel_file.equals("NULL")) relFile = rel_file; else relFile = "\"" + rel_file + "\"";
 		
 		String mapFile = null;
-		if (map_file == "NULL") mapFile = map_file; else mapFile = "\"" + map_file + "\"";
+		if (map_file.equals("NULL")) mapFile = map_file; else mapFile = "\"" + map_file + "\"";
 		
 		String popStrucFile = null;
-		if (popStruc_file == "NULL") popStrucFile = popStruc_file; else popStrucFile = "\"" + popStruc_file + "\"";
+		if (popStruc_file.equals("NULL")) popStrucFile = popStruc_file; else popStrucFile = "\"" + popStruc_file + "\"";
 
 		System.out.println("start GBLUP");
 		System.out.println("resultFolderPath: " + resultFolderPath);
