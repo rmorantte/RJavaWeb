@@ -32,7 +32,7 @@ public class TestGBLUP {
 //                int nrep = 2;
 
 		
-		String pheno_file = resultFolderPath + "phenoData2V.csv"; //fixed filename, output of GSDataCheck 
+		String pheno_file = resultFolderPath + "phenoData.csv"; //fixed filename, output of GSDataCheck 
 		String geno_file =  resultFolderPath + "synbreed.csv"; //fixed filename, output of GSDataImputation
 //		int markerFormat = 3;//c(1, 2, 3), ,
 		String importRel = "FALSE"; 
@@ -40,7 +40,7 @@ public class TestGBLUP {
 		String rMatType = "t1"; //c("t1", "t2", "t3", "t4"), 
         String map_file = "NULL"; //# ped_file = NULL, #peFormat = NULL, #data quality check options, ...,
 //        String[] traitNames = {"Trait.1"}; //
-        String[] traitNames = {"Trait.1", "Trait2"};
+        String[] traitNames = {"X1", "X2"}; //{"Trait.1", "Trait2"};
         String[] covariates = {"NULL"}; 
         String doCV = "TRUE"; //"FALSE"; //
 //        String varCompEst = "BL"; //c("BL", "BRR"), 

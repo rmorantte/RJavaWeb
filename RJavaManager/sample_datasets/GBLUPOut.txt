@@ -5,106 +5,106 @@ Genome-based Best Linear Unbiased Prediction
 
 Cross Validation
 
-Trait:  Trait.1 
+Trait:  X1 
 
 Object of class 'cvData' 
 
  5 -fold cross validation with 2 replication(s) 
      Sampling:                 random 
      Variance components:      committed 
-     Number of random effects: 1250 
-     Number of individuals:    1250 -- 1250  
-     Size of the TS:           250 -- 250  
+     Number of random effects: 599 
+     Number of individuals:    599 -- 599  
+     Size of the TS:           119 -- 120  
 
 Results: 
                       Min 	  Mean +- pooled SE 	  Max 
- Predictive ability:  0.4388  	  0.5291 +- 0.00446  	  0.6243 
- Rank correlation:    0.4190  	  0.5093 +- 0.00182  	  0.5811 
- Mean squared error:  52.968  	  59.181 +- 0.4752  	  68.891 
- Bias (reg. slope)    0.8347  	  1.0256 +- 0.009458  	  1.3332 
- 10% best predicted:  157.52  	  157.65 +- 0.1266  	  157.77 
+ Predictive ability:  -0.2000  	  -0.00181 +- 0.03897  	  0.0864 
+ Rank correlation:    -0.2023  	  0.02573 +- 0.01737  	  0.1460 
+ Mean squared error:  0.856  	  0.998 +- 2.592e-05  	  1.074 
+ Bias (reg. slope)    NA  	  NA +- NA  	  NA 
+ 10% best predicted:  -0.24  	  -0.19 +- 0.05815  	  -0.13 
 
 Seed start:  
 Seed replications: 
-[1] 31181 87021
+[1] 68436 88529
 
 Spearman's Rank Correlation
-        rep1   rep2
-fold1 0.5303 0.4449
-fold2 0.5460 0.5460
-fold3 0.4838 0.5811
-fold4 0.4909 0.4190
-fold5 0.5047 0.5465
+         rep1    rep2
+fold1 -0.2023  0.0561
+fold2  0.0784 -0.0979
+fold3  0.0479 -0.0068
+fold4  0.0417  0.1181
+fold5  0.0761  0.1460
 
 Predictive Ability
-        rep1   rep2
-fold1 0.5445 0.4791
-fold2 0.5606 0.5536
-fold3 0.5147 0.6243
-fold4 0.5184 0.4388
-fold5 0.5297 0.5275
+         rep1    rep2
+fold1 -0.2000  0.0656
+fold2  0.0313 -0.0371
+fold3  0.0335  0.0039
+fold4 -0.0302  0.0864
+fold5 -0.0385  0.0670
 
 Mean squared error
-          rep1     rep2
-fold1 55.84517 57.61564
-fold2 60.10256 58.14383
-fold3 61.48604 60.66072
-fold4 57.30217 68.89143
-fold5 58.79127 52.96785
+           rep1      rep2
+fold1 0.9206103 1.0509772
+fold2 1.0737905 0.9996643
+fold3 1.0725311 1.0426845
+fold4 1.0689336 0.9070638
+fold5 0.8564162 0.9916325
 
 Mean of observed values for the 10% best predicted
-          m10
-rep1 157.7720
-rep2 157.5187
+            m10
+rep1 -0.2439823
+rep2 -0.1276895
 
-Trait:  Trait2 
+Trait:  X2 
 
 Object of class 'cvData' 
 
  5 -fold cross validation with 2 replication(s) 
      Sampling:                 random 
      Variance components:      committed 
-     Number of random effects: 1250 
-     Number of individuals:    1250 -- 1250  
-     Size of the TS:           250 -- 250  
+     Number of random effects: 599 
+     Number of individuals:    599 -- 599  
+     Size of the TS:           119 -- 120  
 
 Results: 
                       Min 	  Mean +- pooled SE 	  Max 
- Predictive ability:  0.4479  	  0.5240 +- 0.00117  	  0.5984 
- Rank correlation:    0.4541  	  0.5052 +- 0.00167  	  0.5649 
- Mean squared error:  0.00517  	  0.00594 +- 1.098e-05  	  0.00655 
- Bias (reg. slope)    0.8278  	  1.0099 +- 0.005717  	  1.1933 
- 10% best predicted:  1.57  	  1.57 +- 0.0009036  	  1.58 
+ Predictive ability:  -0.0972  	  0.01204 +- 0.00522  	  0.1224 
+ Rank correlation:    -0.0947  	  0.01468 +- 0.00998  	  0.2384 
+ Mean squared error:  0.859  	  0.999 +- 4.574e-05  	  1.164 
+ Bias (reg. slope)    NA  	  NA +- NA  	  NA 
+ 10% best predicted:  -0.18  	  -0.097 +- 0.08739  	  -0.0095 
 
 Seed start:  
 Seed replications: 
-[1] 26527 97065
+[1] 77658 47155
 
 Spearman's Rank Correlation
-        rep1   rep2
-fold1 0.4850 0.5437
-fold2 0.5580 0.5041
-fold3 0.5002 0.4541
-fold4 0.4874 0.5649
-fold5 0.4873 0.4678
+         rep1    rep2
+fold1 -0.0947 -0.0564
+fold2  0.0210  0.2384
+fold3  0.0144 -0.0778
+fold4 -0.0248  0.1014
+fold5  0.1076 -0.0823
 
 Predictive Ability
-        rep1   rep2
-fold1 0.4950 0.5378
-fold2 0.5984 0.5337
-fold3 0.5048 0.4479
-fold4 0.5034 0.5942
-fold5 0.5123 0.5120
+         rep1    rep2
+fold1 -0.0412 -0.0321
+fold2  0.0104  0.1224
+fold3  0.0662 -0.0638
+fold4 -0.0406  0.1048
+fold5  0.0915 -0.0972
 
 Mean squared error
-             rep1        rep2
-fold1 0.005862496 0.005166788
-fold2 0.005478659 0.005699125
-fold3 0.006554787 0.006488971
-fold4 0.006206860 0.006195470
-fold5 0.005634123 0.006076805
+           rep1      rep2
+fold1 1.0419523 0.8593243
+fold2 0.9155706 0.8964435
+fold3 1.1300966 1.1644363
+fold4 0.9072780 1.0752076
+fold5 0.9978533 0.9968817
 
 Mean of observed values for the 10% best predicted
-          m10
-rep1 1.573433
-rep2 1.575240
+              m10
+rep1 -0.009450869
+rep2 -0.184238112
