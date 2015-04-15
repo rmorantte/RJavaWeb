@@ -1164,6 +1164,7 @@ public class WebToolManager implements IRJavaWebToolManager {
 			map_file = "\"" + map_file + "\"";
 			mFormat = "\"" + mFormat + "\"";
 		}
+		System.out.println("mFormat: " + mFormat);
 		if (!rel_file.equals("NULL")) {
 			rel_file = "\"" + rel_file + "\"";
 			rFormat = "\"" + rFormat + "\"";
