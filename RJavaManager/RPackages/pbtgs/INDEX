@@ -11,7 +11,6 @@ bigcor                  Function for creating matrix of correlation
 createGSPlots           Function for creating graphs for genomic
                         selection
 doGBLUP                 Function for performing GBLUP
-doGSDataCheck           Function for checking GS data quality
 doGenSim                Function for computing relationhsip matrix
 marker_relationship     Function for computing marker-based
                         relationship matrix

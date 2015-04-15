@@ -1354,7 +1354,9 @@ public class WebToolManager implements IRJavaWebToolManager {
 	
 	
 	@Override
-	public void doGBLUP(String resultFolderPath, String pheno_file, String geno_file, int markerFormat, String importRel, String rel_file, String rMatType, 
+	public void doGBLUP(String resultFolderPath, String pheno_file, String geno_file, 
+//			int markerFormat, 
+			String importRel, String rel_file, String rMatType, 
 			String map_file, String[] traitNames, String[] covariates, String doCV, 
 //			String varCompEst, 
 			String samplingStrat, String popStruc_file, int nfolds, int nrep) {
@@ -1403,8 +1405,9 @@ public class WebToolManager implements IRJavaWebToolManager {
 //			### add sourcing panel functions
 			String source8 = "sink(paste(\"" + resultFolderPath + "GBLUPOut.txt\", sep = \"\"))";
 //			String getGBLUPOut  = null;
-			String getGBLUPOut = "gsGBLUP <- doGBLUP(\"" + resultFolderPath + "\", \"" + pheno_file + "\", " + genoFile + ", " + markerFormat + ", " + importRel + 
-					", " + relFile + ", \"" + rMatType + "\", " + mapFile + ", " + traitNamesVector + ", " + covariatesVector + ", " + doCV + ", \"" + 
+			String getGBLUPOut = "gsGBLUP <- doGBLUP(\"" + resultFolderPath + "\", \"" + pheno_file + "\", " + genoFile + ", " + 
+//					markerFormat + ", " + 
+					importRel + ", " + relFile + ", \"" + rMatType + "\", " + mapFile + ", " + traitNamesVector + ", " + covariatesVector + ", " + doCV + ", \"" + 
 //					varCompEst + "\", \"" +
 					samplingStrat + "\", " + popStrucFile + ", " + nfolds + ", " + nrep + ")";
 			String source9 = "sink()";

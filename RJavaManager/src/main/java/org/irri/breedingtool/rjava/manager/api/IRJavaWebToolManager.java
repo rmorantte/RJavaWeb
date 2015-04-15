@@ -91,7 +91,9 @@ public interface IRJavaWebToolManager {
 	
 	public void doGSDataImputation(String resultFolderPath, String geno_file, String impType, String pheno_file, String familyTrait, String packageFormat);
 
-	public void doGBLUP(String resultFolderPath, String pheno_file, String geno_file, int markerFormat, String importRel, String rel_file, String rMatType, 
+	public void doGBLUP(String resultFolderPath, String pheno_file, String geno_file, 
+//			int markerFormat, 
+			String importRel, String rel_file, String rMatType, 
 			String map_file, String[] traitNames, String[] covariates, String doCV, 
 //			String varCompEst, 
 			String samplingStrat, String popStruc_file, int nfolds, int nrep);

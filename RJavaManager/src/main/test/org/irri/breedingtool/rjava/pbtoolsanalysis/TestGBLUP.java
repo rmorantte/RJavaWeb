@@ -14,24 +14,42 @@ public class TestGBLUP {
 		//supply path where output will be saved
 		String resultFolderPath = DATA_PATH;  // outputPath = "E:/App Files/workspace_Juno/RJavaManager/sample_datasets"
 
-//		doGBLUP <- function(outputPath, 
-				String pheno_file = resultFolderPath + "phenoData2V.csv"; //fixed filename, output of GSDataCheck 
-				String geno_file =  resultFolderPath + "synbreed.csv"; //fixed filename, output of GSDataImputation
-				int markerFormat = 3;//c(1, 2, 3), ,
-				String importRel = "FALSE"; 
-				String rel_file = "NULL"; 
-				String rMatType = "t1"; //c("t1", "t2", "t3", "t4"), 
-                String map_file = "NULL"; //# ped_file = NULL, #peFormat = NULL, #data quality check options, ...,
-//                String[] traitNames = {"Trait.1"}; //
-                String[] traitNames = {"Trait.1", "Trait2"};
-                String[] covariates = {"NULL"}; 
-                String doCV = "TRUE"; //"FALSE"; //
-//                String varCompEst = "BL"; //c("BL", "BRR"), 
-                String samplingStrat = "random"; //c("random","within popStruc"),
-                String popStruc_file = "NULL";
-                int nfolds = 5; 
-                int nrep = 2;
+//				String pheno_file = resultFolderPath + "phenoData2V.csv"; //fixed filename, output of GSDataCheck 
+//				String geno_file =  resultFolderPath + "synbreed.csv"; //fixed filename, output of GSDataImputation
+//				int markerFormat = 3;//c(1, 2, 3), ,
+//				String importRel = "FALSE"; 
+//				String rel_file = "NULL"; 
+//				String rMatType = "t1"; //c("t1", "t2", "t3", "t4"), 
+//                String map_file = "NULL"; //# ped_file = NULL, #peFormat = NULL, #data quality check options, ...,
+////                String[] traitNames = {"Trait.1"}; //
+//                String[] traitNames = {"Trait.1", "Trait2"};
+//                String[] covariates = {"NULL"}; 
+//                String doCV = "TRUE"; //"FALSE"; //
+////                String varCompEst = "BL"; //c("BL", "BRR"), 
+//                String samplingStrat = "random"; //c("random","within popStruc"),
+//                String popStruc_file = "NULL";
+//                int nfolds = 5; 
+//                int nrep = 2;
 
+		
+		String pheno_file = resultFolderPath + "phenoData2V.csv"; //fixed filename, output of GSDataCheck 
+		String geno_file =  resultFolderPath + "synbreed.csv"; //fixed filename, output of GSDataImputation
+//		int markerFormat = 3;//c(1, 2, 3), ,
+		String importRel = "FALSE"; 
+		String rel_file = "NULL"; 
+		String rMatType = "t1"; //c("t1", "t2", "t3", "t4"), 
+        String map_file = "NULL"; //# ped_file = NULL, #peFormat = NULL, #data quality check options, ...,
+//        String[] traitNames = {"Trait.1"}; //
+        String[] traitNames = {"Trait.1", "Trait2"};
+        String[] covariates = {"NULL"}; 
+        String doCV = "TRUE"; //"FALSE"; //
+//        String varCompEst = "BL"; //c("BL", "BRR"), 
+        String samplingStrat = "random"; //c("random","within popStruc"),
+        String popStruc_file = "NULL";
+        int nfolds = 5; 
+        int nrep = 2;
+		
+		
 //		//Pedigree-based
 //		String doPedigree = "TRUE";
 //		//supply format of input file, whether "csv", "ctxt", "stxt", "ttxt", or "sctxt" 
@@ -64,7 +82,9 @@ public class TestGBLUP {
 //				relType, outFileName, markerFormat);
 		
 		rJavaManager.getWebToolManager().doGBLUP(
-				resultFolderPath, pheno_file, geno_file, markerFormat, importRel, rel_file, rMatType, 
+				resultFolderPath, pheno_file, geno_file, 
+//				markerFormat, 
+				importRel, rel_file, rMatType, 
                 map_file, traitNames, covariates, doCV, 
 //                varCompEst, 
                 samplingStrat, popStruc_file, nfolds, nrep);

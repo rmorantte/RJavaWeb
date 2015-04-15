@@ -4,7 +4,6 @@ BLUP_synbreed_gv	BLUP_synbreed_gv
 createGSPlots	createGSPlots
 doGBLUP	doGBLUP
 doGenSim	doGenSim
-doGSDataCheck	doGSDataCheck
 GSDataCheck	GSDataCheck
 GSDataImputation	GSDataImputation
 GSDataPrep	GSDataPrep
