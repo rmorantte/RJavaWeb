@@ -40,7 +40,7 @@ public class TestGBLUP {
 		String rMatType = "t1"; //c("t1", "t2", "t3", "t4"), 
         String map_file = "NULL"; //# ped_file = NULL, #peFormat = NULL, #data quality check options, ...,
 //        String[] traitNames = {"Trait.1"}; //
-        String[] traitNames = {"X1", "X2"}; //{"Trait.1", "Trait2"};
+        String[] traitNames = {"X1", "X2", "X4", "X5"}; //{"Trait.1", "Trait2"};
         String[] covariates = {"NULL"}; 
         String doCV = "TRUE"; //"FALSE"; //
 //        String varCompEst = "BL"; //c("BL", "BRR"), 
