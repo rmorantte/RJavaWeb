@@ -8,6 +8,4 @@ GSDataCheck	GSDataCheck
 GSDataImputation	GSDataImputation
 GSDataPrep	GSDataPrep
 marker_relationship	marker_relationship
-panel.corCoef	panel.corCoef
-panel.hist	panel.hist
 pedigree_relationship	pedigree_relationship

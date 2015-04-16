@@ -14,7 +14,5 @@ doGBLUP                 Function for performing GBLUP
 doGenSim                Function for computing relationhsip matrix
 marker_relationship     Function for computing marker-based
                         relationship matrix
-panel.corCoef           put correlations on the lower panels
-panel.hist              put histograms on the diagonal
 pedigree_relationship   Function for computing pedigree-based
                         relationship matrix
