@@ -1,0 +1,58 @@
+
+GENOMIC SELECTION
+
+Genome-based Best Linear Unbiased Prediction
+
+Cross Validation
+
+Trait:  ph1 
+
+Object of class 'cvData' 
+
+ 5 -fold cross validation with 2 replication(s) 
+     Sampling:                 random 
+     Variance components:      committed 
+     Number of random effects: 200 
+     Number of individuals:    200 -- 200  
+     Size of the TS:           40 -- 40  
+
+Results: 
+                      Min 	  Mean +- pooled SE 	  Max 
+ Predictive ability:  -0.3369  	  -0.04599 +- 0.05891  	  0.2536 
+ Rank correlation:    -0.3243  	  -0.00958 +- 0.05228  	  0.2749 
+ Mean squared error:  149.448  	  242.118 +- 2.1539  	  336.283 
+ Bias (reg. slope)    -25.3878  	  -5.1098 +- 3.5573  	  9.2207 
+ 10% best predicted:  103.19  	  103.58 +- 0.3983  	  103.98 
+
+Seed start:  
+Seed replications: 
+[1] 69697 57147
+
+Spearman's Rank Correlation
+         rep1    rep2
+fold1  0.2038  0.0223
+fold2  0.0371 -0.0977
+fold3 -0.1345  0.1388
+fold4 -0.3243 -0.1248
+fold5 -0.0914  0.2749
+
+Predictive Ability
+         rep1    rep2
+fold1  0.1485  0.0196
+fold2  0.0173 -0.1408
+fold3 -0.1881  0.0951
+fold4 -0.3369 -0.1629
+fold5 -0.1653  0.2536
+
+Mean squared error
+          rep1     rep2
+fold1 297.0928 237.5640
+fold2 237.6670 336.2833
+fold3 248.5225 241.5558
+fold4 200.3775 234.9705
+fold5 237.7001 149.4475
+
+Mean of observed values for the 10% best predicted
+          m10
+rep1 103.1859
+rep2 103.9825
